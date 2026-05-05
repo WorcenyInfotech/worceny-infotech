@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --bg: #0a0a0b;
+    --surface: #111114;
+    --surface2: #18181c;
+    --border: rgba(255, 255, 255, 0.07);
+    --accent: #865aff;
+    --accent2: #5aff73;
+    --text: #f0f0f2;
+    --muted: #7a7a8a;
+    --card-bg: #13131a;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -12,69 +24,141 @@
   }
 
   body {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--bg);
+    color: var(--text);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #000;
+    background: var(--bg);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #00ff88;
-    border-radius: 3px;
+    background: var(--accent);
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: rgba(134, 90, 255, 0.3);
+    color: var(--text);
   }
 }
 
 @layer utilities {
+
+  /* Glass morphism */
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
   }
 
   .glass-dark {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 255, 136, 0.15);
+    background: rgba(17, 17, 20, 0.7);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(134, 90, 255, 0.12);
   }
 
-  .neon-text {
-    color: #00ff88;
-    text-shadow: 0 0 10px rgba(0, 255, 136, 0.6), 0 0 30px rgba(0, 255, 136, 0.3);
+  /* Accent text & glow */
+  .accent-text {
+    color: var(--accent);
+    text-shadow: 0 0 12px rgba(134, 90, 255, 0.5), 0 0 32px rgba(134, 90, 255, 0.2);
   }
 
-  .neon-border {
-    border: 1px solid #00ff88;
-    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3), inset 0 0 10px rgba(0, 255, 136, 0.05);
+  .accent2-text {
+    color: var(--accent2);
+    text-shadow: 0 0 12px rgba(90, 255, 115, 0.5), 0 0 32px rgba(90, 255, 115, 0.2);
   }
 
-  .neon-glow {
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 255, 136, 0.15);
+  /* Borders */
+  .accent-border {
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 12px rgba(134, 90, 255, 0.25), inset 0 0 12px rgba(134, 90, 255, 0.04);
   }
 
+  .accent2-border {
+    border: 1px solid var(--accent2);
+    box-shadow: 0 0 12px rgba(90, 255, 115, 0.25), inset 0 0 12px rgba(90, 255, 115, 0.04);
+  }
+
+  /* Glow shadows */
+  .accent-glow {
+    box-shadow: 0 0 24px rgba(134, 90, 255, 0.45), 0 0 60px rgba(134, 90, 255, 0.15);
+  }
+
+  .accent2-glow {
+    box-shadow: 0 0 24px rgba(90, 255, 115, 0.4), 0 0 60px rgba(90, 255, 115, 0.12);
+  }
+
+  /* Gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, #00ff88, #00ccff);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  .gradient-text-rev {
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Backgrounds */
   .hero-gradient {
-    background: radial-gradient(ellipse at 50% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 70%),
-                radial-gradient(ellipse at 80% 20%, rgba(0, 204, 255, 0.06) 0%, transparent 50%),
-                #000000;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(134, 90, 255, 0.1) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 70%, rgba(90, 255, 115, 0.06) 0%, transparent 50%),
+      var(--bg);
   }
 
   .section-gradient {
-    background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
+  }
+
+  .surface-bg {
+    background-color: var(--surface);
+  }
+
+  .surface2-bg {
+    background-color: var(--surface2);
+  }
+
+  .card-bg {
+    background-color: var(--card-bg);
+  }
+
+  /* Grid overlay */
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(134, 90, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(134, 90, 255, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Muted text */
+  .text-muted {
+    color: var(--muted);
+  }
+
+  /* Accent bg chips */
+  .chip-accent {
+    background: rgba(134, 90, 255, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(134, 90, 255, 0.25);
+  }
+
+  .chip-accent2 {
+    background: rgba(90, 255, 115, 0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(90, 255, 115, 0.22);
   }
 }

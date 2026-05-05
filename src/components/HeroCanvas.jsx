@@ -1,7 +1,6 @@
 import { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
-import * as THREE from 'three'
 
 function ParticleField() {
   const ref = useRef()
@@ -10,9 +9,9 @@ function ParticleField() {
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3)
     for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 20
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 20
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 20
+      arr[i * 3]     = (Math.random() - 0.5) * 22
+      arr[i * 3 + 1] = (Math.random() - 0.5) * 22
+      arr[i * 3 + 2] = (Math.random() - 0.5) * 22
     }
     return arr
   }, [])
@@ -26,11 +25,11 @@ function ParticleField() {
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#00ff88"
-        size={0.04}
+        color="#865aff"
+        size={0.045}
         sizeAttenuation
         depthWrite={false}
-        opacity={0.7}
+        opacity={0.6}
       />
     </Points>
   )
@@ -39,19 +38,14 @@ function ParticleField() {
 function FloatingTorus() {
   const ref = useRef()
   useFrame((state) => {
-    ref.current.rotation.x = state.clock.elapsedTime * 0.3
-    ref.current.rotation.y = state.clock.elapsedTime * 0.2
-    ref.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.3
+    ref.current.rotation.x = state.clock.elapsedTime * 0.28
+    ref.current.rotation.y = state.clock.elapsedTime * 0.18
+    ref.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.35
   })
   return (
-    <mesh ref={ref} position={[3, 0, -2]}>
-      <torusGeometry args={[1.2, 0.3, 16, 60]} />
-      <meshStandardMaterial
-        color="#00ff88"
-        wireframe
-        transparent
-        opacity={0.25}
-      />
+    <mesh ref={ref} position={[3.2, 0, -2]}>
+      <torusGeometry args={[1.2, 0.28, 16, 60]} />
+      <meshStandardMaterial color="#865aff" wireframe transparent opacity={0.22} />
     </mesh>
   )
 }
@@ -59,19 +53,29 @@ function FloatingTorus() {
 function FloatingIcosahedron() {
   const ref = useRef()
   useFrame((state) => {
-    ref.current.rotation.x = state.clock.elapsedTime * 0.4
-    ref.current.rotation.z = state.clock.elapsedTime * 0.3
-    ref.current.position.y = Math.cos(state.clock.elapsedTime * 0.6) * 0.4
+    ref.current.rotation.x = state.clock.elapsedTime * 0.38
+    ref.current.rotation.z = state.clock.elapsedTime * 0.28
+    ref.current.position.y = Math.cos(state.clock.elapsedTime * 0.55) * 0.4
   })
   return (
     <mesh ref={ref} position={[-3.5, 0.5, -1]}>
       <icosahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial
-        color="#00ccff"
-        wireframe
-        transparent
-        opacity={0.2}
-      />
+      <meshStandardMaterial color="#5aff73" wireframe transparent opacity={0.18} />
+    </mesh>
+  )
+}
+
+function FloatingOctahedron() {
+  const ref = useRef()
+  useFrame((state) => {
+    ref.current.rotation.y = state.clock.elapsedTime * 0.5
+    ref.current.rotation.x = state.clock.elapsedTime * 0.3
+    ref.current.position.y = Math.sin(state.clock.elapsedTime * 0.4 + 1) * 0.3
+  })
+  return (
+    <mesh ref={ref} position={[0, -2.5, -3]}>
+      <octahedronGeometry args={[0.9, 0]} />
+      <meshStandardMaterial color="#865aff" wireframe transparent opacity={0.15} />
     </mesh>
   )
 }
@@ -83,12 +87,13 @@ export default function HeroCanvas() {
       style={{ position: 'absolute', inset: 0 }}
       gl={{ antialias: true, alpha: true }}
     >
-      <ambientLight intensity={0.5} />
-      <pointLight position={[5, 5, 5]} color="#00ff88" intensity={1} />
-      <pointLight position={[-5, -5, -5]} color="#00ccff" intensity={0.5} />
+      <ambientLight intensity={0.4} />
+      <pointLight position={[5, 5, 5]}   color="#865aff" intensity={1.2} />
+      <pointLight position={[-5, -5, -5]} color="#5aff73" intensity={0.6} />
       <ParticleField />
       <FloatingTorus />
       <FloatingIcosahedron />
+      <FloatingOctahedron />
     </Canvas>
   )
 }
