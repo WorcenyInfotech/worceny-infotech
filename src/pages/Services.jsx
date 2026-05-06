@@ -137,11 +137,11 @@ export default function Services() {
 
               <h3
                 className="text-lg font-bold mb-3 relative z-10 transition-colors duration-300"
-                style={{ color: 'var(--text)' }}
+                style={{ color: 'var(--text-card)' }}
               >
                 {s.title}
               </h3>
-              <p className="text-sm leading-relaxed mb-5 relative z-10" style={{ color: 'var(--muted)' }}>
+              <p className="text-sm leading-relaxed mb-5 relative z-10" style={{ color: 'var(--muted-card)' }}>
                 {s.desc}
               </p>
 

@@ -36,7 +36,7 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden pt-16 pb-8"
-      style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
+      style={{ background: 'var(--surface3)', borderTop: '1px solid var(--border)' }}>
 
       {/* Top gradient line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px"
@@ -80,7 +80,7 @@ export default function Footer() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 + gi * 0.1 }}
             >
-              <h4 className="font-semibold mb-5 text-sm" style={{ color: 'var(--text)' }}>{title}</h4>
+              <h4 className="font-semibold mb-5 text-sm" style={{ color: 'var(--accent)' }}>{title}</h4>
               <ul className="space-y-3">
                 {items.map((item, i) => (
                   <motion.li key={item.label}
@@ -92,7 +92,7 @@ export default function Footer() {
                       whileHover={{ x: 5, color: 'var(--accent)' }}
                       transition={{ duration: 0.2 }}
                       onClick={item.action}
-                      className="text-sm transition-colors duration-300"
+                      className="text-sm transition-colors duration-300 cursor-pointer"
                       style={{ color: 'var(--muted)' }}
                     >
                       {item.label}

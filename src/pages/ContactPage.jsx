@@ -20,7 +20,7 @@ const contactInfo = [
 const socials = [
   { icon: <FiLinkedin size={17} />,  label: 'LinkedIn',  href: '#', accent: '#0077b5' },
   { icon: <FiTwitter size={17} />,   label: 'Twitter',   href: '#', accent: '#1da1f2' },
-  { icon: <FiGithub size={17} />,    label: 'GitHub',    href: '#', accent: '#f0f0f2' },
+  { icon: <FiGithub size={17} />,    label: 'GitHub',    href: '#', accent: '#0e0e0e' },
   { icon: <FiInstagram size={17} />, label: 'Instagram', href: '#', accent: '#e1306c' },
 ]
 
@@ -107,7 +107,7 @@ export default function ContactPage() {
   })
 
   return (
-    <div ref={sectionRef} className="min-h-screen pt-24" style={{ background: 'var(--bg)' }}>
+    <div ref={sectionRef} className="min-h-screen pt-18" style={{ background: 'var(--bg)' }}>
 
       {/* Hero */}
       <div className="relative py-20 overflow-hidden">
@@ -151,9 +151,9 @@ export default function ContactPage() {
                 style={{ background: `${item.accent}14`, color: item.accent }}>
                 {item.icon}
               </motion.div>
-              <div className="text-xs mb-1" style={{ color: 'var(--muted)' }}>{item.label}</div>
-              <div className="text-xs font-semibold leading-tight mb-1" style={{ color: 'var(--text)' }}>{item.value}</div>
-              <div className="text-xs" style={{ color: 'var(--muted)', opacity: 0.7 }}>{item.sub}</div>
+              <div className="text-xs mb-1" style={{ color: 'var(--muted-card)' }}>{item.label}</div>
+              <div className="text-xs font-semibold leading-tight mb-1" style={{ color: 'var(--text-card)' }}>{item.value}</div>
+              <div className="text-xs" style={{ color: 'var(--muted-card)', opacity: 0.7 }}>{item.sub}</div>
             </motion.div>
           ))}
         </div>
@@ -170,8 +170,8 @@ export default function ContactPage() {
             className="lg:col-span-3"
           >
             <div className="rounded-3xl p-8" style={{ background: 'var(--card-bg)', border: '1px solid rgba(134,90,255,0.15)' }}>
-              <h2 className="text-2xl font-black mb-1" style={{ color: 'var(--text)' }}>Send Us a Message</h2>
-              <p className="text-sm mb-8" style={{ color: 'var(--muted)' }}>Fill in the details and we'll get back to you shortly.</p>
+              <h2 className="text-2xl font-black mb-1" style={{ color: 'var(--text-card)' }}>Send Us a Message</h2>
+              <p className="text-sm mb-8" style={{ color: 'var(--muted-card)' }}>Fill in the details and we'll get back to you shortly.</p>
 
               {sent ? (
                 <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
@@ -180,15 +180,15 @@ export default function ContactPage() {
                   <motion.div animate={{ scale:[1,1.2,1], rotate:[0,10,-10,0] }} transition={{ duration: 0.6 }}>
                     <FiCheckCircle size={64} style={{ color: 'var(--accent2)' }} className="mb-5" />
                   </motion.div>
-                  <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--text)' }}>Message Sent!</h3>
-                  <p style={{ color: 'var(--muted)' }}>We'll get back to you within 2 hours.</p>
+                  <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-card)' }}>Message Sent!</h3>
+                  <p style={{ color: 'var(--muted-card)' }}>We'll get back to you within 2 hours.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {/* Row 1 */}
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
-                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted)' }}>Full Name *</label>
+                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted-card)' }}>Full Name *</label>
                       <input type="text" value={form.name} placeholder="John Doe"
                         onChange={e => setForm({...form, name: e.target.value})}
                         onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
@@ -197,7 +197,7 @@ export default function ContactPage() {
                         className="text-xs mt-1" style={{ color: '#ff5a5a' }}>{errors.name}</motion.p>}
                     </div>
                     <div>
-                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted)' }}>Email Address *</label>
+                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted-card)' }}>Email Address *</label>
                       <input type="email" value={form.email} placeholder="john@example.com"
                         onChange={e => setForm({...form, email: e.target.value})}
                         onFocus={() => setFocused('email')} onBlur={() => setFocused(null)}
@@ -210,14 +210,14 @@ export default function ContactPage() {
                   {/* Row 2 */}
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
-                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted)' }}>Phone Number</label>
+                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted-card)' }}>Phone Number</label>
                       <input type="tel" value={form.phone} placeholder="+91 98765 43210"
                         onChange={e => setForm({...form, phone: e.target.value})}
                         onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)}
                         style={inputStyle('phone')} />
                     </div>
                     <div>
-                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted)' }}>Service Needed</label>
+                      <label className="text-sm mb-2 block" style={{ color: 'var(--muted-card)' }}>Service Needed</label>
                       <select value={form.service} onChange={e => setForm({...form, service: e.target.value})}
                         onFocus={() => setFocused('service')} onBlur={() => setFocused(null)}
                         style={{ ...inputStyle('service'), cursor: 'pointer' }}>
@@ -229,7 +229,7 @@ export default function ContactPage() {
 
                   {/* Budget */}
                   <div>
-                    <label className="text-sm mb-3 block" style={{ color: 'var(--muted)' }}>Project Budget</label>
+                    <label className="text-sm mb-3 block" style={{ color: 'var(--muted-card)' }}>Project Budget</label>
                     <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
                       {budgets.map(b => (
                         <motion.button key={b} type="button"
@@ -246,7 +246,7 @@ export default function ContactPage() {
 
                   {/* Message */}
                   <div>
-                    <label className="text-sm mb-2 block" style={{ color: 'var(--muted)' }}>Project Details *</label>
+                    <label className="text-sm mb-2 block" style={{ color: 'var(--muted-card)' }}>Project Details *</label>
                     <textarea rows={5} value={form.message} placeholder="Tell us about your project, goals, timeline..."
                       onChange={e => setForm({...form, message: e.target.value})}
                       onFocus={() => setFocused('message')} onBlur={() => setFocused(null)}
@@ -277,7 +277,7 @@ export default function ContactPage() {
           >
             {/* Why Us */}
             <div className="rounded-3xl p-7" style={{ background: 'var(--card-bg)', border: '1px solid rgba(134,90,255,0.12)' }}>
-              <h3 className="text-xl font-bold mb-5" style={{ color: 'var(--text)' }}>Why Choose Us?</h3>
+              <h3 className="text-xl font-bold mb-5" style={{ color: 'var(--text-card)' }}>Why Choose Us?</h3>
               <div className="space-y-4">
                 {[
                   { title: 'Fast Delivery',       desc: 'On time, every time.' },
@@ -297,8 +297,8 @@ export default function ContactPage() {
                       <span className="w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} />
                     </span>
                     <div>
-                      <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{item.title}</div>
-                      <div className="text-xs" style={{ color: 'var(--muted)' }}>{item.desc}</div>
+                      <div className="text-sm font-semibold" style={{ color: 'var(--text-card)' }}>{item.title}</div>
+                      <div className="text-xs" style={{ color: 'var(--muted-card)' }}>{item.desc}</div>
                     </div>
                   </motion.div>
                 ))}
@@ -307,7 +307,7 @@ export default function ContactPage() {
 
             {/* Socials */}
             <div className="rounded-3xl p-7" style={{ background: 'var(--card-bg)', border: '1px solid rgba(134,90,255,0.12)' }}>
-              <h3 className="text-xl font-bold mb-5" style={{ color: 'var(--text)' }}>Follow Us</h3>
+              <h3 className="text-xl font-bold mb-5" style={{ color: 'var(--text-card)' }}>Follow Us</h3>
               <div className="grid grid-cols-2 gap-3">
                 {socials.map((s, i) => (
                   <motion.a key={s.label} href={s.href}
@@ -330,8 +330,8 @@ export default function ContactPage() {
             <motion.div whileHover={{ scale: 1.02 }}
               className="rounded-3xl p-6 text-center"
               style={{ background: 'var(--card-bg)', border: '1px solid rgba(134,90,255,0.2)' }}>
-              <div className="text-4xl font-black mb-1 gradient-text">2 hrs</div>
-              <div className="text-sm" style={{ color: 'var(--muted)' }}>Average Response Time</div>
+              <div className="text-4xl font-black mb-1" style={{color: 'var(--text-card)'}}>2 hrs</div>
+              <div className="text-sm" style={{ color: 'var(--muted-card)' }}>Average Response Time</div>
               <div className="mt-3 flex items-center justify-center gap-2">
                 <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--accent2)' }} />
                 <span className="text-xs" style={{ color: 'var(--accent2)' }}>Currently Online</span>
@@ -356,12 +356,12 @@ export default function ContactPage() {
                 style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between px-6 py-5 text-left">
-                  <span className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{faq.q}</span>
+                  <span className="text-sm font-semibold" style={{ color: 'var(--text-card)' }}>{faq.q}</span>
                   <motion.span animate={{ rotate: openFaq === i ? 45 : 0 }} transition={{ duration: 0.25 }}
                     className="text-xl shrink-0 ml-4" style={{ color: 'var(--accent)' }}>+</motion.span>
                 </button>
                 <AnimateHeight isOpen={openFaq === i}>
-                  <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{faq.a}</p>
+                  <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: 'var(--muted-card)' }}>{faq.a}</p>
                 </AnimateHeight>
               </motion.div>
             ))}
