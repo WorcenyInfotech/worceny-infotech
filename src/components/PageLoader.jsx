@@ -45,16 +45,6 @@ export default function PageLoader() {
               style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent2))' }}
             />
           </div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-xs tracking-widest uppercase relative z-10 mt-2"
-            style={{ color: 'var(--muted)' }}
-          >
-            Loading Experience...
-          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>

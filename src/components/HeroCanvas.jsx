@@ -25,7 +25,7 @@ function ParticleField() {
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#865aff"
+        color="#ffffff"
         size={0.045}
         sizeAttenuation
         depthWrite={false}
@@ -45,7 +45,7 @@ function FloatingTorus() {
   return (
     <mesh ref={ref} position={[3.2, 0, -2]}>
       <torusGeometry args={[1.2, 0.28, 16, 60]} />
-      <meshStandardMaterial color="#865aff" wireframe transparent opacity={0.22} />
+      <meshStandardMaterial color="#ffffff" wireframe transparent opacity={0.22} />
     </mesh>
   )
 }
@@ -60,7 +60,7 @@ function FloatingIcosahedron() {
   return (
     <mesh ref={ref} position={[-3.5, 0.5, -1]}>
       <icosahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial color="#5aff73" wireframe transparent opacity={0.18} />
+      <meshStandardMaterial color="#ffffff" wireframe transparent opacity={0.18} />
     </mesh>
   )
 }
@@ -75,7 +75,7 @@ function FloatingOctahedron() {
   return (
     <mesh ref={ref} position={[0, -2.5, -3]}>
       <octahedronGeometry args={[0.9, 0]} />
-      <meshStandardMaterial color="#865aff" wireframe transparent opacity={0.15} />
+      <meshStandardMaterial color="#ffffff" wireframe transparent opacity={0.15} />
     </mesh>
   )
 }
@@ -88,8 +88,8 @@ export default function HeroCanvas() {
       gl={{ antialias: true, alpha: true }}
     >
       <ambientLight intensity={0.4} />
-      <pointLight position={[5, 5, 5]}   color="#865aff" intensity={1.2} />
-      <pointLight position={[-5, -5, -5]} color="#5aff73" intensity={0.6} />
+      <pointLight position={[5, 5, 5]}   color="#ffffff" intensity={1.2} />
+      <pointLight position={[-5, -5, -5]} color="#ffffff" intensity={0.6} />
       <ParticleField />
       <FloatingTorus />
       <FloatingIcosahedron />

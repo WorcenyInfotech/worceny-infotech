@@ -7,7 +7,6 @@ import HeroCanvas from '../components/HeroCanvas'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const stats = [['50+', 'Projects Done'], ['30+', 'Happy Clients'], ['5+', 'Years Experience']]
 
 export default function Home() {
   const sectionRef = useRef()
@@ -15,7 +14,6 @@ export default function Home() {
   const headingRef = useRef()
   const subRef     = useRef()
   const btnsRef    = useRef()
-  const statsRef   = useRef()
   const navigate   = useNavigate()
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
@@ -43,10 +41,6 @@ export default function Home() {
         { opacity: 0, y: 22, scale: 0.9 },
         { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.4)' }, '-=0.4'
       )
-      .fromTo(statsRef.current.children,
-        { opacity: 0, y: 28, scale: 0.8 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.7)' }, '-=0.3'
-      )
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -58,20 +52,6 @@ export default function Home() {
       className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden"
     >
       <HeroCanvas />
-
-      {/* Glow orbs */}
-      <motion.div
-        animate={{ scale: [1, 1.25, 1], opacity: [0.08, 0.15, 0.08] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/3 left-1/4 w-[480px] h-[480px] rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'var(--accent)' }}
-      />
-      <motion.div
-        animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.1, 0.05] }}
-        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        className="absolute bottom-1/4 right-1/4 w-[380px] h-[380px] rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'var(--accent2)' }}
-      />
 
       {/* Grid */}
       <div className="absolute inset-0 grid-overlay pointer-events-none" />
@@ -133,20 +113,6 @@ export default function Home() {
           >
             View Our Work
           </motion.button>
-        </div>
-
-        {/* Stats */}
-        <div ref={statsRef} className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
-          {stats.map(([num, label], i) => (
-            <div key={label} className="text-center">
-              {i > 0 && (
-                <div className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-8"
-                  style={{ background: 'var(--border)' }} />
-              )}
-              <div className="text-2xl md:text-3xl font-black gradient-text">{num}</div>
-              <div className="text-xs mt-1" style={{ color: 'var(--muted)' }}>{label}</div>
-            </div>
-          ))}
         </div>
       </motion.div>
 
