@@ -94,7 +94,7 @@ export default function About() {
           <span className="inline-block text-sm font-semibold tracking-widest uppercase mb-3"
             style={{ color: 'var(--accent)' }}>Who We Are</span>
           <h2 className="text-4xl md:text-5xl font-black mt-2 mb-4" style={{ color: 'var(--text)' }}>
-            About <span className="gradient-text">WorcenyInfotech</span>
+            About <span className="gradient-text">Worceny Infotech</span>
           </h2>
           <div ref={lineRef} className="w-24 h-0.5 mx-auto mb-6 rounded-full"
             style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent2))' }} />

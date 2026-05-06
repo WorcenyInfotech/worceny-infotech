@@ -7,9 +7,9 @@ import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle } from 'react-icons/fi
 gsap.registerPlugin(ScrollTrigger)
 
 const contactInfo = [
-  { icon: <FiMail size={20} />, label: 'Email', value: 'hello@worcenyinfotech.com' },
+  { icon: <FiMail size={20} />, label: 'Email', value: 'worcenyinfotech@gmail.com' },
   { icon: <FiPhone size={20} />, label: 'Phone', value: '+91 98765 43210' },
-  { icon: <FiMapPin size={20} />, label: 'Location', value: 'Mumbai, Maharashtra, India' },
+  { icon: <FiMapPin size={20} />, label: 'Location', value: 'Surat, Gujarat, India' },
 ]
 
 export default function Contact() {

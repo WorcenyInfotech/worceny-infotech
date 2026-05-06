@@ -9,12 +9,12 @@ import { FiLinkedin, FiTwitter, FiGithub, FiInstagram } from 'react-icons/fi'
 gsap.registerPlugin(ScrollTrigger)
 
 const contactInfo = [
-  { icon: <FiMail size={20} />,    label: 'Email Us',      value: 'hello@worcenyinfotech.com', sub: 'Reply within 2 hours',    accent: '#865aff' },
+  { icon: <FiMail size={20} />,    label: 'Email Us',      value: 'worcenyinfotech@gmail.com', sub: 'Reply within 2 hours',    accent: '#865aff' },
   { icon: <FiPhone size={20} />,   label: 'Call Us',       value: '+91 98765 43210',           sub: 'Mon–Sat, 9am–7pm IST',    accent: '#5aff73' },
   { icon: <FaWhatsapp size={20} />,label: 'WhatsApp',      value: '+91 98765 43210',           sub: 'Quick chat support',       accent: '#25D366' },
-  { icon: <FiMapPin size={20} />,  label: 'Office',        value: 'Mumbai, Maharashtra',       sub: 'India — 400001',           accent: '#865aff' },
+  { icon: <FiMapPin size={20} />,  label: 'Office',        value: 'Surat, Gujarat, India',     sub: 'India — 400001',           accent: '#865aff' },
   { icon: <FiClock size={20} />,   label: 'Working Hours', value: 'Mon – Sat',                 sub: '9:00 AM – 7:00 PM IST',   accent: '#5aff73' },
-  { icon: <FiGlobe size={20} />,   label: 'Website',       value: 'worcenyinfotech.com',       sub: 'Visit our website',        accent: '#865aff' },
+  // { icon: <FiGlobe size={20} />,   label: 'Website',       value: 'worcenyinfotech.com',       sub: 'Visit our website',        accent: '#865aff' },
 ]
 
 const socials = [
@@ -138,7 +138,7 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-6 pb-16">
 
         {/* Info Cards */}
-        <div className="contact-cards-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-20">
+        <div className="contact-cards-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20">
           {contactInfo.map((item) => (
             <motion.div key={item.label}
               whileHover={{ y: -6, boxShadow: `0 0 28px ${item.accent}18` }}

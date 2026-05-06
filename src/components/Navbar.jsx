@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
 import { useLocation, useNavigate } from 'react-router-dom'
-import logo from '../assets/images/logo-best.png'
 
 const navLinks = [
   { label: 'Home',      path: '/', section: 'home' },
@@ -78,7 +77,7 @@ export default function Navbar() {
           className="cursor-pointer flex items-center shrink-0"
           onClick={() => handleNav({ path: '/', section: 'home' })}
         >
-          <img src={logo} alt="WorcenyInfotech" className="h-32 w-32 object-contain" />
+          <img src="./logo.png" alt="WorcenyInfotech" className="h-8 object-contain" />
         </motion.div>
 
         {/* Desktop links */}

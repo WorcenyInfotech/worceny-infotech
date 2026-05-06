@@ -1,7 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logo from '../assets/images/logo-best.png'
 
 export default function Footer() {
   const ref      = useRef()
@@ -53,8 +52,8 @@ export default function Footer() {
             transition={{ duration: 0.7 }}
             className="md:col-span-1"
           >
-            <img src={logo} alt="WorcenyInfotech"
-              className="h-44 w-44 object-contain mb-4 cursor-pointer"
+            <img src="./logo.png" alt="WorcenyInfotech"
+              className="h-10 object-contain mb-4 cursor-pointer"
               onClick={() => { navigate('/'); window.scrollTo({ top: 0 }) }} />
             <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--muted)' }}>
               Building modern, scalable web solutions for businesses worldwide.
@@ -65,9 +64,9 @@ export default function Footer() {
             </div>
             <div className="space-y-1.5">
               {[
-                '📧 hello@worcenyinfotech.com',
+                '📧 worcenyinfotech@gmail.com',
                 '📞 +91 98765 43210',
-                '📍 Mumbai, India',
+                '📍 Surat, Gujarat, India',
               ].map(item => (
                 <div key={item} className="text-xs" style={{ color: 'var(--muted)' }}>{item}</div>
               ))}
@@ -114,10 +113,7 @@ export default function Footer() {
           style={{ borderTop: '1px solid var(--border)' }}
         >
           <p className="text-sm" style={{ color: 'var(--muted)' }}>
-            © {new Date().getFullYear()} WorcenyInfotech. All rights reserved.
-          </p>
-          <p className="text-sm" style={{ color: 'var(--muted)' }}>
-            Built with <span style={{ color: 'var(--accent)' }}>♥</span> using React & Tailwind CSS
+            © {new Date().getFullYear()} Worceny Infotech. All rights reserved.
           </p>
         </motion.div>
       </div>

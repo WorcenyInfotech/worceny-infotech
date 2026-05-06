@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import logo from '../assets/images/logo-best.png'
 
 export default function PageLoader() {
   const [done, setDone] = useState(false)
@@ -27,12 +26,12 @@ export default function PageLoader() {
 
           {/* Logo */}
           <motion.img
-            src={logo}
+            src="./logo.png"
             alt="WorcenyInfotech"
             initial={{ opacity: 0, scale: 0.7, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-            className="h-56 w-56 object-contain relative z-10"
+            className="h-14 mb-2 object-contain relative z-10"
           />
 
           {/* Progress bar */}
@@ -51,7 +50,7 @@ export default function PageLoader() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-xs tracking-widest uppercase relative z-10"
+            className="text-xs tracking-widest uppercase relative z-10 mt-2"
             style={{ color: 'var(--muted)' }}
           >
             Loading Experience...
