@@ -465,7 +465,7 @@ export default function PortfolioPage() {
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(cat)}
-              className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
+              className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer"
               style={
                 filter === cat
                   ? {

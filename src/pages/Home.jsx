@@ -99,7 +99,7 @@ export default function Home() {
             whileHover={{ scale: 1.06, boxShadow: '0 0 40px rgba(134,90,255,0.55)' }}
             whileTap={{ scale: 0.95 }}
             onClick={() => { navigate('/contact'); window.scrollTo({ top: 0 }) }}
-            className="px-8 py-4 rounded-full font-bold text-base transition-all duration-300"
+            className="px-8 py-4 rounded-full font-bold text-base transition-all duration-300 cursor-pointer" 
             style={{ background: 'var(--accent)', color: '#fff', boxShadow: '0 0 24px rgba(134,90,255,0.35)' }}
           >
             Contact Us →
@@ -108,7 +108,7 @@ export default function Home() {
             whileHover={{ scale: 1.06, borderColor: 'var(--accent)', color: 'var(--accent)' }}
             whileTap={{ scale: 0.95 }}
             onClick={() => { navigate('/portfolio'); window.scrollTo({ top: 0 }) }}
-            className="px-8 py-4 rounded-full font-semibold text-base transition-all duration-300"
+            className="px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 cursor-pointer"
             style={{ background: 'rgba(134,90,255,0.08)', border: '1px solid rgba(134,90,255,0.25)', color: 'var(--text)' }}
           >
             View Our Work
