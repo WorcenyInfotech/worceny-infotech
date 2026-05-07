@@ -4,7 +4,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 export default function WhatsAppButton() {
   return (
     <motion.a
-      href="https://wa.me/917046457286"
+      href="https://wa.me/918140398723"
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}

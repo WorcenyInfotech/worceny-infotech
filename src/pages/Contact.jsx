@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const contactInfo = [
   { icon: <FiMail size={20} />, label: 'Email', value: 'worcenyinfotech@gmail.com' },
-  { icon: <FiPhone size={20} />, label: 'Phone', value: '+91 70464 57286' },
+  { icon: <FiPhone size={20} />, label: 'Phone', value: '+91 81403 98723' },
   { icon: <FiMapPin size={20} />, label: 'Location', value: 'Surat, Gujarat, India' },
 ]
 

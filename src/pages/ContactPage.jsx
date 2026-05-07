@@ -25,7 +25,7 @@ const contactInfo = [
   {
     icon: <FaWhatsapp size={20} />,
     label: "Call & WhatsApp",
-    value: ["+91 70464 57286", "+91 91069 30388"],
+    value: ["+91 81403 98723", "+91 91069 30388"],
     sub: "Mon-Sat, 9am-7pm IST",
     accent: "#25D366",
   },
