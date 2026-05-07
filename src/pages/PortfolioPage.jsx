@@ -638,7 +638,7 @@ export default function PortfolioPage() {
               navigate("/contact");
               window.scrollTo({ top: 0 });
             }}
-            className="px-10 py-4 rounded-full font-bold text-base transition-all duration-300"
+            className="px-10 py-4 rounded-full font-bold text-base transition-all duration-300 cursor-pointer"
             style={{ background: "var(--accent)", color: "#fff" }}
           >
             Start a Project →

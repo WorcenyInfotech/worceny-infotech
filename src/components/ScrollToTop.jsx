@@ -22,7 +22,7 @@ export default function ScrollToTop() {
           whileHover={{ scale: 1.15, boxShadow: '0 0 24px rgba(134,90,255,0.55)' }}
           whileTap={{ scale: 0.9 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-24 right-6 z-50 w-11 h-11 rounded-full flex items-center justify-center"
+          className="fixed bottom-24 right-6 z-50 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer"
           style={{
             background: 'var(--surface2)',
             border: '1px solid rgba(134,90,255,0.35)',

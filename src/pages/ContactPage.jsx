@@ -259,7 +259,7 @@ export default function ContactPage() {
                   <motion.button type="submit"
                     whileHover={{ scale: 1.02, boxShadow: '0 0 36px rgba(134,90,255,0.5)' }}
                     whileTap={{ scale: 0.97 }}
-                    className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 text-base transition-all duration-300"
+                    className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 text-base transition-all duration-300 cursor-pointer"
                     style={{ background: 'var(--accent)', color: '#fff' }}>
                     <FiSend size={16} /> Send Message
                   </motion.button>
@@ -356,7 +356,7 @@ export default function ContactPage() {
               <motion.div key={i} className="faq-item rounded-2xl overflow-hidden"
                 style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left">
+                  className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer">
                   <span className="text-sm font-semibold" style={{ color: 'var(--text-card)' }}>{faq.q}</span>
                   <motion.span animate={{ rotate: openFaq === i ? 45 : 0 }} transition={{ duration: 0.25 }}
                     className="text-xl shrink-0 ml-4" style={{ color: 'var(--accent)' }}>+</motion.span>
