@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const categories = ["All", "Full Stack", "Frontend", "Web Dev", "Mobile"];
+const categories = ["All", "Full Stack", "Frontend", "Backend"];
 
 const projects = [
   {
@@ -157,9 +157,9 @@ const projects = [
 ];
 
 const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "30+", label: "Happy Clients" },
-  { value: "5+", label: "Years Experience" },
+  { value: "10+", label: "Projects Delivered" },
+  { value: "10+", label: "Happy Clients" },
+  { value: "2+", label: "Years Experience" },
   { value: "99%", label: "Client Satisfaction" },
 ];
 

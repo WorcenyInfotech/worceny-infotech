@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 const contactInfo = [
   { icon: <FiMail size={20} />,    label: 'Email Us',      value: 'worcenyinfotech@gmail.com', sub: 'Reply within 2 hours',    accent: '#865aff' },
-  { icon: <FiPhone size={20} />,   label: 'Call Us',       value: '+91 98765 43210',           sub: 'Mon–Sat, 9am–7pm IST',    accent: '#5aff73' },
-  { icon: <FaWhatsapp size={20} />,label: 'WhatsApp',      value: '+91 98765 43210',           sub: 'Quick chat support',       accent: '#25D366' },
+  { icon: <FiPhone size={20} />,   label: 'Call Us',       value: '+91 91069 30388',           sub: 'Mon–Sat, 9am–7pm IST',    accent: '#5aff73' },
+  { icon: <FaWhatsapp size={20} />,label: 'WhatsApp',      value: '+91 70464 57286',           sub: 'Quick chat support',       accent: '#25D366' },
   { icon: <FiMapPin size={20} />,  label: 'Office',        value: 'Surat, Gujarat, India',     sub: 'India — 400001',           accent: '#865aff' },
   { icon: <FiClock size={20} />,   label: 'Working Hours', value: 'Mon – Sat',                 sub: '9:00 AM – 7:00 PM IST',   accent: '#5aff73' },
   // { icon: <FiGlobe size={20} />,   label: 'Website',       value: 'worcenyinfotech.com',       sub: 'Visit our website',        accent: '#865aff' },
@@ -20,7 +20,7 @@ const contactInfo = [
 const socials = [
   { icon: <FiLinkedin size={17} />,  label: 'LinkedIn',  href: '#', accent: '#0077b5' },
   { icon: <FiTwitter size={17} />,   label: 'Twitter',   href: '#', accent: '#1da1f2' },
-  { icon: <FiGithub size={17} />,    label: 'GitHub',    href: '#', accent: '#0e0e0e' },
+  { icon: <FiGithub size={17} />,    label: 'GitHub',    href: 'https://github.com/WorcenyInfotech', accent: '#0e0e0e' },
   { icon: <FiInstagram size={17} />, label: 'Instagram', href: '#', accent: '#e1306c' },
 ]
 
@@ -88,6 +88,9 @@ export default function ContactPage() {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length) return setErrors(errs)
+    const subject = encodeURIComponent(`New Project Enquiry from ${form.name}`)
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || 'N/A'}\nService: ${form.service || 'N/A'}\nBudget: ${form.budget || 'N/A'}\n\nProject Details:\n${form.message}`)
+    window.open(`https://mail.google.com/mail/?view=cm&to=worcenyinfotech@gmail.com&su=${subject}&body=${body}`, '_blank')
     setSent(true)
     setForm({ name: '', email: '', phone: '', service: '', budget: '', message: '' })
     setErrors({})
@@ -220,9 +223,9 @@ export default function ContactPage() {
                       <label className="text-sm mb-2 block" style={{ color: 'var(--muted-card)' }}>Service Needed</label>
                       <select value={form.service} onChange={e => setForm({...form, service: e.target.value})}
                         onFocus={() => setFocused('service')} onBlur={() => setFocused(null)}
-                        style={{ ...inputStyle('service'), cursor: 'pointer' }}>
-                        <option value="" style={{ background: 'var(--card-bg)' }}>Select a service</option>
-                        {services.map(s => <option key={s} value={s} style={{ background: 'var(--card-bg)' }}>{s}</option>)}
+                        style={{ ...inputStyle('service'), cursor: 'pointer', color: form.service ? 'var(--text)' : '#888' }}>
+                        <option value="" disabled style={{ background: '#1a1a2e', color: '#888' }}>Select a service</option>
+                        {services.map(s => <option key={s} value={s} style={{ background: '#1a1a2e', color: '#fff' }}>{s}</option>)}
                       </select>
                     </div>
                   </div>

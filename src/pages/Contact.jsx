@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const contactInfo = [
   { icon: <FiMail size={20} />, label: 'Email', value: 'worcenyinfotech@gmail.com' },
-  { icon: <FiPhone size={20} />, label: 'Phone', value: '+91 98765 43210' },
+  { icon: <FiPhone size={20} />, label: 'Phone', value: '+91 70464 57286' },
   { icon: <FiMapPin size={20} />, label: 'Location', value: 'Surat, Gujarat, India' },
 ]
 
@@ -73,6 +73,9 @@ export default function Contact() {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length) return setErrors(errs)
+    const subject = encodeURIComponent(`New Message from ${form.name}`)
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`)
+    window.open(`https://mail.google.com/mail/?view=cm&to=worcenyinfotech@gmail.com&su=${subject}&body=${body}`, '_blank')
     setSent(true)
     setForm({ name: '', email: '', message: '' })
     setErrors({})

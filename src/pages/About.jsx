@@ -29,17 +29,15 @@ const cards = [
 ];
 
 const stats = [
-  { icon: <FiAward size={20} />, value: "50+", label: "Projects Delivered" },
-  { icon: <FiUsers size={20} />, value: "30+", label: "Happy Clients" },
+  { icon: <FiAward size={20} />, value: "10+", label: "Projects Delivered" },
+  { icon: <FiUsers size={20} />, value: "10+", label: "Happy Clients" },
   { icon: <FiZap size={20} />, value: "99%", label: "Client Satisfaction" },
-  { icon: <FiShield size={20} />, value: "5+", label: "Years Experience" },
+  { icon: <FiShield size={20} />, value: "2+", label: "Years Experience" },
 ];
 
 const team = [
-  { name: "Rahul Sharma", role: "Founder & CEO", initials: "RS" },
-  { name: "Priya Mehta", role: "Lead Frontend Dev", initials: "PM" },
-  { name: "Arjun Patel", role: "Backend Architect", initials: "AP" },
-  { name: "Sneha Verma", role: "UI/UX Designer", initials: "SV" },
+  { name: "Raj Soni", role: "Co-Founder & Full Stack Developer", initials: "RS" },
+  { name: "Siddharth Sarvaiya", role: "Co-Founder & Full Stack Developer", initials: "SS" },
 ];
 
 export default function About() {
@@ -275,7 +273,7 @@ export default function About() {
           </h3>
         </div>
 
-        <div ref={teamRef} className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div ref={teamRef} className="grid grid-cols-2 md:grid-cols-2 gap-5 max-w-xl mx-auto w-full">
           {team.map((member, i) => (
             <motion.div
               key={member.name}

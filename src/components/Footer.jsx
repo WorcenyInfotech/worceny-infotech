@@ -29,7 +29,7 @@ export default function Footer() {
     Connect: [
       { label: 'LinkedIn',  action: () => {} },
       { label: 'Twitter',   action: () => {} },
-      { label: 'GitHub',    action: () => {} },
+      { label: 'GitHub',    action: () => window.open('https://github.com/WorcenyInfotech', '_blank') },
       { label: 'Instagram', action: () => {} },
     ],
   }
@@ -65,7 +65,7 @@ export default function Footer() {
             <div className="space-y-1.5">
               {[
                 '📧 worcenyinfotech@gmail.com',
-                '📞 +91 98765 43210',
+                '📞 +91 70464 57286',
                 '📍 Surat, Gujarat, India',
               ].map(item => (
                 <div key={item} className="text-xs" style={{ color: 'var(--muted)' }}>{item}</div>
