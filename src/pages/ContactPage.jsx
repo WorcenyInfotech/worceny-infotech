@@ -210,7 +210,7 @@ export default function ContactPage() {
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen pt-18"
+      className="min-h-screen pt-16 md:pt-18"
       style={{ background: "var(--bg)" }}
     >
       {/* Hero */}

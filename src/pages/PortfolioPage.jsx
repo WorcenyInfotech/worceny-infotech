@@ -2,7 +2,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiX, FiExternalLink, FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import {
+  FiX,
+  FiExternalLink,
+  FiArrowRight,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,162 +17,160 @@ const categories = ["All", "Full Stack", "Frontend", "Backend"];
 
 const projects = [
   {
-  id: 1,
-  title: "Employee Management Services Website | Business Website",
-  category: "Full Stack",
-  year: "2025",
-  desc: "Full-stack Employee Management Services Website designed for companies to manage employees, attendance, leave requests, payroll, and internal operations with a secure multi-role system and admin control panel.",
-  tech: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript", "AJAX"],
-  accent: "#5aff73",
-  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-  liveDemo: 'https://emsraj.vercel.app/', // TODO: replace with real URL
-  images: [
-    '/images/1.1.png',
-    '/images/1.2.png',
-    '/images/1.3.png',
-  ],
-  features: [
-    "Multi-role system (Admin, Employee, Super Admin)",
-    "Attendance & leave management",
-    "Payroll & salary processing",
-    "Admin dashboard analytics",
-    "Secure authentication system"
-  ]
+    id: 1,
+    title: "Employee Management Services Website | Business Website",
+    category: "Full Stack",
+    year: "2025",
+    desc: "Full-stack Employee Management Services Website designed for companies to manage employees, attendance, leave requests, payroll, and internal operations with a secure multi-role system and admin control panel.",
+    tech: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript", "AJAX"],
+    accent: "#5aff73",
+    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+    liveDemo: "https://emsraj.vercel.app/", // TODO: replace with real URL
+    images: ["/images/1.1.png", "/images/1.2.png", "/images/1.3.png"],
+    features: [
+      "Multi-role system (Admin, Employee, Super Admin)",
+      "Attendance & leave management",
+      "Payroll & salary processing",
+      "Admin dashboard analytics",
+      "Secure authentication system",
+    ],
   },
   {
-  id: 2,
-  title: "Ecommerce Watch Website with AI Customer Support",
-  category: "Full Stack",
-  year: "2025",
-  desc: "Modern ecommerce watch store with AI-powered customer support, product catalog, cart system, secure checkout, and intelligent chatbot for instant customer assistance and product recommendations.",
-  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "AI Chatbot API"],
-  accent: "#5aff73",
-  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-  liveDemo: '#', // TODO: replace with real URL
-  images: [
-    '/images/2.1.png',
-    '/images/2.2.png',
-    '/images/2.3.png',
-
-  ],
-  features: [
-    "AI chatbot customer support",
-    "Product catalog & filters",
-    "Shopping cart system",
-    "Secure checkout flow",
-    "Order tracking system"
-  ]
+    id: 2,
+    title: "Ecommerce Watch Website with AI Customer Support",
+    category: "Full Stack",
+    year: "2025",
+    desc: "Modern ecommerce watch store with AI-powered customer support, product catalog, cart system, secure checkout, and intelligent chatbot for instant customer assistance and product recommendations.",
+    tech: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "AI Chatbot API",
+    ],
+    accent: "#5aff73",
+    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+    liveDemo: "#", // TODO: replace with real URL
+    images: ["/images/2.1.png", "/images/2.2.png", "/images/2.3.png"],
+    features: [
+      "AI chatbot customer support",
+      "Product catalog & filters",
+      "Shopping cart system",
+      "Secure checkout flow",
+      "Order tracking system",
+    ],
   },
   {
-  id: 3,
-  title: "QuickChat - Real-Time Chat Application",
-  category: "Full Stack",
-  year: "2025",
-  desc: "QuickChat is a full-stack real-time chat application built with the MERN stack. It features JWT authentication, Socket.IO powered real-time messaging, online/offline user status, responsive UI, and 32 modern theme variations using Zustand and Tailwind CSS.",
-  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Tailwind CSS", "Zustand"],
-  accent: "#5aff73",
-  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-  liveDemo: "https://quickchat-y6jq.onrender.com/",
-  images: [
-    "/images/3.1.png",
-    "/images/3.2.png",
-    "/images/3.3.png"
-  ],
-  features: [
-    "JWT authentication",
-    "Real-time messaging",
-    "Online/offline status",
-    "32 custom themes",
-    "Responsive chat interface"
-  ]
+    id: 3,
+    title: "QuickChat - Real-Time Chat Application",
+    category: "Full Stack",
+    year: "2025",
+    desc: "QuickChat is a full-stack real-time chat application built with the MERN stack. It features JWT authentication, Socket.IO powered real-time messaging, online/offline user status, responsive UI, and 32 modern theme variations using Zustand and Tailwind CSS.",
+    tech: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Socket.IO",
+      "Tailwind CSS",
+      "Zustand",
+    ],
+    accent: "#5aff73",
+    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+    liveDemo: "https://quickchat-y6jq.onrender.com/",
+    images: ["/images/3.1.png", "/images/3.2.png", "/images/3.3.png"],
+    features: [
+      "JWT authentication",
+      "Real-time messaging",
+      "Online/offline status",
+      "32 custom themes",
+      "Responsive chat interface",
+    ],
   },
   {
-  id: 4,
-  title: "GreatKart - Ecommerce Platform",
-  category: "Frontend",
-  year: "2026",
-  desc: "GreatKart is a powerful ecommerce web application built with Python and Django. It includes shopping cart functionality, secure checkout system, order management, PayPal Sandbox payment integration, user dashboard, and token-based email authentication.",
-  tech: ["Python", "Django", "SQLite", "Bootstrap", "PayPal API"],
-  accent: "#5aff73",
-  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-  liveDemo: "#",
-  images: [
-    "/images/6.1.png",
-  ],
-  features: [
-    "Cart & checkout system",
-    "Payment integration",
-    "Order management",
-    "Email authentication",
-    "User dashboard"
-  ]
+    id: 4,
+    title: "GreatKart - Ecommerce Platform",
+    category: "Frontend",
+    year: "2026",
+    desc: "GreatKart is a powerful ecommerce web application built with Python and Django. It includes shopping cart functionality, secure checkout system, order management, PayPal Sandbox payment integration, user dashboard, and token-based email authentication.",
+    tech: ["Python", "Django", "SQLite", "Bootstrap", "PayPal API"],
+    accent: "#5aff73",
+    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+    liveDemo: "#",
+    images: ["/images/6.1.png"],
+    features: [
+      "Cart & checkout system",
+      "Payment integration",
+      "Order management",
+      "Email authentication",
+      "User dashboard",
+    ],
   },
   {
-  id: 5,
-  title: "ArtX - AI Image Generator",
-  category: "Full Stack",
-  year: "2026",
-  desc: "ArtX is a modern AI-powered image generation platform where users can create stunning images from text prompts. Built using the MERN stack with advanced AI APIs, it delivers high-quality AI art generation with a sleek and responsive user experience.",
-  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "OpenAI API"],
-  accent: "#5aff73",
-  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-  liveDemo: "https://artx-ai.vercel.app/",
-  images: [
-    "/images/4.1.png",
-    "/images/4.2.png",
-    "/images/4.3.png",
-  ],
-  features: [
-    "AI image generation",
-    "Text-to-image prompts",
-    "Modern responsive UI",
-    "High-quality image output",
-    "Full-stack MERN architecture"
-  ]
+    id: 5,
+    title: "ArtX - AI Image Generator",
+    category: "Full Stack",
+    year: "2026",
+    desc: "ArtX is a modern AI-powered image generation platform where users can create stunning images from text prompts. Built using the MERN stack with advanced AI APIs, it delivers high-quality AI art generation with a sleek and responsive user experience.",
+    tech: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "OpenAI API",
+    ],
+    accent: "#5aff73",
+    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+    liveDemo: "https://artx-ai.vercel.app/",
+    images: ["/images/4.1.png", "/images/4.2.png", "/images/4.3.png"],
+    features: [
+      "AI image generation",
+      "Text-to-image prompts",
+      "Modern responsive UI",
+      "High-quality image output",
+      "Full-stack MERN architecture",
+    ],
   },
   {
-  id: 6,
-  title: "WavyMusic - Music Streaming Platform",
-  category: "Frontend",
-  year: "2025",
-  desc: "WavyMusic is a modern full-stack music streaming web application built using the MERN stack. Users can explore albums, stream tracks, and enjoy a dynamic audio player with a responsive and visually engaging interface.",
-  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-  accent: "#5aff73",
-  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-  liveDemo: "https://wavymusic.vercel.app",
-  images: [
-    "/images/5.1.png",
-  ],
-  features: [
-    "Music streaming",
-    "Dynamic audio player",
-    "Album & track browsing",
-    "Responsive UI",
-    "Modern MERN architecture"
-  ]
+    id: 6,
+    title: "WavyMusic - Music Streaming Platform",
+    category: "Frontend",
+    year: "2025",
+    desc: "WavyMusic is a modern full-stack music streaming web application built using the MERN stack. Users can explore albums, stream tracks, and enjoy a dynamic audio player with a responsive and visually engaging interface.",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    accent: "#5aff73",
+    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+    liveDemo: "https://wavymusic.vercel.app",
+    images: ["/images/5.1.png"],
+    features: [
+      "Music streaming",
+      "Dynamic audio player",
+      "Album & track browsing",
+      "Responsive UI",
+      "Modern MERN architecture",
+    ],
   },
   {
-  id: 7,
-  title: "Online Chess Game - TimewithChess website",
-  category: "Backend",
-  year: "2025",
-  desc: "A real-time multiplayer chess application inspired by Time with Chess, built using Node.js and Socket.IO. Players can compete online with live game synchronization, responsive gameplay, and seamless real-time interactions.",
-  tech: ["Node.js", "Express.js", "Socket.IO", "JavaScript", "HTML", "CSS"],
-  accent: "#5aff73",
-  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-  liveDemo: "#",
-  images: [
-    "/images/7.1.png",
-    "/images/7.2.png",
-  ],
-  features: [
-    "Real-time multiplayer chess",
-    "Live game synchronization",
-    "Socket.IO integration",
-    "Responsive gameplay UI",
-    "Online player matchmaking"
-  ]
-  },  
+    id: 7,
+    title: "Online Chess Game - TimewithChess website",
+    category: "Backend",
+    year: "2025",
+    desc: "A real-time multiplayer chess application inspired by Time with Chess, built using Node.js and Socket.IO. Players can compete online with live game synchronization, responsive gameplay, and seamless real-time interactions.",
+    tech: ["Node.js", "Express.js", "Socket.IO", "JavaScript", "HTML", "CSS"],
+    accent: "#5aff73",
+    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+    liveDemo: "#",
+    images: ["/images/7.1.png", "/images/7.2.png"],
+    features: [
+      "Real-time multiplayer chess",
+      "Live game synchronization",
+      "Socket.IO integration",
+      "Responsive gameplay UI",
+      "Online player matchmaking",
+    ],
+  },
 ];
 
 const stats = [
@@ -177,8 +181,8 @@ const stats = [
 ];
 
 function ProjectModal({ project, onClose }) {
-  const [imgIndex, setImgIndex] = useState(0)
-  const hasImages = project.images && project.images.length > 0
+  const [imgIndex, setImgIndex] = useState(0);
+  const hasImages = project.images && project.images.length > 0;
   return (
     <AnimatePresence>
       <motion.div
@@ -187,7 +191,10 @@ function ProjectModal({ project, onClose }) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
         className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        style={{ background: "rgba(10,10,11,0.88)", backdropFilter: "blur(16px)" }}
+        style={{
+          background: "rgba(10,10,11,0.88)",
+          backdropFilter: "blur(16px)",
+        }}
         onClick={onClose}
       >
         <motion.div
@@ -196,7 +203,10 @@ function ProjectModal({ project, onClose }) {
           exit={{ scale: 0.82, opacity: 0, y: 35 }}
           transition={{ type: "spring", damping: 22, stiffness: 280 }}
           className="rounded-3xl p-8 max-w-xl w-full relative max-h-[90vh] overflow-y-auto"
-          style={{ background: "var(--card-bg)", border: "1px solid rgba(134,90,255,0.2)" }}
+          style={{
+            background: "var(--card-bg)",
+            border: "1px solid rgba(134,90,255,0.2)",
+          }}
           onClick={(e) => e.stopPropagation()}
         >
           <motion.button
@@ -210,27 +220,54 @@ function ProjectModal({ project, onClose }) {
           </motion.button>
 
           {/* Image Gallery */}
-          <div className="w-full h-48 rounded-2xl mb-4 relative overflow-hidden"
-            style={{ background: `linear-gradient(135deg, ${project.gradient})` }}>
+          <div
+            className="w-full h-48 rounded-2xl mb-4 relative overflow-hidden"
+            style={{
+              background: `linear-gradient(135deg, ${project.gradient})`,
+            }}
+          >
             {hasImages ? (
               <>
-                <img src={project.images[imgIndex]} alt={project.title}
-                  className="w-full h-full object-cover" />
+                <img
+                  src={project.images[imgIndex]}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
                 {project.images.length > 1 && (
                   <>
-                    <button onClick={() => setImgIndex(i => (i - 1 + project.images.length) % project.images.length)}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80">
+                    <button
+                      onClick={() =>
+                        setImgIndex(
+                          (i) =>
+                            (i - 1 + project.images.length) %
+                            project.images.length,
+                        )
+                      }
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80"
+                    >
                       <FiChevronLeft size={16} />
                     </button>
-                    <button onClick={() => setImgIndex(i => (i + 1) % project.images.length)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80">
+                    <button
+                      onClick={() =>
+                        setImgIndex((i) => (i + 1) % project.images.length)
+                      }
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80"
+                    >
                       <FiChevronRight size={16} />
                     </button>
                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
                       {project.images.map((_, i) => (
-                        <button key={i} onClick={() => setImgIndex(i)}
+                        <button
+                          key={i}
+                          onClick={() => setImgIndex(i)}
                           className="w-1.5 h-1.5 rounded-full transition-all"
-                          style={{ background: i === imgIndex ? project.accent : 'rgba(255,255,255,0.4)' }} />
+                          style={{
+                            background:
+                              i === imgIndex
+                                ? project.accent
+                                : "rgba(255,255,255,0.4)",
+                          }}
+                        />
                       ))}
                     </div>
                   </>
@@ -238,13 +275,21 @@ function ProjectModal({ project, onClose }) {
               </>
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <span className="text-7xl font-black" style={{ color: project.accent, opacity: 0.3 }}>
+                <span
+                  className="text-7xl font-black"
+                  style={{ color: project.accent, opacity: 0.3 }}
+                >
                   {project.title[0]}
                 </span>
               </div>
             )}
-            <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs pointer-events-none"
-              style={{ background: "rgba(10,10,11,0.6)", color: "var(--muted-card)" }}>
+            <div
+              className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs pointer-events-none"
+              style={{
+                background: "rgba(10,10,11,0.6)",
+                color: "var(--muted-card)",
+              }}
+            >
               {project.year}
             </div>
           </div>
@@ -253,27 +298,70 @@ function ProjectModal({ project, onClose }) {
           {hasImages && project.images.length > 1 && (
             <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
               {project.images.map((img, i) => (
-                <img key={i} src={img} alt="" onClick={() => setImgIndex(i)}
+                <img
+                  key={i}
+                  src={img}
+                  alt=""
+                  onClick={() => setImgIndex(i)}
                   className="w-14 h-10 object-cover rounded-lg cursor-pointer shrink-0 transition-all"
-                  style={{ border: i === imgIndex ? `2px solid ${project.accent}` : '2px solid transparent', opacity: i === imgIndex ? 1 : 0.5 }} />
+                  style={{
+                    border:
+                      i === imgIndex
+                        ? `2px solid ${project.accent}`
+                        : "2px solid transparent",
+                    opacity: i === imgIndex ? 1 : 0.5,
+                  }}
+                />
               ))}
             </div>
           )}
 
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}>
-            <span className="text-xs px-3 py-1 rounded-full mb-4 inline-block"
-              style={{ background: `${project.accent}15`, color: project.accent, border: `1px solid ${project.accent}30` }}>
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+          >
+            <span
+              className="text-xs px-3 py-1 rounded-full mb-4 inline-block"
+              style={{
+                background: `${project.accent}15`,
+                color: project.accent,
+                border: `1px solid ${project.accent}30`,
+              }}
+            >
               {project.category}
             </span>
-            <h3 className="text-2xl font-bold mb-3" style={{ color: "var(--text-card)" }}>{project.title}</h3>
-            <p className="leading-relaxed mb-6 text-sm" style={{ color: "var(--muted-card)" }}>{project.desc}</p>
+            <h3
+              className="text-2xl font-bold mb-3"
+              style={{ color: "var(--text-card)" }}
+            >
+              {project.title}
+            </h3>
+            <p
+              className="leading-relaxed mb-6 text-sm"
+              style={{ color: "var(--muted-card)" }}
+            >
+              {project.desc}
+            </p>
 
             <div className="mb-6">
-              <h4 className="text-sm font-semibold mb-3" style={{ color: "var(--text-card)" }}>Key Features</h4>
+              <h4
+                className="text-sm font-semibold mb-3"
+                style={{ color: "var(--text-card)" }}
+              >
+                Key Features
+              </h4>
               <div className="grid grid-cols-2 gap-2">
                 {project.features.map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-xs" style={{ color: "var(--muted-card)" }}>
-                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: project.accent }} />
+                  <div
+                    key={f}
+                    className="flex items-center gap-2 text-xs"
+                    style={{ color: "var(--muted-card)" }}
+                  >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: project.accent }}
+                    />
                     {f}
                   </div>
                 ))}
@@ -282,28 +370,40 @@ function ProjectModal({ project, onClose }) {
 
             <div className="flex flex-wrap gap-2 mb-6">
               {project.tech.map((t, i) => (
-                <motion.span key={t} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+                <motion.span
+                  key={t}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.05 }}
                   className="text-xs px-3 py-1 rounded-full"
-                  style={{ background: "var(--surface2)", color: "var(--muted)", border: "1px solid var(--border)" }}>
+                  style={{
+                    background: "var(--surface2)",
+                    color: "var(--muted)",
+                    border: "1px solid var(--border)",
+                  }}
+                >
                   {t}
                 </motion.span>
               ))}
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.04, boxShadow: `0 0 20px ${project.accent}40` }}
+              whileHover={{
+                scale: 1.04,
+                boxShadow: `0 0 20px ${project.accent}40`,
+              }}
               whileTap={{ scale: 0.96 }}
-              onClick={() => window.open(project.liveDemo, '_blank')}
+              onClick={() => window.open(project.liveDemo, "_blank")}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold"
-              style={{ background: project.accent, color: "#fff" }}>
+              style={{ background: project.accent, color: "#fff" }}
+            >
               <FiExternalLink size={14} /> Live Demo
             </motion.button>
           </motion.div>
         </motion.div>
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }
 
 export default function PortfolioPage() {
@@ -349,7 +449,7 @@ export default function PortfolioPage() {
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen pt-18"
+      className="min-h-screen pt-16 md:pt-18"
       style={{ background: "var(--bg)" }}
     >
       {/* Hero */}
@@ -485,7 +585,9 @@ export default function PortfolioPage() {
                 {/* Thumbnail */}
                 <div
                   className="relative h-48 overflow-hidden"
-                  style={{ background: `linear-gradient(135deg, ${p.gradient})` }}
+                  style={{
+                    background: `linear-gradient(135deg, ${p.gradient})`,
+                  }}
                 >
                   {p.images && p.images.length > 0 ? (
                     <motion.img
@@ -501,7 +603,10 @@ export default function PortfolioPage() {
                       transition={{ duration: 0.5 }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <span className="text-8xl font-black" style={{ color: p.accent, opacity: 0.15 }}>
+                      <span
+                        className="text-8xl font-black"
+                        style={{ color: p.accent, opacity: 0.15 }}
+                      >
                         {p.title[0]}
                       </span>
                     </motion.div>
