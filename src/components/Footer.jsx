@@ -27,10 +27,8 @@ export default function Footer() {
       { label: 'Full Stack',           action: () => scrollTo('services') },
     ],
     Connect: [
-      { label: 'LinkedIn',  action: () => {} },
-      { label: 'Twitter',   action: () => {} },
+      { label: 'LinkedIn', action: () => window.open('https://www.linkedin.com/in/worceny-infotech/', '_blank') },
       { label: 'GitHub',    action: () => window.open('https://github.com/WorcenyInfotech', '_blank') },
-      { label: 'Instagram', action: () => {} },
     ],
   }
 
@@ -65,7 +63,6 @@ export default function Footer() {
             <div className="space-y-1.5">
               {[
                 '📧 worcenyinfotech@gmail.com',
-                '📞 +91 70464 57286',
                 '📍 Surat, Gujarat, India',
               ].map(item => (
                 <div key={item} className="text-xs" style={{ color: 'var(--muted)' }}>{item}</div>

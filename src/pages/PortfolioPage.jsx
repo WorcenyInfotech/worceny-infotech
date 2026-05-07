@@ -47,6 +47,7 @@ const projects = [
     '/images/2.1.png',
     '/images/2.2.png',
     '/images/2.3.png',
+
   ],
   features: [
     "AI chatbot customer support",
@@ -56,6 +57,116 @@ const projects = [
     "Order tracking system"
   ]
   },
+  {
+  id: 3,
+  title: "QuickChat - Real-Time Chat Application",
+  category: "Full Stack",
+  year: "2025",
+  desc: "QuickChat is a full-stack real-time chat application built with the MERN stack. It features JWT authentication, Socket.IO powered real-time messaging, online/offline user status, responsive UI, and 32 modern theme variations using Zustand and Tailwind CSS.",
+  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Tailwind CSS", "Zustand"],
+  accent: "#5aff73",
+  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+  liveDemo: "https://quickchat-y6jq.onrender.com/",
+  images: [
+    "/images/3.1.png",
+    "/images/3.2.png",
+    "/images/3.3.png"
+  ],
+  features: [
+    "JWT authentication",
+    "Real-time messaging",
+    "Online/offline status",
+    "32 custom themes",
+    "Responsive chat interface"
+  ]
+  },
+  {
+  id: 4,
+  title: "GreatKart - Ecommerce Platform",
+  category: "Frontend",
+  year: "2026",
+  desc: "GreatKart is a powerful ecommerce web application built with Python and Django. It includes shopping cart functionality, secure checkout system, order management, PayPal Sandbox payment integration, user dashboard, and token-based email authentication.",
+  tech: ["Python", "Django", "SQLite", "Bootstrap", "PayPal API"],
+  accent: "#5aff73",
+  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+  liveDemo: "#",
+  images: [
+    "/images/6.1.png",
+  ],
+  features: [
+    "Cart & checkout system",
+    "Payment integration",
+    "Order management",
+    "Email authentication",
+    "User dashboard"
+  ]
+  },
+  {
+  id: 5,
+  title: "ArtX - AI Image Generator",
+  category: "Full Stack",
+  year: "2026",
+  desc: "ArtX is a modern AI-powered image generation platform where users can create stunning images from text prompts. Built using the MERN stack with advanced AI APIs, it delivers high-quality AI art generation with a sleek and responsive user experience.",
+  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "OpenAI API"],
+  accent: "#5aff73",
+  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+  liveDemo: "https://artx-ai.vercel.app/",
+  images: [
+    "/images/4.1.png",
+    "/images/4.2.png",
+    "/images/4.3.png",
+  ],
+  features: [
+    "AI image generation",
+    "Text-to-image prompts",
+    "Modern responsive UI",
+    "High-quality image output",
+    "Full-stack MERN architecture"
+  ]
+  },
+  {
+  id: 6,
+  title: "WavyMusic - Music Streaming Platform",
+  category: "Frontend",
+  year: "2025",
+  desc: "WavyMusic is a modern full-stack music streaming web application built using the MERN stack. Users can explore albums, stream tracks, and enjoy a dynamic audio player with a responsive and visually engaging interface.",
+  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+  accent: "#5aff73",
+  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+  liveDemo: "https://wavymusic.vercel.app",
+  images: [
+    "/images/5.1.png",
+  ],
+  features: [
+    "Music streaming",
+    "Dynamic audio player",
+    "Album & track browsing",
+    "Responsive UI",
+    "Modern MERN architecture"
+  ]
+  },
+  {
+  id: 7,
+  title: "Online Chess Game - TimewithChess website",
+  category: "Backend",
+  year: "2025",
+  desc: "A real-time multiplayer chess application inspired by Time with Chess, built using Node.js and Socket.IO. Players can compete online with live game synchronization, responsive gameplay, and seamless real-time interactions.",
+  tech: ["Node.js", "Express.js", "Socket.IO", "JavaScript", "HTML", "CSS"],
+  accent: "#5aff73",
+  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+  liveDemo: "#",
+  images: [
+    "/images/7.1.png",
+    "/images/7.2.png",
+  ],
+  features: [
+    "Real-time multiplayer chess",
+    "Live game synchronization",
+    "Socket.IO integration",
+    "Responsive gameplay UI",
+    "Online player matchmaking"
+  ]
+  },  
 ];
 
 const stats = [
@@ -329,7 +440,7 @@ export default function PortfolioPage() {
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(cat)}
-              className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer"
+              className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
               style={
                 filter === cat
                   ? {

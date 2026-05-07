@@ -196,7 +196,7 @@ export default function Services() {
             whileHover={{ scale: 1.05, boxShadow: '0 0 28px rgba(134,90,255,0.5)' }}
             whileTap={{ scale: 0.96 }}
             onClick={() => { window.location.href = '/contact'; window.scrollTo({ top: 0 }) }}
-            className="px-7 py-3 rounded-full font-bold text-sm shrink-0 transition-all duration-300 cursor-pointer"
+            className="px-7 py-3 rounded-full font-bold text-sm shrink-0 transition-all duration-300"
             style={{ background: 'var(--accent)', color: '#fff' }}
           >
             Get a Free Quote →

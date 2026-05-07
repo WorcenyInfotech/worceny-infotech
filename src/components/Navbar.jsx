@@ -172,7 +172,7 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <motion.button
           whileTap={{ scale: 0.9 }}
-          className="md:hidden text-2xl cursor-pointer"
+          className="md:hidden text-2xl"
           style={{ color: "var(--accent)" }}
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -242,7 +242,7 @@ export default function Navbar() {
                     window.scrollTo({ top: 0 });
                     setMenuOpen(false);
                   }}
-                  className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-bold mt-2 cursor-pointer"
+                  className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-bold mt-2"
                   style={{
                     color: "var(--surface)",
                     background: "var(--accent)",
