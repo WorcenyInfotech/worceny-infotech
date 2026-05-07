@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { FiX, FiExternalLink, FiGithub, FiArrowRight } from 'react-icons/fi'
+import { FiX, FiExternalLink, FiArrowRight, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -15,6 +15,12 @@ const projects = [
     tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     color: '#00ff88',
     gradient: 'from-[#00ff88]/20 to-[#00ccff]/10',
+    liveDemo: 'https://your-live-demo-link.com', // TODO: replace with real URL
+    images: [
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+      'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80',
+      'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80',
+    ],
   },
   {
     id: 2,
@@ -24,6 +30,12 @@ const projects = [
     tech: ['React', 'Tailwind', 'Chart.js'],
     color: '#00ccff',
     gradient: 'from-[#00ccff]/20 to-[#7c3aed]/10',
+    liveDemo: 'https://your-live-demo-link.com', // TODO: replace with real URL
+    images: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80',
+    ],
   },
   {
     id: 3,
@@ -33,6 +45,12 @@ const projects = [
     tech: ['Next.js', 'Sanity CMS', 'GSAP'],
     color: '#a855f7',
     gradient: 'from-[#a855f7]/20 to-[#00ff88]/10',
+    liveDemo: 'https://your-live-demo-link.com', // TODO: replace with real URL
+    images: [
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=80',
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
+    ],
   },
   {
     id: 4,
@@ -42,6 +60,12 @@ const projects = [
     tech: ['React Native', 'Node.js', 'PostgreSQL'],
     color: '#f59e0b',
     gradient: 'from-[#f59e0b]/20 to-[#00ff88]/10',
+    liveDemo: 'https://your-live-demo-link.com', // TODO: replace with real URL
+    images: [
+      'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
+      'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=800&q=80',
+      'https://images.unsplash.com/photo-1616077168712-fc6c788db4af?w=800&q=80',
+    ],
   },
   {
     id: 5,
@@ -51,6 +75,12 @@ const projects = [
     tech: ['Next.js', 'OpenAI', 'Prisma'],
     color: '#00ff88',
     gradient: 'from-[#00ff88]/20 to-[#f59e0b]/10',
+    liveDemo: 'https://your-live-demo-link.com', // TODO: replace with real URL
+    images: [
+      'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80',
+      'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80',
+      'https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80',
+    ],
   },
   {
     id: 6,
@@ -60,10 +90,18 @@ const projects = [
     tech: ['React', 'Google Maps', 'Firebase'],
     color: '#00ccff',
     gradient: 'from-[#00ccff]/20 to-[#a855f7]/10',
+    liveDemo: 'https://your-live-demo-link.com', // TODO: replace with real URL
+    images: [
+      'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&q=80',
+      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
+    ],
   },
 ]
 
 function ProjectModal({ project, onClose }) {
+  const [imgIndex, setImgIndex] = useState(0)
+  const hasImages = project.images && project.images.length > 0
   return (
     <AnimatePresence>
       <motion.div
@@ -79,7 +117,7 @@ function ProjectModal({ project, onClose }) {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.8, opacity: 0, y: 40 }}
           transition={{ type: 'spring', damping: 22, stiffness: 280 }}
-          className="glass-dark rounded-3xl p-8 max-w-lg w-full relative border border-white/10"
+          className="glass-dark rounded-3xl p-8 max-w-lg w-full relative border border-white/10 max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <motion.button
@@ -92,22 +130,59 @@ function ProjectModal({ project, onClose }) {
             <FiX />
           </motion.button>
 
+          {/* Image Gallery or Gradient Placeholder */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.15 }}
-            className={`w-full h-44 rounded-2xl bg-gradient-to-br ${project.gradient} mb-6 flex items-center justify-center relative overflow-hidden`}
+            className="w-full h-48 rounded-2xl mb-4 relative overflow-hidden"
           >
-            <motion.span
-              animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="text-6xl font-black"
-              style={{ color: project.color, opacity: 0.35 }}
-            >
-              {project.title[0]}
-            </motion.span>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            {hasImages ? (
+              <>
+                <img src={project.images[imgIndex]} alt={project.title}
+                  className="w-full h-full object-cover" />
+                {project.images.length > 1 && (
+                  <>
+                    <button onClick={() => setImgIndex(i => (i - 1 + project.images.length) % project.images.length)}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80">
+                      <FiChevronLeft size={16} />
+                    </button>
+                    <button onClick={() => setImgIndex(i => (i + 1) % project.images.length)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80">
+                      <FiChevronRight size={16} />
+                    </button>
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {project.images.map((_, i) => (
+                        <button key={i} onClick={() => setImgIndex(i)}
+                          className="w-1.5 h-1.5 rounded-full transition-all"
+                          style={{ background: i === imgIndex ? project.color : 'rgba(255,255,255,0.4)' }} />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
+            ) : (
+              <div className={`w-full h-full bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
+                <motion.span animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="text-6xl font-black" style={{ color: project.color, opacity: 0.35 }}>
+                  {project.title[0]}
+                </motion.span>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
           </motion.div>
+
+          {/* Thumbnail strip */}
+          {hasImages && project.images.length > 1 && (
+            <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
+              {project.images.map((img, i) => (
+                <img key={i} src={img} alt="" onClick={() => setImgIndex(i)}
+                  className="w-14 h-10 object-cover rounded-lg cursor-pointer shrink-0 transition-all"
+                  style={{ border: i === imgIndex ? `2px solid ${project.color}` : '2px solid transparent', opacity: i === imgIndex ? 1 : 0.5 }} />
+              ))}
+            </div>
+          )}
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <span className="text-xs px-3 py-1 rounded-full border mb-4 inline-block"
@@ -119,34 +194,22 @@ function ProjectModal({ project, onClose }) {
 
             <div className="flex flex-wrap gap-2 mb-6">
               {project.tech.map((t, i) => (
-                <motion.span
-                  key={t}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                <motion.span key={t} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + i * 0.05 }}
-                  className="text-xs px-3 py-1 rounded-full glass text-gray-300 border border-white/10"
-                >
+                  className="text-xs px-3 py-1 rounded-full glass text-gray-300 border border-white/10">
                   {t}
                 </motion.span>
               ))}
             </div>
 
-            <div className="flex gap-3">
-              <motion.button
-                whileHover={{ scale: 1.04, boxShadow: '0 0 20px rgba(0,255,136,0.4)' }}
-                whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#00ff88] text-black text-sm font-semibold"
-              >
-                <FiExternalLink size={14} /> Live Demo
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full glass border border-white/10 text-white text-sm"
-              >
-                <FiGithub size={14} /> Source Code
-              </motion.button>
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.04, boxShadow: '0 0 20px rgba(0,255,136,0.4)' }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => window.open(project.liveDemo, '_blank')}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#00ff88] text-black text-sm font-semibold"
+            >
+              <FiExternalLink size={14} /> Live Demo
+            </motion.button>
           </motion.div>
         </motion.div>
       </motion.div>

@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiX, FiExternalLink, FiGithub, FiArrowRight } from "react-icons/fi";
+import { FiX, FiExternalLink, FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,148 +11,50 @@ const categories = ["All", "Full Stack", "Frontend", "Backend"];
 
 const projects = [
   {
-    id: 1,
-    title: "E-Commerce Platform",
-    category: "Full Stack",
-    year: "2024",
-    desc: "A modern e-commerce platform with real-time inventory, payment integration, and admin dashboard built for 10K+ daily users.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe", "Redis"],
-    accent: "#865aff",
-    gradient: "rgba(134,90,255,0.15), rgba(90,255,115,0.08)",
-    features: [
-      "Real-time inventory",
-      "Stripe payments",
-      "Admin dashboard",
-      "Mobile responsive",
-    ],
+  id: 1,
+  title: "Employee Management Services Website | Business Website",
+  category: "Full Stack",
+  year: "2025",
+  desc: "Full-stack Employee Management Services Website designed for companies to manage employees, attendance, leave requests, payroll, and internal operations with a secure multi-role system and admin control panel.",
+  tech: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript", "AJAX"],
+  accent: "#5aff73",
+  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+  liveDemo: 'https://emsraj.vercel.app/', // TODO: replace with real URL
+  images: [
+    '/images/1.1.png',
+    '/images/1.2.png',
+    '/images/1.3.png',
+  ],
+  features: [
+    "Multi-role system (Admin, Employee, Super Admin)",
+    "Attendance & leave management",
+    "Payroll & salary processing",
+    "Admin dashboard analytics",
+    "Secure authentication system"
+  ]
   },
   {
-    id: 2,
-    title: "SaaS Analytics Dashboard",
-    category: "Frontend",
-    year: "2024",
-    desc: "Analytics dashboard with real-time data visualization, dark theme, and responsive design for a B2B SaaS startup.",
-    tech: ["React", "Tailwind", "Chart.js", "WebSocket"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    features: [
-      "Real-time charts",
-      "Dark/light mode",
-      "CSV export",
-      "Role-based access",
-    ],
-  },
-  {
-    id: 3,
-    title: "Corporate Website",
-    category: "Web Dev",
-    year: "2023",
-    desc: "Premium corporate website with GSAP animations, Sanity CMS integration, and full SEO optimization.",
-    tech: ["Next.js", "Sanity CMS", "GSAP", "Vercel"],
-    accent: "#865aff",
-    gradient: "rgba(134,90,255,0.15), rgba(90,255,115,0.06)",
-    features: [
-      "CMS integration",
-      "SEO optimized",
-      "GSAP animations",
-      "Blog system",
-    ],
-  },
-  {
-    id: 4,
-    title: "Mobile Banking App",
-    category: "Mobile",
-    year: "2023",
-    desc: "Secure mobile banking UI with biometric auth, transaction history, and real-time push notifications.",
-    tech: ["React Native", "Node.js", "PostgreSQL", "Firebase"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    features: [
-      "Biometric auth",
-      "Push notifications",
-      "Transaction history",
-      "QR payments",
-    ],
-  },
-  {
-    id: 5,
-    title: "AI Content Platform",
-    category: "Full Stack",
-    year: "2024",
-    desc: "AI-powered content generation platform with subscription model, team collaboration, and usage analytics.",
-    tech: ["Next.js", "OpenAI API", "Prisma", "Stripe"],
-    accent: "#865aff",
-    gradient: "rgba(134,90,255,0.15), rgba(90,255,115,0.06)",
-    features: [
-      "AI generation",
-      "Team workspaces",
-      "Subscription billing",
-      "Usage analytics",
-    ],
-  },
-  {
-    id: 6,
-    title: "Real Estate Portal",
-    category: "Web Dev",
-    year: "2023",
-    desc: "Property listing portal with Google Maps integration, advanced filters, virtual tours, and agent dashboard.",
-    tech: ["React", "Google Maps", "Firebase", "Node.js"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    features: [
-      "Map integration",
-      "Virtual tours",
-      "Agent dashboard",
-      "Advanced filters",
-    ],
-  },
-  {
-    id: 7,
-    title: "Healthcare Management",
-    category: "Full Stack",
-    year: "2024",
-    desc: "Hospital management system with appointment booking, patient records, billing, and doctor portal.",
-    tech: ["React", "Node.js", "MySQL", "Socket.io"],
-    accent: "#865aff",
-    gradient: "rgba(134,90,255,0.15), rgba(90,255,115,0.06)",
-    features: [
-      "Appointment booking",
-      "Patient records",
-      "Billing system",
-      "Doctor portal",
-    ],
-  },
-  {
-    id: 8,
-    title: "EdTech Learning Platform",
-    category: "Full Stack",
-    year: "2023",
-    desc: "Online learning platform with video courses, quizzes, certificates, and student progress tracking.",
-    tech: ["Next.js", "Node.js", "MongoDB", "AWS S3"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    features: [
-      "Video streaming",
-      "Quiz engine",
-      "Certificates",
-      "Progress tracking",
-    ],
-  },
-  {
-    id: 9,
-    title: "Restaurant Ordering App",
-    category: "Mobile",
-    year: "2023",
-    desc: "Food ordering app with real-time order tracking, table booking, loyalty points, and kitchen display.",
-    tech: ["React Native", "Node.js", "MongoDB", "Razorpay"],
-    accent: "#865aff",
-    gradient: "rgba(134,90,255,0.15), rgba(90,255,115,0.06)",
-    features: [
-      "Live order tracking",
-      "Table booking",
-      "Loyalty points",
-      "Kitchen display",
-    ],
+  id: 2,
+  title: "Ecommerce Watch Website with AI Customer Support",
+  category: "Full Stack",
+  year: "2025",
+  desc: "Modern ecommerce watch store with AI-powered customer support, product catalog, cart system, secure checkout, and intelligent chatbot for instant customer assistance and product recommendations.",
+  tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "AI Chatbot API"],
+  accent: "#5aff73",
+  gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
+  liveDemo: '#', // TODO: replace with real URL
+  images: [
+    '/images/2.1.png',
+    '/images/2.2.png',
+    '/images/2.3.png',
+  ],
+  features: [
+    "AI chatbot customer support",
+    "Product catalog & filters",
+    "Shopping cart system",
+    "Secure checkout flow",
+    "Order tracking system"
+  ]
   },
 ];
 
@@ -164,6 +66,8 @@ const stats = [
 ];
 
 function ProjectModal({ project, onClose }) {
+  const [imgIndex, setImgIndex] = useState(0)
+  const hasImages = project.images && project.images.length > 0
   return (
     <AnimatePresence>
       <motion.div
@@ -172,10 +76,7 @@ function ProjectModal({ project, onClose }) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
         className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        style={{
-          background: "rgba(10,10,11,0.88)",
-          backdropFilter: "blur(16px)",
-        }}
+        style={{ background: "rgba(10,10,11,0.88)", backdropFilter: "blur(16px)" }}
         onClick={onClose}
       >
         <motion.div
@@ -184,151 +85,114 @@ function ProjectModal({ project, onClose }) {
           exit={{ scale: 0.82, opacity: 0, y: 35 }}
           transition={{ type: "spring", damping: 22, stiffness: 280 }}
           className="rounded-3xl p-8 max-w-xl w-full relative max-h-[90vh] overflow-y-auto"
-          style={{
-            background: "var(--card-bg)",
-            border: "1px solid rgba(134,90,255,0.2)",
-          }}
+          style={{ background: "var(--card-bg)", border: "1px solid rgba(134,90,255,0.2)" }}
           onClick={(e) => e.stopPropagation()}
         >
           <motion.button
             whileHover={{ scale: 1.1, rotate: 90 }}
             whileTap={{ scale: 0.9 }}
             onClick={onClose}
-            className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200"
+            className="sticky top-0 float-right z-10 w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200 mb-2"
             style={{ background: "var(--surface2)", color: "var(--muted)" }}
           >
             <FiX size={16} />
           </motion.button>
 
-          {/* Thumbnail */}
-          <div
-            className="w-full h-48 rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden"
-            style={{
-              background: `linear-gradient(135deg, ${project.gradient})`,
-            }}
-          >
-            <motion.span
-              animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.06, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="text-7xl font-black"
-              style={{ color: project.accent, opacity: 0.3 }}
-            >
-              {project.title[0]}
-            </motion.span>
-            <div
-              className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs"
-              style={{
-                background: "rgba(10,10,11,0.6)",
-                color: "var(--muted-card)",
-              }}
-            >
+          {/* Image Gallery */}
+          <div className="w-full h-48 rounded-2xl mb-4 relative overflow-hidden"
+            style={{ background: `linear-gradient(135deg, ${project.gradient})` }}>
+            {hasImages ? (
+              <>
+                <img src={project.images[imgIndex]} alt={project.title}
+                  className="w-full h-full object-cover" />
+                {project.images.length > 1 && (
+                  <>
+                    <button onClick={() => setImgIndex(i => (i - 1 + project.images.length) % project.images.length)}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80">
+                      <FiChevronLeft size={16} />
+                    </button>
+                    <button onClick={() => setImgIndex(i => (i + 1) % project.images.length)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80">
+                      <FiChevronRight size={16} />
+                    </button>
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {project.images.map((_, i) => (
+                        <button key={i} onClick={() => setImgIndex(i)}
+                          className="w-1.5 h-1.5 rounded-full transition-all"
+                          style={{ background: i === imgIndex ? project.accent : 'rgba(255,255,255,0.4)' }} />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-7xl font-black" style={{ color: project.accent, opacity: 0.3 }}>
+                  {project.title[0]}
+                </span>
+              </div>
+            )}
+            <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs pointer-events-none"
+              style={{ background: "rgba(10,10,11,0.6)", color: "var(--muted-card)" }}>
               {project.year}
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18 }}
-          >
-            <span
-              className="text-xs px-3 py-1 rounded-full mb-4 inline-block"
-              style={{
-                background: `${project.accent}15`,
-                color: project.accent,
-                border: `1px solid ${project.accent}30`,
-              }}
-            >
+          {/* Thumbnail strip */}
+          {hasImages && project.images.length > 1 && (
+            <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
+              {project.images.map((img, i) => (
+                <img key={i} src={img} alt="" onClick={() => setImgIndex(i)}
+                  className="w-14 h-10 object-cover rounded-lg cursor-pointer shrink-0 transition-all"
+                  style={{ border: i === imgIndex ? `2px solid ${project.accent}` : '2px solid transparent', opacity: i === imgIndex ? 1 : 0.5 }} />
+              ))}
+            </div>
+          )}
+
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}>
+            <span className="text-xs px-3 py-1 rounded-full mb-4 inline-block"
+              style={{ background: `${project.accent}15`, color: project.accent, border: `1px solid ${project.accent}30` }}>
               {project.category}
             </span>
-            <h3
-              className="text-2xl font-bold mb-3"
-              style={{ color: "var(--text-card)" }}
-            >
-              {project.title}
-            </h3>
-            <p
-              className="leading-relaxed mb-6 text-sm"
-              style={{ color: "var(--muted-card)" }}
-            >
-              {project.desc}
-            </p>
+            <h3 className="text-2xl font-bold mb-3" style={{ color: "var(--text-card)" }}>{project.title}</h3>
+            <p className="leading-relaxed mb-6 text-sm" style={{ color: "var(--muted-card)" }}>{project.desc}</p>
 
-            {/* Features */}
             <div className="mb-6">
-              <h4
-                className="text-sm font-semibold mb-3"
-                style={{ color: "var(--text-card)" }}
-              >
-                Key Features
-              </h4>
+              <h4 className="text-sm font-semibold mb-3" style={{ color: "var(--text-card)" }}>Key Features</h4>
               <div className="grid grid-cols-2 gap-2">
                 {project.features.map((f) => (
-                  <div
-                    key={f}
-                    className="flex items-center gap-2 text-xs"
-                    style={{ color: "var(--muted-card)" }}
-                  >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ background: project.accent }}
-                    />
+                  <div key={f} className="flex items-center gap-2 text-xs" style={{ color: "var(--muted-card)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: project.accent }} />
                     {f}
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Tech */}
             <div className="flex flex-wrap gap-2 mb-6">
               {project.tech.map((t, i) => (
-                <motion.span
-                  key={t}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                <motion.span key={t} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.05 }}
                   className="text-xs px-3 py-1 rounded-full"
-                  style={{
-                    background: "var(--surface2)",
-                    color: "var(--muted)",
-                    border: "1px solid var(--border)",
-                  }}
-                >
+                  style={{ background: "var(--surface2)", color: "var(--muted)", border: "1px solid var(--border)" }}>
                   {t}
                 </motion.span>
               ))}
             </div>
 
-            <div className="flex gap-3">
-              <motion.button
-                whileHover={{
-                  scale: 1.04,
-                  boxShadow: `0 0 20px ${project.accent}40`,
-                }}
-                whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold"
-                style={{ background: project.accent, color: "#fff" }}
-              >
-                <FiExternalLink size={14} /> Live Demo
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm"
-                style={{
-                  background: "var(--surface2)",
-                  color: "var(--text)",
-                  border: "1px solid var(--border)",
-                }}
-              >
-                <FiGithub size={14} /> Source Code
-              </motion.button>
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.04, boxShadow: `0 0 20px ${project.accent}40` }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => window.open(project.liveDemo, '_blank')}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold"
+              style={{ background: project.accent, color: "#fff" }}>
+              <FiExternalLink size={14} /> Live Demo
+            </motion.button>
           </motion.div>
         </motion.div>
       </motion.div>
     </AnimatePresence>
-  );
+  )
 }
 
 export default function PortfolioPage() {
@@ -510,22 +374,27 @@ export default function PortfolioPage() {
                 {/* Thumbnail */}
                 <div
                   className="relative h-48 overflow-hidden"
-                  style={{
-                    background: `linear-gradient(135deg, ${p.gradient})`,
-                  }}
+                  style={{ background: `linear-gradient(135deg, ${p.gradient})` }}
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <span
-                      className="text-8xl font-black"
-                      style={{ color: p.accent, opacity: 0.15 }}
+                  {p.images && p.images.length > 0 ? (
+                    <motion.img
+                      src={p.images[0]}
+                      alt={p.title}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute inset-0 flex items-center justify-center"
                     >
-                      {p.title[0]}
-                    </span>
-                  </motion.div>
+                      <span className="text-8xl font-black" style={{ color: p.accent, opacity: 0.15 }}>
+                        {p.title[0]}
+                      </span>
+                    </motion.div>
+                  )}
                   <div
                     className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs"
                     style={{
