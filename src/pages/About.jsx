@@ -36,8 +36,8 @@ const stats = [
 ];
 
 const team = [
-  { name: "Raj Soni", role: "Co-Founder & Full Stack Developer", initials: "RS" },
   { name: "Siddharth Sarvaiya", role: "Co-Founder & Full Stack Developer", initials: "SS" },
+  { name: "Raj Soni", role: "Co-Founder & Full Stack Developer", initials: "RS" },
 ];
 
 export default function About() {
