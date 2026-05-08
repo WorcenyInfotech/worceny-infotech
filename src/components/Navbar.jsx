@@ -82,8 +82,7 @@ export default function Navbar() {
         scrolled
           ? {
               background: "#f5f7fb",
-              backdropFilter: "blur(20px)",
-              borderBottom: "1px solid var(--accent)",
+              backdropFilter: "blur(20px)"
             }
           : {}
       }
