@@ -9,6 +9,7 @@ import ScrollToTop from './components/ScrollToTop'
 import MainPage from './pages/MainPage'
 import ContactPage from './pages/ContactPage'
 import PortfolioPage from './pages/PortfolioPage'
+import ServicesPage from './pages/ServicesPage'
 
 const pageVariants = {
   initial: { opacity: 0, y: 24 },
@@ -30,6 +31,7 @@ function AnimatedRoutes() {
         <Routes location={location}>
           <Route path="/"          element={<MainPage />} />
           <Route path="/contact"   element={<ContactPage />} />
+          <Route path="/services"  element={<ServicesPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </motion.div>

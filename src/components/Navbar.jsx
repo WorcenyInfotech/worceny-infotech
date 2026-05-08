@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const navLinks = [
   { label: "Home", path: "/", section: "home" },
   { label: "About", path: "/", section: "about" },
-  { label: "Services", path: "/", section: "services" },
+  { label: "Services", path: "/services", section: null },
   { label: "Portfolio", path: "/portfolio", section: null },
   { label: "Contact", path: "/contact", section: null },
 ];
@@ -29,6 +29,7 @@ export default function Navbar() {
   useEffect(() => {
     if (location.pathname === "/contact") setActiveLink("Contact");
     else if (location.pathname === "/portfolio") setActiveLink("Portfolio");
+    else if (location.pathname === "/services") setActiveLink("Services");
     else setActiveLink("Home");
   }, [location.pathname]);
 
@@ -36,7 +37,7 @@ export default function Navbar() {
     const onScroll = () => {
       if (location.pathname !== "/") return;
       const pos = window.scrollY + 120;
-      ["home", "about", "services"].forEach((id) => {
+      ["home", "about"].forEach((id) => {
         const el = document.getElementById(id);
         if (el && pos >= el.offsetTop)
           setActiveLink(id.charAt(0).toUpperCase() + id.slice(1));

@@ -21,10 +21,10 @@ export default function Footer() {
       { label: 'Contact',   action: () => goTo('/contact') },
     ],
     Services: [
-      { label: 'Web Development',      action: () => scrollTo('services') },
-      { label: 'Frontend Dev',         action: () => scrollTo('services') },
-      { label: 'Backend Dev',          action: () => scrollTo('services') },
-      { label: 'Full Stack',           action: () => scrollTo('services') },
+      { label: 'Web Development',      action: () => goTo('/services') },
+      { label: 'Frontend Dev',         action: () => goTo('/services') },
+      { label: 'Backend Dev',          action: () => goTo('/services') },
+      { label: 'Full Stack',           action: () => goTo('/services') },
     ],
     Connect: [
       { label: 'LinkedIn', action: () => window.open('https://www.linkedin.com/in/worceny-infotech/', '_blank') },
