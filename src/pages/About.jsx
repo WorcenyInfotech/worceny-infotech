@@ -2,14 +2,8 @@ import { motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  FiTarget,
-  FiEye,
-  FiAward,
-  FiUsers,
-  FiZap,
-  FiShield,
-} from "react-icons/fi";
+import { FiTarget, FiEye, FiAward, FiUsers, FiZap, FiShield } from "react-icons/fi";
+import Technologies from "../components/Technologies";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -260,6 +254,10 @@ export default function About() {
           ))}
         </div>
 
+        {/* Technologies */}
+        </div>
+      <Technologies />
+      <div className="max-w-7xl mx-auto px-6">
         {/* Team */}
         <div className="text-center mb-12">
           <span
