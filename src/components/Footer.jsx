@@ -22,9 +22,10 @@ export default function Footer() {
     ],
     Services: [
       { label: 'Web Development',      action: () => goTo('/services') },
-      { label: 'Frontend Dev',         action: () => goTo('/services') },
-      { label: 'Backend Dev',          action: () => goTo('/services') },
-      { label: 'Full Stack',           action: () => goTo('/services') },
+      { label: 'Frontend Development',         action: () => goTo('/services') },
+      { label: 'Backend Development',          action: () => goTo('/services') },
+      { label: 'SEO',           action: () => goTo('/services') },
+      { label: 'Web Hosting',           action: () => goTo('/services') },
     ],
     Connect: [
       { label: 'LinkedIn', action: () => window.open('https://www.linkedin.com/company/worceny-infotech', '_blank') },

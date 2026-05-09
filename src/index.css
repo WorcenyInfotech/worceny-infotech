@@ -15,7 +15,8 @@
     --text-card: #f6f6f6;
     --muted: #1b1b1b;
     --muted-card: #cacaca;
-    --card-bg: #13131a;
+    --card-bg: #1a1a1a;
+    --card-bg2: #2d4dca;
   }
 
   * {

@@ -2,8 +2,16 @@ import { motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiTarget, FiEye, FiAward, FiUsers, FiZap, FiShield } from "react-icons/fi";
-import Technologies from "../components/Technologies";
+import {
+  FiTarget,
+  FiEye,
+  FiAward,
+  FiUsers,
+  FiZap,
+  FiShield,
+} from "react-icons/fi";
+import Technologies from "../components/Technologies"
+import WorkProcess from "../components/WorkProcess"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,15 +31,10 @@ const cards = [
 ];
 
 const stats = [
-  { icon: <FiAward size={20} />, value: "10+", label: "Projects Delivered" },
-  { icon: <FiUsers size={20} />, value: "10+", label: "Happy Clients" },
+  { icon: <FiAward size={20} />, value: "5+", label: "Projects Delivered" },
+  { icon: <FiUsers size={20} />, value: "5+", label: "Happy Clients" },
   { icon: <FiZap size={20} />, value: "99%", label: "Client Satisfaction" },
   { icon: <FiShield size={20} />, value: "2+", label: "Years Experience" },
-];
-
-const team = [
-  { name: "Siddharth Sarvaiya", role: "Co-Founder & Full Stack Developer", initials: "SS" },
-  { name: "Raj Soni", role: "Co-Founder & Full Stack Developer", initials: "RS" },
 ];
 
 export default function About() {
@@ -44,7 +47,7 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // heading
+      // Heading animation
       gsap.fromTo(
         headingRef.current.children,
         { opacity: 0, y: 55 },
@@ -55,9 +58,9 @@ export default function About() {
           stagger: 0.11,
           ease: "power3.out",
           scrollTrigger: { trigger: headingRef.current, start: "top 85%" },
-        },
+        }
       );
-      // line
+      // Line animation
       gsap.fromTo(
         lineRef.current,
         { scaleX: 0, transformOrigin: "left center" },
@@ -66,9 +69,9 @@ export default function About() {
           duration: 1.1,
           ease: "power3.out",
           scrollTrigger: { trigger: lineRef.current, start: "top 85%" },
-        },
+        }
       );
-      // cards
+      // Cards animation
       gsap.fromTo(
         cardsRef.current.children,
         { opacity: 0, y: 65, rotateY: -12 },
@@ -80,9 +83,9 @@ export default function About() {
           stagger: 0.18,
           ease: "power3.out",
           scrollTrigger: { trigger: cardsRef.current, start: "top 80%" },
-        },
+        }
       );
-      // stats
+      // Stats animation
       gsap.fromTo(
         statsRef.current.children,
         { opacity: 0, scale: 0.65, y: 35 },
@@ -94,11 +97,11 @@ export default function About() {
           stagger: 0.1,
           ease: "back.out(1.7)",
           scrollTrigger: { trigger: statsRef.current, start: "top 85%" },
-        },
+        }
       );
-      // team
+      // Team section animation (if used later)
       gsap.fromTo(
-        teamRef.current.children,
+        teamRef.current?.children,
         { opacity: 0, y: 40, scale: 0.9 },
         {
           opacity: 1,
@@ -108,7 +111,7 @@ export default function About() {
           stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: { trigger: teamRef.current, start: "top 85%" },
-        },
+        }
       );
     }, sectionRef);
     return () => ctx.revert();
@@ -120,7 +123,7 @@ export default function About() {
       id="about"
       className="py-28 section-gradient relative overflow-hidden"
     >
-      {/* bg accent */}
+      {/* Background accents */}
       <div
         className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none"
         style={{ background: "rgba(134,90,255,0.05)" }}
@@ -163,21 +166,27 @@ export default function About() {
           </p>
         </div>
 
-        {/* Mission & Vision */}
+        {/* Mission & Vision Cards */}
         <div
           ref={cardsRef}
           className="grid md:grid-cols-2 gap-6 mb-20"
-          style={{ perspective: "1000px" }}
+          style={{ perspective: "1200px" }}
         >
           {cards.map((card) => (
             <motion.div
               key={card.title}
-              whileHover={{ y: -8, boxShadow: `0 0 40px ${card.accent}20` }}
+              whileHover={{
+                y: -10,
+                boxShadow: `0 20px 60px ${card.accent}25`,
+                rotateX: 3,
+                rotateY: 3,
+              }}
               transition={{ type: "spring", stiffness: 280, damping: 20 }}
               className="rounded-2xl p-8 group cursor-default"
               style={{
-                background: "var(--card-bg)",
+                background: "linear-gradient(90deg, #111111, #434343)",
                 border: "1px solid var(--border)",
+                transformStyle: "preserve-3d",
               }}
             >
               <motion.div
@@ -189,7 +198,7 @@ export default function About() {
                 {card.icon}
               </motion.div>
               <h3
-                className="text-xl font-bold mb-3 transition-colors duration-300 group-hover:text-var(--accent)"
+                className="text-xl font-bold mb-3 transition-colors duration-300 group-hover:text-[var(--accent)]"
                 style={{ color: "var(--text-card)" }}
               >
                 {card.title}
@@ -200,7 +209,6 @@ export default function About() {
               >
                 {card.desc}
               </p>
-              {/* bottom accent line */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
@@ -223,8 +231,8 @@ export default function About() {
             <motion.div
               key={s.label}
               whileHover={{
-                scale: 1.06,
-                boxShadow: "0 0 30px rgba(134,90,255,0.18)",
+                scale: 1.07,
+                boxShadow: "0 0 40px rgba(134,90,255,0.2)",
               }}
               transition={{ type: "spring", stiffness: 300, damping: 18 }}
               className="rounded-2xl p-6 text-center cursor-default"
@@ -234,7 +242,7 @@ export default function About() {
               }}
             >
               <motion.div
-                whileHover={{ scale: 1.3, rotate: 10 }}
+                whileHover={{ scale: 1.35, rotate: 12 }}
                 transition={{ type: "spring", stiffness: 400 }}
                 className="flex justify-center mb-3"
                 style={{ color: "var(--accent)" }}
@@ -253,67 +261,9 @@ export default function About() {
             </motion.div>
           ))}
         </div>
-
-        {/* Technologies */}
-        </div>
-      <Technologies />
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Team */}
-        <div className="text-center mb-12">
-          <span
-            className="inline-block text-sm font-semibold tracking-widest uppercase mb-3"
-            style={{ color: "var(--accent2)" }}
-          >
-            The Team
-          </span>
-          <h3 className="text-3xl font-black" style={{ color: "var(--text)" }}>
-            Meet the <span className="gradient-text">Experts</span>
-          </h3>
-        </div>
-
-        <div ref={teamRef} className="grid grid-cols-2 md:grid-cols-2 gap-5 max-w-xl mx-auto w-full">
-          {team.map((member, i) => (
-            <motion.div
-              key={member.name}
-              whileHover={{
-                y: -6,
-                boxShadow: "0 0 30px rgba(134,90,255,0.15)",
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="rounded-2xl p-6 text-center cursor-default group"
-              style={{
-                background: "var(--card-bg)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              {/* Avatar */}
-              <motion.div
-                whileHover={{ scale: 1.08 }}
-                className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-lg font-black"
-                style={{
-                  background:
-                    i % 2 === 0
-                      ? "rgba(134,90,255,0.15)"
-                      : "rgba(90,255,115,0.12)",
-                  color: i % 2 === 0 ? "var(--accent)" : "var(--accent2)",
-                  border: `1px solid ${i % 2 === 0 ? "rgba(134,90,255,0.25)" : "rgba(90,255,115,0.2)"}`,
-                }}
-              >
-                {member.initials}
-              </motion.div>
-              <div
-                className="font-bold text-sm mb-1"
-                style={{ color: "var(--text-card)" }}
-              >
-                {member.name}
-              </div>
-              <div className="text-xs" style={{ color: "var(--muted-card)" }}>
-                {member.role}
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
+      <Technologies />
+      <WorkProcess />
     </section>
   );
 }
