@@ -19,7 +19,7 @@ const services = [
     desc: 'We craft stunning, high-performance websites that represent your brand and convert visitors into customers. From simple landing pages to complex business portals — built to impress.',
     features: ['Custom UI/UX Design', 'Mobile Responsive', 'SEO Ready Structure', 'Fast Load Speed', 'CMS Integration', 'Cross-browser Compatible'],
     tags: ['HTML/CSS', 'React', 'WordPress', 'Next.js'],
-    accent: '#865aff',
+    accent: '#6C5CE7', // Deep violet
     number: '01',
   },
   {
@@ -30,7 +30,7 @@ const services = [
     desc: 'Get found on Google. We implement technical SEO, content strategy, and performance improvements that drive organic traffic and improve your search rankings sustainably.',
     features: ['Technical SEO Audit', 'On-Page Optimization', 'Core Web Vitals', 'Schema Markup', 'Keyword Research', 'Monthly Reporting'],
     tags: ['Google Analytics', 'Search Console', 'Lighthouse', 'SEMrush'],
-    accent: '#ff9f43',
+    accent: '#FF6B6B', // Bright coral red
     number: '02',
   },
   {
@@ -41,7 +41,7 @@ const services = [
     desc: 'Automate your customer communication with WhatsApp Business API. Send bulk messages, set up intelligent chatbots, automate follow-ups, and never miss a lead again.',
     features: ['WhatsApp Business API', 'Chatbot Setup', 'Bulk Messaging', 'Lead Follow-up Automation', 'Order & Booking Alerts', 'CRM Integration'],
     tags: ['WhatsApp API', 'Chatbot', 'Automation', 'CRM'],
-    accent: '#25D366',
+    accent: '#25D366', // WhatsApp green (kept original, works well)
     number: '03',
   },
   {
@@ -52,7 +52,7 @@ const services = [
     desc: 'Reliable, secure, and blazing-fast hosting for your website. We manage everything — from server setup to SSL certificates — so you can focus on your business.',
     features: ['99.9% Uptime SLA', 'Free SSL Certificate', 'Daily Backups', 'DDoS Protection', 'CDN Integration', '24/7 Monitoring'],
     tags: ['AWS', 'Vercel', 'Cloudflare', 'cPanel'],
-    accent: '#5aff73',
+    accent: '#FFA500', // Orange for energy & reliability
     number: '04',
   },
   {
@@ -63,7 +63,7 @@ const services = [
     desc: 'We build pixel-perfect, interactive frontends using the latest technologies. Every component is crafted for performance, accessibility, and a seamless user experience across all devices.',
     features: ['React & Next.js', 'Tailwind CSS', 'Framer Motion Animations', 'Component Libraries', 'Performance Optimization', 'Accessibility (WCAG)'],
     tags: ['React', 'Next.js', 'Tailwind', 'TypeScript'],
-    accent: '#5aff73',
+    accent: '#00BFFF', // Deep sky blue
     number: '05',
   },
   {
@@ -74,7 +74,7 @@ const services = [
     desc: 'Robust, secure, and scalable backend systems that power your applications. We design APIs, databases, and server architectures that handle real-world traffic with ease.',
     features: ['REST & GraphQL APIs', 'Node.js / Express', 'Database Design', 'Authentication & Security', 'Cloud Deployment', 'Microservices Architecture'],
     tags: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL'],
-    accent: '#865aff',
+    accent: '#8A2BE2', // Blue violet
     number: '06',
   },
   {
@@ -85,11 +85,10 @@ const services = [
     desc: 'From database to deployment — we handle the entire stack. Our full-stack expertise means faster delivery, consistent code quality, and a single point of accountability for your project.',
     features: ['MERN / MEAN Stack', 'End-to-End Development', 'DevOps & CI/CD', 'Scalable Architecture', 'Third-party Integrations', 'Post-launch Support'],
     tags: ['MERN Stack', 'AWS', 'Docker', 'REST APIs'],
-    accent: '#5aff73',
+    accent: '#32CD32', // Lime green
     number: '07',
   },
 ]
-
 export default function ServicesPage() {
   const sectionRef = useRef()
   const navigate = useNavigate()
@@ -113,7 +112,7 @@ export default function ServicesPage() {
   }, [])
 
   return (
-    <div ref={sectionRef} className="min-h-screen pt-18" style={{ background: 'var(--bg)' }}>
+    <div ref={sectionRef} className="min-h-screen pt-16" style={{ background: 'var(--bg)' }}>
 
       {/* Hero */}
       <div className="relative py-24 overflow-hidden">
@@ -141,7 +140,7 @@ export default function ServicesPage() {
             {services.map((s) => (
               <button key={s.id}
                 onClick={() => document.getElementById(`srv-${s.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-                className="text-xs px-4 py-2 rounded-full transition-all duration-200 hover:scale-105"
+                className="text-xs px-4 py-2 rounded-full transition-all duration-200 hover:scale-105 cursor-pointer"
                 style={{ background: `${s.accent}15`, color: s.accent, border: `1px solid ${s.accent}30` }}>
                 {s.title}
               </button>
@@ -157,7 +156,7 @@ export default function ServicesPage() {
           return (
             <div id={`srv-${s.id}`} key={s.id}
               className="rounded-3xl overflow-hidden"
-              style={{ background: '#ffffff', border: '1px solid #1a1a1a' }}>
+              style={{ background: '#ffffff', border: `1px solid ${s.accent}` }}>
               <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-0`}>
 
                 {/* Visual Panel */}
@@ -240,7 +239,7 @@ export default function ServicesPage() {
             whileHover={{ scale: 1.06, boxShadow: '0 0 36px rgba(134,90,255,0.5)' }}
             whileTap={{ scale: 0.95 }}
             onClick={() => { navigate('/contact'); window.scrollTo({ top: 0 }) }}
-            className="px-10 py-4 rounded-full font-bold text-base relative z-10"
+            className="px-10 py-4 rounded-full font-bold text-base relative z-10 cursor-pointer"
             style={{ background: 'var(--accent)', color: '#fff' }}>
             Get a Free Quote →
           </motion.button>

@@ -49,7 +49,7 @@ const socials = [
   {
     icon: <FiLinkedin size={17} />,
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/worceny-infotech",
+    href: "https://www.linkedin.com/company/worceny-infotech",
     accent: "#0077b5",
   },
   {
@@ -676,6 +676,7 @@ export default function ContactPage() {
                   <motion.a
                     key={s.label}
                     href={s.href}
+                    target="_blank"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}

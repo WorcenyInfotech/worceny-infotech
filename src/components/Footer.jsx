@@ -27,7 +27,7 @@ export default function Footer() {
       { label: 'Full Stack',           action: () => goTo('/services') },
     ],
     Connect: [
-      { label: 'LinkedIn', action: () => window.open('https://www.linkedin.com/in/worceny-infotech/', '_blank') },
+      { label: 'LinkedIn', action: () => window.open('https://www.linkedin.com/company/worceny-infotech', '_blank') },
       { label: 'GitHub',    action: () => window.open('https://github.com/WorcenyInfotech', '_blank') },
     ],
   }
