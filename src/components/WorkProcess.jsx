@@ -49,23 +49,32 @@ export default function WorkProcess() {
           stepsRef.current.children,
           {
             opacity: 0,
-            y: 60,
+            yPercent: 15,   // relative motion for smoother effect
+            rotate: -2,     // subtle rotation
+            scale: 0.95,    // subtle scaling
           },
           {
             opacity: 1,
-            y: 0,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "power3.out",
+            yPercent: 0,
+            rotate: 0,
+            scale: 1,
+            stagger: {
+              each: 0.1,    // shorter stagger, more continuous
+              ease: "power2.out",
+            },
+            duration: 0.5,  // slightly longer for smoother motion
+            ease: "power2.out",
             scrollTrigger: {
               trigger: stepsRef.current,
-              start: "top 85%",
+              start: "top 90%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse",
             },
           }
         );
       }
     }, sectionRef);
-
+  
     return () => ctx.revert();
   }, []);
 
@@ -107,36 +116,32 @@ export default function WorkProcess() {
           gap-5 sm:gap-6 lg:gap-8
         "
       >
-        {processSteps.map((step) => (
-          <motion.div
-            key={step.step}
-            whileHover={{
-              y: -8,
-              scale: 1.02,
-              boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 280,
-              damping: 20,
-            }}
-            className="
-              group
-              relative
-              h-full
-              border
-              border-[var(--border)]
-              bg-[var(--card-bg)]
-              p-5 sm:p-6 lg:p-7
-              backdrop-blur-sm
-              transition-all
-              duration-300
-            "
-            // style={{
-            //     background: "var(--card-bg2)"
-            // }}
-          >
-            {/* Step Number */}
+        {processSteps.map((step, index) => (
+        <motion.div
+        key={step.step}
+        whileHover={{
+          y: -10,
+          rotate: 2, // slight playful rotation
+          boxShadow: "0 25px 50px rgba(0,0,0,0.2)",
+        }}
+        transition={{
+          type: "tween",       // smoother than spring
+          ease: "power2.out",  // gentle easing
+          duration: 0.3,       // quick, smooth response
+        }}
+        className="
+          group
+          relative
+          h-full
+          border
+          border-[var(--border)]
+          bg-[var(--card-bg)]
+          p-5 sm:p-6 lg:p-7
+          backdrop-blur-sm
+          transition-all
+          duration-300
+        "
+      >
             <div
               className="
                 text-4xl sm:text-5xl
@@ -151,7 +156,6 @@ export default function WorkProcess() {
               {step.step}
             </div>
 
-            {/* Title */}
             <h3
               className="
                 text-lg sm:text-xl
@@ -164,7 +168,6 @@ export default function WorkProcess() {
               {step.title}
             </h3>
 
-            {/* Description */}
             <p
               className="
                 text-sm sm:text-base
@@ -175,7 +178,6 @@ export default function WorkProcess() {
               {step.desc}
             </p>
 
-            {/* Accent Line */}
             <div
               className="
                 absolute

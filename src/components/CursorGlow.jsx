@@ -26,7 +26,7 @@ export default function CursorCircle() {
       <div
         className="w-3 h-3 rounded-full"
         style={{
-          background: 'var(--accent2)', // solid theme color
+          background: 'var(--accent)', 
         }}
       />
     </motion.div>
