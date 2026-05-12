@@ -31,8 +31,8 @@ const cards = [
 ];
 
 const stats = [
-  { icon: <FiAward size={20} />, value: "5+", label: "Projects Delivered" },
-  { icon: <FiUsers size={20} />, value: "5+", label: "Happy Clients" },
+  { icon: <FiAward size={20} />, value: "10+", label: "Projects Delivered" },
+  { icon: <FiUsers size={20} />, value: "10+", label: "Happy Clients" },
   { icon: <FiZap size={20} />, value: "99%", label: "Client Satisfaction" },
   { icon: <FiShield size={20} />, value: "2+", label: "Years Experience" },
 ];
@@ -160,9 +160,9 @@ export default function About() {
             className="max-w-2xl mx-auto text-lg leading-relaxed"
             style={{ color: "var(--muted)" }}
           >
-            We are a passionate team of developers, designers, and strategists
-            dedicated to crafting exceptional digital experiences that drive
-            real business results.
+            Based in Surat, Gujarat, we are a passionate team of developers,
+            designers, and strategists crafting exceptional digital experiences
+            that drive real business results for clients across India and beyond.
           </p>
         </div>
 
@@ -184,8 +184,9 @@ export default function About() {
               transition={{ type: "spring", stiffness: 280, damping: 20 }}
               className="rounded-2xl p-8 group cursor-default"
               style={{
-                background: "linear-gradient(90deg, #111111, #434343)",
-                border: "1px solid var(--border)",
+                background: "#ffffff",
+                border: "1px solid rgba(45,77,202,0.14)",
+                boxShadow: "0 12px 40px rgba(15,23,42,0.06)",
                 transformStyle: "preserve-3d",
               }}
             >
@@ -199,13 +200,13 @@ export default function About() {
               </motion.div>
               <h3
                 className="text-xl font-bold mb-3 transition-colors duration-300 group-hover:text-[var(--accent)]"
-                style={{ color: "var(--text-card)" }}
+                style={{ color: "var(--text)" }}
               >
                 {card.title}
               </h3>
               <p
                 className="leading-relaxed"
-                style={{ color: "var(--muted-card)" }}
+                style={{ color: "var(--muted)" }}
               >
                 {card.desc}
               </p>

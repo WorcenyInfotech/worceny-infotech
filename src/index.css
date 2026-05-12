@@ -12,10 +12,10 @@
     --accent3: #f3f3f3;
     --accent4: #7528f1;
     --text: #1a1a1a;
-    --text-card: #f6f6f6;
+    --text-card: #1a1a1a;
     --muted: #1b1b1b;
-    --muted-card: #cacaca;
-    --card-bg: #1a1a1a;
+    --muted-card: #5c6470;
+    --card-bg: #ffffff;
     --card-bg2: #2d4dca;
   }
 
@@ -34,6 +34,18 @@
     color: var(--text);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    height: auto;
   }
 
   ::-webkit-scrollbar {
@@ -166,5 +178,10 @@
     background: rgba(90, 255, 115, 0.1);
     color: var(--accent2);
     border: 1px solid rgba(90, 255, 115, 0.22);
+  }
+
+  /* Calendly modal scrolling fix */
+  .calendly-overlay {
+    overflow-y: auto !important;
   }
 }

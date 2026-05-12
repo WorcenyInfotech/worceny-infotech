@@ -15,20 +15,21 @@ export default function Footer() {
 
   const footerLinks = {
     Company: [
-      { label: 'About',     action: () => scrollTo('about') },
-      { label: 'Services',  action: () => scrollTo('services') },
-      { label: 'Portfolio', action: () => goTo('/portfolio') },
-      { label: 'Contact',   action: () => goTo('/contact') },
+      { label: 'About',        action: () => scrollTo('about') },
+      { label: 'Services',     action: () => goTo('/services') },
+      { label: 'Industries',   action: () => goTo('/industries') },
+      { label: 'Technologies', action: () => goTo('/technologies') },
+      { label: 'Portfolio',    action: () => goTo('/portfolio') },
+      { label: 'Contact',      action: () => goTo('/contact') },
     ],
     Services: [
-      { label: 'Web Development',      action: () => goTo('/services') },
-      { label: 'Frontend Development',         action: () => goTo('/services') },
-      { label: 'Backend Development',          action: () => goTo('/services') },
-      { label: 'SEO',           action: () => goTo('/services') },
-      { label: 'Web Hosting',           action: () => goTo('/services') },
+      { label: 'Web Development',      action: () => goTo('/services/website') },
+      { label: 'Frontend Development', action: () => goTo('/services/frontend') },
+      { label: 'Backend Development',  action: () => goTo('/services/backend') },
+      { label: 'SEO Optimization',     action: () => goTo('/services/seo') },
     ],
     Connect: [
-      { label: 'LinkedIn', action: () => window.open('https://www.linkedin.com/company/worceny-infotech', '_blank') },
+      { label: 'LinkedIn',  action: () => window.open('https://www.linkedin.com/company/worceny-infotech', '_blank') },
       { label: 'GitHub',    action: () => window.open('https://github.com/WorcenyInfotech', '_blank') },
     ],
   }
@@ -38,7 +39,7 @@ export default function Footer() {
       style={{ background: 'var(--surface3)', borderTop: '1px solid var(--border)' }}>
 
       {/* Top gradient line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px"
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] max-w-[600px] h-px"
         style={{ background: 'linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent)' }} />
 
       <div ref={ref} className="max-w-7xl mx-auto px-6">
@@ -55,7 +56,7 @@ export default function Footer() {
               className="h-10 object-contain mb-4 cursor-pointer"
               onClick={() => { navigate('/'); window.scrollTo({ top: 0 }) }} />
             <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--muted)' }}>
-              Building modern, scalable web solutions for businesses worldwide.
+              Surat-based IT &amp; web company — modern websites, apps, and software for businesses in Gujarat and worldwide.
             </p>
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--accent2)' }} />

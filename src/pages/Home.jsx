@@ -25,6 +25,26 @@ export default function Home() {
   const smoothY = useSpring(y, { stiffness: 80, damping: 20 });
 
   useEffect(() => {
+    // Load Calendly CSS
+    if (!document.getElementById('calendly-css')) {
+      const link = document.createElement('link');
+      link.id = 'calendly-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      document.head.appendChild(link);
+    }
+
+    // Load Calendly JS
+    if (!document.getElementById('calendly-js')) {
+      const script = document.createElement('script');
+      script.id = 'calendly-js';
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 2.5 });
       tl.fromTo(
@@ -101,7 +121,7 @@ export default function Home() {
               className="text-sm font-semibold tracking-wide"
               style={{ color: "var(--accent)" }}
             >
-              Available for Projects
+              Surat&apos;s top IT &amp; web partner
             </span>
           </div>
         </div>
@@ -118,8 +138,11 @@ export default function Home() {
           >
             <span className="inline-block">We Build</span>{" "}
             <span className="inline-block gradient-text">Modern</span>
+            {/* <span className="inline-block">Top IT services</span>{" "}
+            <span className="inline-block gradient-text">in Surat</span> */}
             <br />
             <span className="inline-block">Websites</span>
+            {/* <span className="inline-block">Websites &amp; apps</span> */}
           </h1>
         </div>
 
@@ -129,8 +152,9 @@ export default function Home() {
           style={{ opacity: 0, color: "var(--muted)" }}
           className="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
         >
-          Creative, Fast, and Scalable Web Solutions for businesses that want to
-          stand out in the digital world.
+          Worceny Infotech is a leading IT service company in Surat — creative,
+          fast, and scalable websites, web apps, and software for businesses that
+          want to stand out online.
         </p>
 
         {/* Buttons */}
@@ -166,8 +190,20 @@ export default function Home() {
             }}
             whileTap={{ scale: 0.95 }}
             onClick={() => {
-              navigate("/portfolio");
-              window.scrollTo({ top: 0 });
+              const openCalendly = () => {
+                window.Calendly.initPopupWidget({ url: 'https://calendly.com/worcenyinfotech/new-meeting' });
+              };
+              if (window.Calendly) {
+                openCalendly();
+              } else {
+                // Script still loading — wait for it
+                const script = document.getElementById('calendly-js');
+                if (script) {
+                  script.addEventListener('load', openCalendly, { once: true });
+                } else {
+                  window.open('https://calendly.com/worcenyinfotech/new-meeting', '_blank');
+                }
+              }
             }}
             className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-base transition-all duration-300 cursor-pointer"
             style={{
@@ -176,7 +212,7 @@ export default function Home() {
               color: "var(--text)",
             }}
           >
-            View Our Work
+            Free Meeting Consulting
           </motion.button>
         </div>
       </motion.div>

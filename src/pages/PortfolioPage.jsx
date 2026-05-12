@@ -192,8 +192,9 @@ function ProjectModal({ project, onClose }) {
         transition={{ duration: 0.25 }}
         className="fixed inset-0 z-50 flex items-center justify-center p-4"
         style={{
-          background: "rgba(10,10,11,0.88)",
-          backdropFilter: "blur(16px)",
+          background: "",
+          backdropFilter: "blur(0px)",
+          WebkitBackdropFilter: "blur(0px)",
         }}
         onClick={onClose}
       >
@@ -204,8 +205,9 @@ function ProjectModal({ project, onClose }) {
           transition={{ type: "spring", damping: 22, stiffness: 280 }}
           className="rounded-3xl p-8 max-w-xl w-full relative max-h-[90vh] overflow-y-auto"
           style={{
-            background: "var(--card-bg)",
-            border: "1px solid rgba(134,90,255,0.2)",
+            background: "#111116",
+            border: "1px solid rgba(134,90,255,0.28)",
+            boxShadow: "0 24px 80px rgba(0,0,0,0.45)",
           }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -214,7 +216,7 @@ function ProjectModal({ project, onClose }) {
             whileTap={{ scale: 0.9 }}
             onClick={onClose}
             className="sticky top-0 float-right z-10 w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200 mb-2"
-            style={{ background: "var(--surface2)", color: "var(--muted)" }}
+            style={{ background: "rgba(255,255,255,0.08)", color: "#e4e4e7" }}
           >
             <FiX size={16} />
           </motion.button>
@@ -243,7 +245,7 @@ function ProjectModal({ project, onClose }) {
                             project.images.length,
                         )
                       }
-                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-black/55 text-white hover:bg-black/75 border border-white/15"
                     >
                       <FiChevronLeft size={16} />
                     </button>
@@ -251,7 +253,7 @@ function ProjectModal({ project, onClose }) {
                       onClick={() =>
                         setImgIndex((i) => (i + 1) % project.images.length)
                       }
-                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-black/55 text-white hover:bg-black/75 border border-white/15"
                     >
                       <FiChevronRight size={16} />
                     </button>
@@ -286,8 +288,8 @@ function ProjectModal({ project, onClose }) {
             <div
               className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs pointer-events-none"
               style={{
-                background: "rgba(10,10,11,0.6)",
-                color: "var(--muted-card)",
+                background: "rgba(0,0,0,0.62)",
+                color: "rgba(255,255,255,0.92)",
               }}
             >
               {project.year}
@@ -333,13 +335,13 @@ function ProjectModal({ project, onClose }) {
             </span>
             <h3
               className="text-2xl font-bold mb-3"
-              style={{ color: "var(--text-card)" }}
+              style={{ color: "#f4f4f5" }}
             >
               {project.title}
             </h3>
             <p
               className="leading-relaxed mb-6 text-sm"
-              style={{ color: "var(--muted-card)" }}
+              style={{ color: "#a8a8b3" }}
             >
               {project.desc}
             </p>
@@ -347,7 +349,7 @@ function ProjectModal({ project, onClose }) {
             <div className="mb-6">
               <h4
                 className="text-sm font-semibold mb-3"
-                style={{ color: "var(--text-card)" }}
+                style={{ color: "#f4f4f5" }}
               >
                 Key Features
               </h4>
@@ -356,7 +358,7 @@ function ProjectModal({ project, onClose }) {
                   <div
                     key={f}
                     className="flex items-center gap-2 text-xs"
-                    style={{ color: "var(--muted-card)" }}
+                    style={{ color: "#a8a8b3" }}
                   >
                     <span
                       className="w-1.5 h-1.5 rounded-full shrink-0"
@@ -377,9 +379,9 @@ function ProjectModal({ project, onClose }) {
                   transition={{ delay: i * 0.05 }}
                   className="text-xs px-3 py-1 rounded-full"
                   style={{
-                    background: "var(--surface2)",
-                    color: "var(--muted)",
-                    border: "1px solid var(--border)",
+                    background: "rgba(255,255,255,0.06)",
+                    color: "#d4d4d8",
+                    border: "1px solid rgba(255,255,255,0.12)",
                   }}
                 >
                   {t}
@@ -578,8 +580,9 @@ export default function PortfolioPage() {
                 onClick={() => setSelected(p)}
                 className="rounded-2xl overflow-hidden cursor-pointer group"
                 style={{
-                  background: "var(--card-bg)",
-                  border: "1px solid var(--border)",
+                  background: "#111116",
+                  border: "1px solid rgba(134,90,255,0.22)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.35)",
                 }}
               >
                 {/* Thumbnail */}
@@ -614,8 +617,8 @@ export default function PortfolioPage() {
                   <div
                     className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs"
                     style={{
-                      background: "rgba(10,10,11,0.65)",
-                      color: "var(--muted-card)",
+                      background: "rgba(0,0,0,0.62)",
+                      color: "rgba(255,255,255,0.92)",
                     }}
                   >
                     {p.year}
@@ -626,10 +629,13 @@ export default function PortfolioPage() {
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.28 }}
                     className="absolute inset-0 flex items-center justify-center"
-                    style={{ background: "rgba(10,10,11,0.7)" }}
+                    style={{
+                      background: "rgba(10,10,14,0.72)",
+                      backdropFilter: "blur(4px)",
+                    }}
                   >
                     <span
-                      className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold"
+                      className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold bg-transparent"
                       style={{
                         border: `1px solid ${p.accent}`,
                         color: p.accent,
@@ -665,14 +671,14 @@ export default function PortfolioPage() {
                     </span>
                   </div>
                   <h3
-                    className="text-lg font-bold mb-2 transition-colors duration-300 group-hover:text-var(--accent)"
-                    style={{ color: "var(--text-card)" }}
+                    className="text-lg font-bold mb-2 transition-colors duration-300 group-hover:text-[var(--accent)]"
+                    style={{ color: "#f4f4f5" }}
                   >
                     {p.title}
                   </h3>
                   <p
                     className="text-sm line-clamp-2 mb-4"
-                    style={{ color: "var(--muted-card)" }}
+                    style={{ color: "#a8a8b3" }}
                   >
                     {p.desc}
                   </p>
@@ -682,9 +688,9 @@ export default function PortfolioPage() {
                         key={t}
                         className="text-xs px-2 py-0.5 rounded-md"
                         style={{
-                          background: "var(--surface2)",
-                          color: "var(--muted)",
-                          border: "1px solid var(--border)",
+                          background: "rgba(255,255,255,0.06)",
+                          color: "#d4d4d8",
+                          border: "1px solid rgba(255,255,255,0.1)",
                         }}
                       >
                         {t}
@@ -694,9 +700,9 @@ export default function PortfolioPage() {
                       <span
                         className="text-xs px-2 py-0.5 rounded-md"
                         style={{
-                          background: "var(--surface)",
-                          color: "var(--muted)",
-                          border: "1px solid var(--border)",
+                          background: "rgba(255,255,255,0.06)",
+                          color: "#d4d4d8",
+                          border: "1px solid rgba(255,255,255,0.1)",
                         }}
                       >
                         +{p.tech.length - 3}

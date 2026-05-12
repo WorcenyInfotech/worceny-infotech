@@ -10,6 +10,12 @@ import MainPage from './pages/MainPage'
 import ContactPage from './pages/ContactPage'
 import PortfolioPage from './pages/PortfolioPage'
 import ServicesPage from './pages/ServicesPage'
+import ServiceDetailPage from './pages/ServiceDetailPage'
+import IndustriesPage from './pages/IndustriesPage'
+import IndustryDetailPage from './pages/IndustryDetailPage'
+import TechnologiesPage from './pages/TechnologiesPage'
+import TechnologyDetailPage from './pages/TechnologyDetailPage'
+import TechnologyItemDetailPage from './pages/TechnologyItemDetailPage'
 
 const pageVariants = {
   initial: { opacity: 0, y: 24 },
@@ -29,10 +35,16 @@ function AnimatedRoutes() {
         exit="exit"
       >
         <Routes location={location}>
-          <Route path="/"          element={<MainPage />} />
-          <Route path="/contact"   element={<ContactPage />} />
-          <Route path="/services"  element={<ServicesPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/"                    element={<MainPage />} />
+          <Route path="/contact"             element={<ContactPage />} />
+          <Route path="/services"            element={<ServicesPage />} />
+          <Route path="/services/:id"        element={<ServiceDetailPage />} />
+          <Route path="/industries"          element={<IndustriesPage />} />
+          <Route path="/industries/:id"      element={<IndustryDetailPage />} />
+          <Route path="/technologies"        element={<TechnologiesPage />} />
+          <Route path="/technologies/:groupId/:techSlug" element={<TechnologyItemDetailPage />} />
+          <Route path="/technologies/:id"    element={<TechnologyDetailPage />} />
+          <Route path="/portfolio"           element={<PortfolioPage />} />
         </Routes>
       </motion.div>
     </AnimatePresence>

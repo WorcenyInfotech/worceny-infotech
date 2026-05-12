@@ -2,93 +2,12 @@ import { motion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import {
-  FiCode, FiLayout, FiServer, FiLayers,
-  FiTrendingUp, FiMessageCircle, FiGlobe, FiCloud, FiArrowRight, FiCheck
-} from 'react-icons/fi'
+import { FiCheck, FiArrowRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
+import { services } from '../data/servicesData'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const services = [
-  {
-    id: 'website',
-    icon: <FiGlobe size={36} />,
-    title: 'Website Development',
-    subtitle: 'Your Digital Presence, Perfected',
-    desc: 'We craft stunning, high-performance websites that represent your brand and convert visitors into customers. From simple landing pages to complex business portals — built to impress.',
-    features: ['Custom UI/UX Design', 'Mobile Responsive', 'SEO Ready Structure', 'Fast Load Speed', 'CMS Integration', 'Cross-browser Compatible'],
-    tags: ['HTML/CSS', 'React', 'WordPress', 'Next.js'],
-    accent: '#6C5CE7', // Deep violet
-    number: '01',
-  },
-  {
-    id: 'seo',
-    icon: <FiTrendingUp size={36} />,
-    title: 'SEO Optimization',
-    subtitle: 'Rank Higher, Grow Faster',
-    desc: 'Get found on Google. We implement technical SEO, content strategy, and performance improvements that drive organic traffic and improve your search rankings sustainably.',
-    features: ['Technical SEO Audit', 'On-Page Optimization', 'Core Web Vitals', 'Schema Markup', 'Keyword Research', 'Monthly Reporting'],
-    tags: ['Google Analytics', 'Search Console', 'Lighthouse', 'SEMrush'],
-    accent: '#FF6B6B', // Bright coral red
-    number: '02',
-  },
-  {
-    id: 'whatsapp',
-    icon: <FiMessageCircle size={36} />,
-    title: 'WhatsApp Automation',
-    subtitle: 'Engage Customers Instantly',
-    desc: 'Automate your customer communication with WhatsApp Business API. Send bulk messages, set up intelligent chatbots, automate follow-ups, and never miss a lead again.',
-    features: ['WhatsApp Business API', 'Chatbot Setup', 'Bulk Messaging', 'Lead Follow-up Automation', 'Order & Booking Alerts', 'CRM Integration'],
-    tags: ['WhatsApp API', 'Chatbot', 'Automation', 'CRM'],
-    accent: '#25D366', // WhatsApp green (kept original, works well)
-    number: '03',
-  },
-  {
-    id: 'hosting',
-    icon: <FiCloud size={36} />,
-    title: 'Web Hosting',
-    subtitle: 'Always Online, Always Fast',
-    desc: 'Reliable, secure, and blazing-fast hosting for your website. We manage everything — from server setup to SSL certificates — so you can focus on your business.',
-    features: ['99.9% Uptime SLA', 'Free SSL Certificate', 'Daily Backups', 'DDoS Protection', 'CDN Integration', '24/7 Monitoring'],
-    tags: ['AWS', 'Vercel', 'Cloudflare', 'cPanel'],
-    accent: '#FFA500', // Orange for energy & reliability
-    number: '04',
-  },
-  {
-    id: 'frontend',
-    icon: <FiLayout size={36} />,
-    title: 'Frontend Development',
-    subtitle: 'Interfaces That Users Love',
-    desc: 'We build pixel-perfect, interactive frontends using the latest technologies. Every component is crafted for performance, accessibility, and a seamless user experience across all devices.',
-    features: ['React & Next.js', 'Tailwind CSS', 'Framer Motion Animations', 'Component Libraries', 'Performance Optimization', 'Accessibility (WCAG)'],
-    tags: ['React', 'Next.js', 'Tailwind', 'TypeScript'],
-    accent: '#00BFFF', // Deep sky blue
-    number: '05',
-  },
-  {
-    id: 'backend',
-    icon: <FiServer size={36} />,
-    title: 'Backend Development',
-    subtitle: 'Powerful Engines Behind the Scenes',
-    desc: 'Robust, secure, and scalable backend systems that power your applications. We design APIs, databases, and server architectures that handle real-world traffic with ease.',
-    features: ['REST & GraphQL APIs', 'Node.js / Express', 'Database Design', 'Authentication & Security', 'Cloud Deployment', 'Microservices Architecture'],
-    tags: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL'],
-    accent: '#8A2BE2', // Blue violet
-    number: '06',
-  },
-  {
-    id: 'fullstack',
-    icon: <FiLayers size={36} />,
-    title: 'Full Stack Development',
-    subtitle: 'Complete Solutions, One Team',
-    desc: 'From database to deployment — we handle the entire stack. Our full-stack expertise means faster delivery, consistent code quality, and a single point of accountability for your project.',
-    features: ['MERN / MEAN Stack', 'End-to-End Development', 'DevOps & CI/CD', 'Scalable Architecture', 'Third-party Integrations', 'Post-launch Support'],
-    tags: ['MERN Stack', 'AWS', 'Docker', 'REST APIs'],
-    accent: '#32CD32', // Lime green
-    number: '07',
-  },
-]
 export default function ServicesPage() {
   const sectionRef = useRef()
   const navigate = useNavigate()
@@ -103,8 +22,10 @@ export default function ServicesPage() {
       services.forEach((s) => {
         gsap.fromTo(`#srv-${s.id}`,
           { opacity: 0, y: 60 },
-          { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-            scrollTrigger: { trigger: `#srv-${s.id}`, start: 'top 80%' } }
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: `#srv-${s.id}`, start: 'top 80%' }
+          }
         )
       })
     }, sectionRef)
@@ -123,6 +44,7 @@ export default function ServicesPage() {
         <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.04, 0.08, 0.04] }} transition={{ duration: 9, repeat: Infinity, delay: 2 }}
           className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none"
           style={{ background: 'var(--accent2)' }} />
+
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
           <div className="srv-hero-text inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-6"
             style={{ background: 'rgba(134,90,255,0.1)', border: '1px solid rgba(134,90,255,0.28)' }}>
@@ -135,6 +57,7 @@ export default function ServicesPage() {
           <p className="srv-hero-text text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--muted)' }}>
             Comprehensive digital solutions to grow your business — from design to deployment and beyond.
           </p>
+
           {/* Quick nav pills */}
           <div className="srv-hero-text flex flex-wrap justify-center gap-3 mt-10">
             {services.map((s) => (
@@ -161,11 +84,14 @@ export default function ServicesPage() {
 
                 {/* Visual Panel */}
                 <div className="lg:w-2/5 relative flex flex-col items-center justify-center p-12 min-h-[320px]"
-                  style={{ background: `linear-gradient(135deg, ${s.accent}12, ${s.accent}04)`, borderRight: isEven ? `1px solid ${s.accent}15` : 'none', borderLeft: !isEven ? `1px solid ${s.accent}15` : 'none' }}>
-                  {/* Big number */}
+                  style={{
+                    background: `linear-gradient(135deg, ${s.accent}12, ${s.accent}04)`,
+                    borderRight: isEven ? `1px solid ${s.accent}15` : 'none',
+                    borderLeft: !isEven ? `1px solid ${s.accent}15` : 'none'
+                  }}>
                   <span className="absolute top-6 left-8 text-7xl font-black select-none"
                     style={{ color: `${s.accent}10` }}>{s.number}</span>
-                  {/* Icon circle */}
+
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 6 }}
                     transition={{ type: 'spring', stiffness: 300 }}
@@ -175,7 +101,7 @@ export default function ServicesPage() {
                   </motion.div>
                   <h2 className="text-2xl font-black text-center relative z-10" style={{ color: '#1a1a1a' }}>{s.title}</h2>
                   <p className="text-sm text-center mt-2 relative z-10" style={{ color: s.accent }}>{s.subtitle}</p>
-                  {/* Tags */}
+
                   <div className="flex flex-wrap justify-center gap-2 mt-5 relative z-10">
                     {s.tags.map(tag => (
                       <span key={tag} className="text-xs px-3 py-1 rounded-full"
@@ -184,7 +110,6 @@ export default function ServicesPage() {
                       </span>
                     ))}
                   </div>
-                  {/* Glow */}
                   <div className="absolute inset-0 pointer-events-none rounded-3xl"
                     style={{ background: `radial-gradient(circle at 50% 50%, ${s.accent}08, transparent 70%)` }} />
                 </div>
@@ -204,13 +129,14 @@ export default function ServicesPage() {
                       </div>
                     ))}
                   </div>
+
                   <motion.button
-                    whileHover={{ scale: 1.04, x: 4 }}
+                    whileHover={{ scale: 1.04, x: 4, boxShadow: `0 0 24px ${s.accent}40` }}
                     whileTap={{ scale: 0.97 }}
-                    onClick={() => { navigate('/contact'); window.scrollTo({ top: 0 }) }}
-                    className="self-start flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all duration-300"
-                    style={{ background: `${s.accent}18`, color: s.accent, border: `1px solid ${s.accent}35` }}>
-                    Get Started <FiArrowRight size={14} />
+                    onClick={() => { navigate(`/services/${s.id}`); window.scrollTo({ top: 0 }) }}
+                    className="self-start flex items-center gap-2 px-7 py-3 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer"
+                    style={{ background: s.accent, color: '#fff' }}>
+                    More Details <FiArrowRight size={14} />
                   </motion.button>
                 </div>
               </div>
