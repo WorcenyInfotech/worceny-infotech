@@ -8,14 +8,7 @@ import {
 } from "react-icons/fi";
 
 /** Factory for technology items */
-const createTech = (
-  name,
-  slug,
-  icon,
-  desc,
-  longDesc,
-  highlights = []
-) => ({
+const createTech = (name, slug, icon, desc, longDesc, highlights = []) => ({
   name,
   slug,
   icon,
@@ -41,7 +34,11 @@ export const techGroups = [
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
         "Semantic markup for modern websites.",
         "HTML5 structures fast, accessible, and SEO-friendly web pages.",
-        ["SEO-friendly structure", "Accessibility support", "Modern semantic tags"]
+        [
+          "SEO-friendly structure",
+          "Accessibility support",
+          "Modern semantic tags",
+        ]
       ),
 
       createTech(
@@ -95,7 +92,11 @@ export const techGroups = [
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
         "Utility-first CSS framework.",
         "Tailwind accelerates UI development with scalable utility classes.",
-        ["Rapid UI development", "Responsive utilities", "Customizable design system"]
+        [
+          "Rapid UI development",
+          "Responsive utilities",
+          "Customizable design system",
+        ]
       ),
 
       createTech(
@@ -409,7 +410,11 @@ export const techGroups = [
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
         "Container deployment system.",
         "Portable deployment across environments.",
-        ["Scalable containers", "Environment isolation", "Deployment automation"]
+        [
+          "Scalable containers",
+          "Environment isolation",
+          "Deployment automation",
+        ]
       ),
 
       createTech(
@@ -503,49 +508,25 @@ export const techGroups = [
 // Exported hints and helpers
 
 export const SERVICE_TECH_GROUP_HINT = {
-  website: [
-    "website-development",
-    "frontend-development",
-    "web-hosting",
-  ],
+  website: ["website-development", "frontend-development", "web-hosting"],
 
-  seo: [
-    "seo-optimization",
-  ],
+  seo: ["seo-optimization"],
 
-  hosting: [
-    "web-hosting",
-  ],
+  hosting: ["web-hosting"],
 
-  whatsapp: [
-    "backend-development",
-    "frontend-development",
-  ],
+  whatsapp: ["backend-development", "frontend-development"],
 
-  uiux: [
-    "frontend-development",
-  ],
+  uiux: ["frontend-development"],
 
-  animation: [
-    "frontend-development",
-  ],
+  animation: ["frontend-development"],
 
-  frontend: [
-    "frontend-development",
-  ],
+  frontend: ["frontend-development"],
 
-  backend: [
-    "backend-development",
-    "database-development",
-  ],
+  backend: ["backend-development", "database-development"],
 
-  database: [
-    "database-development",
-  ],
+  database: ["database-development"],
 
-  api: [
-    "backend-development",
-  ],
+  api: ["backend-development"],
 
   fullstack: [
     "frontend-development",
@@ -553,22 +534,13 @@ export const SERVICE_TECH_GROUP_HINT = {
     "database-development",
   ],
 
-  cms: [
-    "website-development",
-  ],
+  cms: ["website-development"],
 
-  deployment: [
-    "web-hosting",
-  ],
+  deployment: ["web-hosting"],
 
-  cloud: [
-    "web-hosting",
-  ],
+  cloud: ["web-hosting"],
 
-  devops: [
-    "web-hosting",
-    "backend-development",
-  ],
+  devops: ["web-hosting", "backend-development"],
 
   ecommerce: [
     "website-development",
@@ -576,15 +548,9 @@ export const SERVICE_TECH_GROUP_HINT = {
     "database-development",
   ],
 
-  chatbot: [
-    "whatsapp-automation",
-    "backend-development",
-  ],
+  chatbot: ["whatsapp-automation", "backend-development"],
 
-  automation: [
-    "whatsapp-automation",
-    "backend-development",
-  ],
+  automation: ["whatsapp-automation", "backend-development"],
 };
 
 export const NAME_TO_SLUG_HINT = {
@@ -748,8 +714,7 @@ const compactKey = (s) =>
     .replace(/\./g, "")
     .replace(/\s+/g, "");
 
-const techMatchesSlug = (tech, slugHint) =>
-  slugHint && tech.slug === slugHint;
+const techMatchesSlug = (tech, slugHint) => slugHint && tech.slug === slugHint;
 
 const techMatchesName = (tech, rawName) => {
   const a = compactKey(rawName);
@@ -761,17 +726,15 @@ const techMatchesName = (tech, rawName) => {
 /** Lookup helpers */
 
 export function lookupTechnologyLink(techName, serviceId = null) {
-  if (!techName) return null;
+  if (!techName) {
+    return null;
+  }
 
-  const hintedSlug =
-    NAME_TO_SLUG_HINT[compactKey(techName)] ?? null;
+  const hintedSlug = NAME_TO_SLUG_HINT[compactKey(techName)] ?? null;
 
   const searchGroups =
     serviceId && SERVICE_TECH_GROUP_HINT[serviceId]
-      ? [
-          ...SERVICE_TECH_GROUP_HINT[serviceId],
-          ...techGroups.map((g) => g.id),
-        ]
+      ? [...SERVICE_TECH_GROUP_HINT[serviceId], ...techGroups.map((g) => g.id)]
       : techGroups.map((g) => g.id);
 
   const seen = new Set();
@@ -787,15 +750,13 @@ export function lookupTechnologyLink(techName, serviceId = null) {
   for (const gid of orderedGroupIds) {
     const group = techGroups.find((g) => g.id === gid);
 
-    if (!group) continue;
+    if (!group) {
+      continue;
+    }
 
     const tech =
-      group.techs.find((t) =>
-        techMatchesName(t, techName)
-      ) ||
-      group.techs.find((t) =>
-        techMatchesSlug(t, hintedSlug)
-      );
+      group.techs.find((t) => techMatchesName(t, techName)) ||
+      group.techs.find((t) => techMatchesSlug(t, hintedSlug));
 
     if (tech) {
       return `/technologies/${gid}/${tech.slug}`;
@@ -808,11 +769,11 @@ export function lookupTechnologyLink(techName, serviceId = null) {
 export function getTechItem(groupId, techSlug) {
   const group = techGroups.find((g) => g.id === groupId);
 
-  if (!group) return null;
+  if (!group) {
+    return null;
+  }
 
-  const tech = group.techs.find(
-    (t) => t.slug === techSlug
-  );
+  const tech = group.techs.find((t) => t.slug === techSlug);
 
   return tech ? { group, tech } : null;
 }
@@ -824,9 +785,7 @@ export function getTechSiblings(groupId, techSlug) {
     return { prev: null, next: null };
   }
 
-  const idx = group.techs.findIndex(
-    (t) => t.slug === techSlug
-  );
+  const idx = group.techs.findIndex((t) => t.slug === techSlug);
 
   if (idx < 0) {
     return { prev: null, next: null };
@@ -834,9 +793,6 @@ export function getTechSiblings(groupId, techSlug) {
 
   return {
     prev: idx > 0 ? group.techs[idx - 1] : null,
-    next:
-      idx < group.techs.length - 1
-        ? group.techs[idx + 1]
-        : null,
+    next: idx < group.techs.length - 1 ? group.techs[idx + 1] : null,
   };
 }

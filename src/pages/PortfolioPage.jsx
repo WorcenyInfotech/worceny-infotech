@@ -174,8 +174,8 @@ const projects = [
 ];
 
 const stats = [
-  { value: "10+", label: "Projects Delivered" },
-  { value: "10+", label: "Happy Clients" },
+  { value: "50+", label: "Projects Delivered" },
+  { value: "50+", label: "Happy Clients" },
   { value: "2+", label: "Years Experience" },
   { value: "99%", label: "Client Satisfaction" },
 ];
@@ -242,7 +242,7 @@ function ProjectModal({ project, onClose }) {
                         setImgIndex(
                           (i) =>
                             (i - 1 + project.images.length) %
-                            project.images.length,
+                            project.images.length
                         )
                       }
                       className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center bg-black/55 text-white hover:bg-black/75 border border-white/15"
@@ -430,7 +430,7 @@ export default function PortfolioPage() {
           stagger: 0.12,
           ease: "power3.out",
           delay: 0.2,
-        },
+        }
       );
       gsap.fromTo(
         ".stat-item",
@@ -442,7 +442,7 @@ export default function PortfolioPage() {
           stagger: 0.1,
           ease: "back.out(1.7)",
           scrollTrigger: { trigger: ".stats-row", start: "top 85%" },
-        },
+        }
       );
     }, sectionRef);
     return () => ctx.revert();

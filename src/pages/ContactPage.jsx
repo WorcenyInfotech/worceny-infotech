@@ -8,9 +8,10 @@ import {
   FiSend,
   FiCheckCircle,
   FiClock,
+  FiLinkedin,
+  FiGithub,
 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiLinkedin, FiGithub } from "react-icons/fi";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,7 +131,7 @@ export default function ContactPage() {
           stagger: 0.12,
           ease: "power3.out",
           delay: 0.2,
-        },
+        }
       );
       gsap.fromTo(
         ".contact-card",
@@ -143,7 +144,7 @@ export default function ContactPage() {
           stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: { trigger: ".contact-cards-grid", start: "top 82%" },
-        },
+        }
       );
       gsap.fromTo(
         ".faq-item",
@@ -155,7 +156,7 @@ export default function ContactPage() {
           stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: { trigger: ".faq-section", start: "top 82%" },
-        },
+        }
       );
     }, sectionRef);
     return () => ctx.revert();
@@ -163,24 +164,31 @@ export default function ContactPage() {
 
   const validate = () => {
     const e = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email))
+    if (!form.name.trim()) {
+      e.name = "Name is required";
+    }
+    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) {
       e.email = "Valid email required";
-    if (!form.message.trim()) e.message = "Message is required";
+    }
+    if (!form.message.trim()) {
+      e.message = "Message is required";
+    }
     return e;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length) return setErrors(errs);
+    if (Object.keys(errs).length) {
+      return setErrors(errs);
+    }
     const subject = encodeURIComponent(`New Project Enquiry from ${form.name}`);
     const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "N/A"}\nService: ${form.service || "N/A"}\nBudget: ${form.budget || "N/A"}\n\nProject Details:\n${form.message}`,
+      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "N/A"}\nService: ${form.service || "N/A"}\nBudget: ${form.budget || "N/A"}\n\nProject Details:\n${form.message}`
     );
     window.open(
       `https://mail.google.com/mail/?view=cm&to=worcenyinfotech@gmail.com&su=${subject}&body=${body}`,
-      "_blank",
+      "_blank"
     );
     setSent(true);
     setForm({

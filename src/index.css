@@ -2,21 +2,21 @@
 
 @layer base {
   :root {
-    --bg: #f5f7fb;          /* Light background - keep */
-    --surface: #ffffff;      /* Slightly brighter surfaces */
-    --surface2: #f3f4f6;     /* Soft gray for cards or sections */
-    --surface3: #e5e7eb;     /* For subtle layering */
-    --border: #4f46e5;       /* Softer blue for borders & accents */
-    --accent: #4f46e5;       /* Main brand color */
-    --accent2: #8b5cf6;      /* Secondary purple accent */
-    --accent3: #f3f3f3;      /* Lightest gray highlight */
-    --accent4: #8b5cf6;      /* Matches accent2 */
-    --text: #111827;         /* Slightly deeper dark for readability */
-    --text-card: #1f2937;    /* Slightly softer than pure black */
-    --muted: #6b7280;        /* Softer muted text for subtext */
-    --muted-card: #9ca3af;   /* Secondary muted text */
-    --card-bg: #ffffff;       /* White card */
-    --card-bg2: #4f46e5;     /* Softer blue card - optional for highlight cards */
+    --bg: #f5f7fb; /* Light background - keep */
+    --surface: #ffffff; /* Slightly brighter surfaces */
+    --surface2: #f3f4f6; /* Soft gray for cards or sections */
+    --surface3: #e5e7eb; /* For subtle layering */
+    --border: #4f46e5; /* Softer blue for borders & accents */
+    --accent: #4f46e5; /* Main brand color */
+    --accent2: #8b5cf6; /* Secondary purple accent */
+    --accent3: #f3f3f3; /* Lightest gray highlight */
+    --accent4: #8b5cf6; /* Matches accent2 */
+    --text: #111827; /* Slightly deeper dark for readability */
+    --text-card: #1f2937; /* Slightly softer than pure black */
+    --muted: #6b7280; /* Softer muted text for subtext */
+    --muted-card: #9ca3af; /* Secondary muted text */
+    --card-bg: #ffffff; /* White card */
+    --card-bg2: #4f46e5; /* Softer blue card - optional for highlight cards */
   }
 
   * {
@@ -27,13 +27,14 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    font-family: "Inter", sans-serif;
+    overflow-x: clip;
   }
 
   img,
@@ -68,7 +69,6 @@
 }
 
 @layer utilities {
-
   /* Glass morphism */
   .glass {
     background: rgba(255, 255, 255, 0.04);
@@ -87,32 +87,44 @@
   /* Accent text & glow */
   .accent-text {
     color: var(--accent);
-    text-shadow: 0 0 12px rgba(134, 90, 255, 0.5), 0 0 32px rgba(134, 90, 255, 0.2);
+    text-shadow:
+      0 0 12px rgba(134, 90, 255, 0.5),
+      0 0 32px rgba(134, 90, 255, 0.2);
   }
 
   .accent2-text {
     color: var(--accent2);
-    text-shadow: 0 0 12px rgba(90, 255, 115, 0.5), 0 0 32px rgba(90, 255, 115, 0.2);
+    text-shadow:
+      0 0 12px rgba(90, 255, 115, 0.5),
+      0 0 32px rgba(90, 255, 115, 0.2);
   }
 
   /* Borders */
   .accent-border {
     border: 1px solid var(--accent);
-    box-shadow: 0 0 12px rgba(134, 90, 255, 0.25), inset 0 0 12px rgba(134, 90, 255, 0.04);
+    box-shadow:
+      0 0 12px rgba(134, 90, 255, 0.25),
+      inset 0 0 12px rgba(134, 90, 255, 0.04);
   }
 
   .accent2-border {
     border: 1px solid var(--accent2);
-    box-shadow: 0 0 12px rgba(90, 255, 115, 0.25), inset 0 0 12px rgba(90, 255, 115, 0.04);
+    box-shadow:
+      0 0 12px rgba(90, 255, 115, 0.25),
+      inset 0 0 12px rgba(90, 255, 115, 0.04);
   }
 
   /* Glow shadows */
   .accent-glow {
-    box-shadow: 0 0 16px rgba(79, 70, 229, 0.35), 0 0 48px rgba(79, 70, 229, 0.1);
+    box-shadow:
+      0 0 16px rgba(79, 70, 229, 0.35),
+      0 0 48px rgba(79, 70, 229, 0.1);
   }
-  
+
   .accent2-glow {
-    box-shadow: 0 0 16px rgba(139, 92, 246, 0.35), 0 0 48px rgba(139, 92, 246, 0.08);
+    box-shadow:
+      0 0 16px rgba(139, 92, 246, 0.35),
+      0 0 48px rgba(139, 92, 246, 0.08);
   }
 
   /* Gradient text */
@@ -133,13 +145,26 @@
   /* Backgrounds */
   .hero-gradient {
     background:
-      radial-gradient(ellipse at 60% 40%, rgba(79, 70, 229, 0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(
+        ellipse at 60% 40%,
+        rgba(79, 70, 229, 0.08) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 20% 70%,
+        rgba(139, 92, 246, 0.05) 0%,
+        transparent 50%
+      ),
       var(--bg);
   }
 
   .section-gradient {
-    background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      var(--surface) 50%,
+      var(--bg) 100%
+    );
   }
 
   .surface-bg {

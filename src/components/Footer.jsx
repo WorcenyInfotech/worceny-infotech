@@ -21,7 +21,7 @@ export default function Footer() {
         document
           .getElementById(section)
           ?.scrollIntoView({ behavior: "smooth" }),
-      320,
+      320
     );
   };
 
@@ -56,7 +56,7 @@ export default function Footer() {
         action: () =>
           window.open(
             "https://www.linkedin.com/company/worceny-infotech",
-            "_blank",
+            "_blank"
           ),
       },
       {
@@ -183,14 +183,25 @@ export default function Footer() {
             className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold p-2 text-center md:text-left"
             style={{
               color: "var(--text)",
-              background: "rgba(134, 90, 255, 0.3)",
+              background: "rgba(134, 90, 255, 0.4)",
             }}
           >
             Have a project in mind?
           </h3>
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold shadow-lg transition-transform cursor-pointer"
+            whileHover={{
+              scale: 1.05,
+              y: -2,
+            }}
+            whileTap={{
+              scale: 0.98,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 18,
+            }}
+            className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold shadow-lg transition-all duration-300 ease-out cursor-pointer"
             style={{
               background:
                 "linear-gradient(to right, var(--accent), var(--accent2))",

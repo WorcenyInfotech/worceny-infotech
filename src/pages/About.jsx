@@ -10,8 +10,8 @@ import {
   FiZap,
   FiShield,
 } from "react-icons/fi";
-import Technologies from "../components/Technologies"
-import WorkProcess from "../components/WorkProcess"
+import Technologies from "../components/Technologies";
+import WorkProcess from "../components/WorkProcess";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,8 +31,8 @@ const cards = [
 ];
 
 const stats = [
-  { icon: <FiAward size={20} />, value: "10+", label: "Projects Delivered" },
-  { icon: <FiUsers size={20} />, value: "10+", label: "Happy Clients" },
+  { icon: <FiAward size={20} />, value: "50+", label: "Projects Delivered" },
+  { icon: <FiUsers size={20} />, value: "50+", label: "Happy Clients" },
   { icon: <FiZap size={20} />, value: "99%", label: "Client Satisfaction" },
   { icon: <FiShield size={20} />, value: "2+", label: "Years Experience" },
 ];
@@ -162,7 +162,8 @@ export default function About() {
           >
             Based in Surat, Gujarat, we are a passionate team of developers,
             designers, and strategists crafting exceptional digital experiences
-            that drive real business results for clients across India and beyond.
+            that drive real business results for clients across India and
+            beyond.
           </p>
         </div>
 
@@ -204,10 +205,7 @@ export default function About() {
               >
                 {card.title}
               </h3>
-              <p
-                className="leading-relaxed"
-                style={{ color: "var(--muted)" }}
-              >
+              <p className="leading-relaxed" style={{ color: "var(--muted)" }}>
                 {card.desc}
               </p>
               <motion.div
