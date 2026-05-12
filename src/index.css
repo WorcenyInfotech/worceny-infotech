@@ -2,21 +2,21 @@
 
 @layer base {
   :root {
-    --bg: #f5f7fb;
-    --surface: #f5f7fb;
-    --surface2: #ffffff;
-    --surface3: #f5f5f5;
-    --border: #2d4dca;
-    --accent: #2d4dca;
-    --accent2: #7528f1;
-    --accent3: #f3f3f3;
-    --accent4: #7528f1;
-    --text: #1a1a1a;
-    --text-card: #1a1a1a;
-    --muted: #1b1b1b;
-    --muted-card: #5c6470;
-    --card-bg: #ffffff;
-    --card-bg2: #2d4dca;
+    --bg: #f5f7fb;          /* Light background - keep */
+    --surface: #ffffff;      /* Slightly brighter surfaces */
+    --surface2: #f3f4f6;     /* Soft gray for cards or sections */
+    --surface3: #e5e7eb;     /* For subtle layering */
+    --border: #4f46e5;       /* Softer blue for borders & accents */
+    --accent: #4f46e5;       /* Main brand color */
+    --accent2: #8b5cf6;      /* Secondary purple accent */
+    --accent3: #f3f3f3;      /* Lightest gray highlight */
+    --accent4: #8b5cf6;      /* Matches accent2 */
+    --text: #111827;         /* Slightly deeper dark for readability */
+    --text-card: #1f2937;    /* Slightly softer than pure black */
+    --muted: #6b7280;        /* Softer muted text for subtext */
+    --muted-card: #9ca3af;   /* Secondary muted text */
+    --card-bg: #ffffff;       /* White card */
+    --card-bg2: #4f46e5;     /* Softer blue card - optional for highlight cards */
   }
 
   * {
@@ -108,11 +108,11 @@
 
   /* Glow shadows */
   .accent-glow {
-    box-shadow: 0 0 24px rgba(134, 90, 255, 0.45), 0 0 60px rgba(134, 90, 255, 0.15);
+    box-shadow: 0 0 16px rgba(79, 70, 229, 0.35), 0 0 48px rgba(79, 70, 229, 0.1);
   }
-
+  
   .accent2-glow {
-    box-shadow: 0 0 24px rgba(90, 255, 115, 0.4), 0 0 60px rgba(90, 255, 115, 0.12);
+    box-shadow: 0 0 16px rgba(139, 92, 246, 0.35), 0 0 48px rgba(139, 92, 246, 0.08);
   }
 
   /* Gradient text */
@@ -133,8 +133,8 @@
   /* Backgrounds */
   .hero-gradient {
     background:
-      radial-gradient(ellipse at 60% 40%, rgba(134, 90, 255, 0.1) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 70%, rgba(90, 255, 115, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 40%, rgba(79, 70, 229, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
       var(--bg);
   }
 

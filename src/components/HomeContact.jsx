@@ -29,7 +29,7 @@ const contactInfo = [
     icon: <FiMapPin size={20} />,
     label: 'Office',
     value: 'Surat, Gujarat, India',
-    sub: 'India — 400001',
+    sub: 'India — 395004',
     accent: '#865aff',
   },
   {

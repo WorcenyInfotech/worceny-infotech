@@ -90,7 +90,7 @@ export default function Technologies() {
   const current = services.find((s) => s.id === active);
 
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: "var(--bg)" }}>
+    <section className="py-24 relative overflow-hidden" style={{ background: "#ffffff" }}>
       {/* Background blobs */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none"
         style={{ background: "rgba(134,90,255,0.07)" }} />

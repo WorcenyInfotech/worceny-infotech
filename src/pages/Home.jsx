@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import HeroCanvas from "../components/HeroCanvas";
+// import HeroCanvas from "../components/HeroCanvas";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -94,7 +94,7 @@ export default function Home() {
       id="home"
       className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden"
     >
-      <HeroCanvas />
+      {/* <HeroCanvas /> */}
 
       {/* Grid */}
       <div className="absolute inset-0 grid-overlay pointer-events-none" />

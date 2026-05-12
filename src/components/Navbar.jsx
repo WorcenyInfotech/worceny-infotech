@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
-  useMotionValueEvent,
-  useScroll,
 } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
@@ -20,18 +18,14 @@ const simpleLinks = [
 const megaKeys = ["services", "industries", "technologies"];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(null);
   const [mobileMega, setMobileMega] = useState(null);
   const [activeLink, setActiveLink] = useState("Home");
-  const { scrollY } = useScroll();
   const location = useLocation();
   const navigate = useNavigate();
   const megaLeaveTimer = useRef(null);
   const navRef = useRef(null);
-
-  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 40));
 
   useEffect(() => {
     if (location.pathname === "/contact") setActiveLink("Contact");
@@ -134,17 +128,7 @@ export default function Navbar() {
       initial={{ y: -90, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "shadow-sm shadow-black/1" : "bg-transparent"
-      }`}
-      style={
-        scrolled
-          ? {
-              background: "#f5f7fb",
-              backdropFilter: "blur(20px)",
-            }
-          : {}
-      }
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white`}
     >
       <div className="relative" onMouseLeave={scheduleMegaClose}>
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between gap-6">
@@ -389,7 +373,7 @@ export default function Navbar() {
                             key={s.id}
                             type="button"
                             onClick={() => goMega(`/services/${s.id}`)}
-                            className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)]"
+                            className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)] cursor-pointer"
                           >
                             <div
                               className="text-sm font-semibold"
@@ -414,7 +398,7 @@ export default function Navbar() {
                             key={ind.id}
                             type="button"
                             onClick={() => goMega(`/industries/${ind.id}`)}
-                            className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)]"
+                            className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)] cursor-pointer"
                           >
                             <div
                               className="text-sm font-semibold"
@@ -439,7 +423,7 @@ export default function Navbar() {
                             <button
                               type="button"
                               onClick={() => goMega(`/technologies/${g.id}`)}
-                              className="text-left w-full rounded-lg px-1 py-1 mb-2 transition-colors hover:opacity-90"
+                              className="text-left w-full rounded-lg px-1 py-1 mb-2 transition-colors hover:bg-[rgba(40,77,202,0.08)] cursor-pointer"
                             >
                               <div
                                 className="text-sm font-black leading-tight"
@@ -460,7 +444,7 @@ export default function Navbar() {
                                   <button
                                     type="button"
                                     onClick={() => goMega(`/technologies/${g.id}/${t.slug}`)}
-                                    className="w-full text-left text-xs py-1.5 px-2 rounded-md transition-colors hover:bg-[rgba(45,77,202,0.08)]"
+                                    className="w-full text-left text-xs py-1.5 px-2 rounded-md transition-colors hover:bg-[rgba(45,77,202,0.08)] cursor-pointer"
                                     style={{ color: "var(--text)" }}
                                   >
                                     {t.name}
