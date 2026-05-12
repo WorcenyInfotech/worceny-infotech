@@ -1,7 +1,6 @@
 import {
   FiGlobe,
   FiLayout,
-  FiDatabase,
   FiServer,
   FiTrendingUp,
   FiCloud,
@@ -500,3 +499,344 @@ export const techGroups = [
     ],
   },
 ];
+
+// Exported hints and helpers
+
+export const SERVICE_TECH_GROUP_HINT = {
+  website: [
+    "website-development",
+    "frontend-development",
+    "web-hosting",
+  ],
+
+  seo: [
+    "seo-optimization",
+  ],
+
+  hosting: [
+    "web-hosting",
+  ],
+
+  whatsapp: [
+    "backend-development",
+    "frontend-development",
+  ],
+
+  uiux: [
+    "frontend-development",
+  ],
+
+  animation: [
+    "frontend-development",
+  ],
+
+  frontend: [
+    "frontend-development",
+  ],
+
+  backend: [
+    "backend-development",
+    "database-development",
+  ],
+
+  database: [
+    "database-development",
+  ],
+
+  api: [
+    "backend-development",
+  ],
+
+  fullstack: [
+    "frontend-development",
+    "backend-development",
+    "database-development",
+  ],
+
+  cms: [
+    "website-development",
+  ],
+
+  deployment: [
+    "web-hosting",
+  ],
+
+  cloud: [
+    "web-hosting",
+  ],
+
+  devops: [
+    "web-hosting",
+    "backend-development",
+  ],
+
+  ecommerce: [
+    "website-development",
+    "backend-development",
+    "database-development",
+  ],
+
+  chatbot: [
+    "whatsapp-automation",
+    "backend-development",
+  ],
+
+  automation: [
+    "whatsapp-automation",
+    "backend-development",
+  ],
+};
+
+export const NAME_TO_SLUG_HINT = {
+  // Frontend
+  react: "react-js",
+  reactjs: "react-js",
+
+  next: "next-js",
+  nextjs: "next-js",
+
+  vue: "vue-js",
+  vuejs: "vue-js",
+
+  angular: "angular",
+  angularjs: "angular",
+
+  javascript: "javascript",
+  js: "javascript",
+
+  typescript: "typescript",
+  ts: "typescript",
+
+  html: "html5",
+  html5: "html5",
+
+  css: "css3",
+  css3: "css3",
+
+  tailwind: "tailwind-css",
+  tailwindcss: "tailwind-css",
+
+  framer: "framer-motion",
+  framermotion: "framer-motion",
+
+  bootstrap: "bootstrap",
+
+  redux: "redux-toolkit",
+  reduxtoolkit: "redux-toolkit",
+
+  zustand: "zustand",
+
+  // Backend
+  node: "nodejs",
+  nodejs: "nodejs",
+  nodes: "nodejs",
+
+  express: "express-js",
+  expressjs: "express-js",
+
+  graphql: "graphql",
+
+  socketio: "socket-io",
+  socket: "socket-io",
+
+  jwt: "jwt-auth",
+
+  oauth: "oauth",
+
+  // Database
+  mongo: "mongodb",
+  mongodb: "mongodb",
+
+  postgres: "postgresql",
+  postgresql: "postgresql",
+
+  mysql: "mysql",
+
+  sqlite: "sqlite",
+
+  redis: "redis",
+
+  firebase: "firebase",
+
+  supabase: "supabase",
+
+  prisma: "prisma",
+
+  mongoose: "mongoose",
+
+  sequelize: "sequelize",
+
+  // PHP / CMS
+  laravel: "laravel",
+
+  php: "php",
+
+  wordpress: "wordpress",
+
+  // Python
+  python: "python",
+
+  django: "django",
+
+  flask: "flask",
+
+  fastapi: "fastapi",
+
+  // Hosting / DevOps
+  vercel: "vercel",
+
+  netlify: "netlify",
+
+  docker: "docker",
+
+  nginx: "nginx",
+
+  linux: "linux",
+
+  cloudflare: "cloudflare",
+
+  aws: "aws",
+
+  firebasehosting: "firebase-hosting",
+
+  railway: "railway",
+
+  render: "render",
+
+  // SEO
+  googleanalytics: "google-analytics",
+  analytics: "google-analytics",
+
+  searchconsole: "search-console",
+  googlesearchconsole: "search-console",
+
+  lighthouse: "lighthouse",
+
+  chromedevtools: "chrome-devtools",
+  devtools: "chrome-devtools",
+
+  semrush: "semrush",
+
+  // WhatsApp / Automation
+  whatsapp: "whatsapp-api",
+  whatsappapi: "whatsapp-api",
+
+  chatbot: "chatbot",
+
+  crm: "crm-integration",
+
+  // Misc
+  git: "git",
+
+  github: "github",
+
+  gitlab: "gitlab",
+
+  postman: "postman",
+
+  vite: "vite",
+
+  webpack: "webpack",
+
+  babel: "babel",
+};
+
+const compactKey = (s) =>
+  String(s || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\./g, "")
+    .replace(/\s+/g, "");
+
+const techMatchesSlug = (tech, slugHint) =>
+  slugHint && tech.slug === slugHint;
+
+const techMatchesName = (tech, rawName) => {
+  const a = compactKey(rawName);
+  const b = compactKey(tech.name);
+
+  return a === b || NAME_TO_SLUG_HINT[a] === tech.slug;
+};
+
+/** Lookup helpers */
+
+export function lookupTechnologyLink(techName, serviceId = null) {
+  if (!techName) return null;
+
+  const hintedSlug =
+    NAME_TO_SLUG_HINT[compactKey(techName)] ?? null;
+
+  const searchGroups =
+    serviceId && SERVICE_TECH_GROUP_HINT[serviceId]
+      ? [
+          ...SERVICE_TECH_GROUP_HINT[serviceId],
+          ...techGroups.map((g) => g.id),
+        ]
+      : techGroups.map((g) => g.id);
+
+  const seen = new Set();
+  const orderedGroupIds = [];
+
+  for (const gid of searchGroups) {
+    if (!seen.has(gid)) {
+      seen.add(gid);
+      orderedGroupIds.push(gid);
+    }
+  }
+
+  for (const gid of orderedGroupIds) {
+    const group = techGroups.find((g) => g.id === gid);
+
+    if (!group) continue;
+
+    const tech =
+      group.techs.find((t) =>
+        techMatchesName(t, techName)
+      ) ||
+      group.techs.find((t) =>
+        techMatchesSlug(t, hintedSlug)
+      );
+
+    if (tech) {
+      return `/technologies/${gid}/${tech.slug}`;
+    }
+  }
+
+  return null;
+}
+
+export function getTechItem(groupId, techSlug) {
+  const group = techGroups.find((g) => g.id === groupId);
+
+  if (!group) return null;
+
+  const tech = group.techs.find(
+    (t) => t.slug === techSlug
+  );
+
+  return tech ? { group, tech } : null;
+}
+
+export function getTechSiblings(groupId, techSlug) {
+  const group = techGroups.find((g) => g.id === groupId);
+
+  if (!group) {
+    return { prev: null, next: null };
+  }
+
+  const idx = group.techs.findIndex(
+    (t) => t.slug === techSlug
+  );
+
+  if (idx < 0) {
+    return { prev: null, next: null };
+  }
+
+  return {
+    prev: idx > 0 ? group.techs[idx - 1] : null,
+    next:
+      idx < group.techs.length - 1
+        ? group.techs[idx + 1]
+        : null,
+  };
+}
