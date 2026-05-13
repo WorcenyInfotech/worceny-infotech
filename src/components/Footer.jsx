@@ -183,7 +183,7 @@ export default function Footer() {
             className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold p-2 text-center md:text-left"
             style={{
               color: "var(--text)",
-              background: "rgba(134, 90, 255, 0.4)",
+              // background: "rgba(134, 90, 255, 0.4)",
             }}
           >
             Have a project in mind?

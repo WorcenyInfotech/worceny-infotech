@@ -29,37 +29,6 @@ export const techGroups = [
 
     techs: [
       createTech(
-        "HTML5",
-        "html5",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-        "Semantic markup for modern websites.",
-        "HTML5 structures fast, accessible, and SEO-friendly web pages.",
-        [
-          "SEO-friendly structure",
-          "Accessibility support",
-          "Modern semantic tags",
-        ]
-      ),
-
-      createTech(
-        "CSS3",
-        "css3",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-        "Modern styling and responsive layouts.",
-        "CSS3 powers animations, responsive layouts, and scalable design systems.",
-        ["Responsive layouts", "Animations & transitions", "Modern UI styling"]
-      ),
-
-      createTech(
-        "JavaScript",
-        "javascript",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-        "Interactive frontend functionality.",
-        "JavaScript powers dynamic interactions, APIs, animations, and user experiences.",
-        ["DOM manipulation", "API integrations", "Interactive interfaces"]
-      ),
-
-      createTech(
         "React.js",
         "react-js",
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
@@ -84,28 +53,6 @@ export const techGroups = [
         "Popular CMS platform.",
         "WordPress enables easy content management with custom themes and plugins.",
         ["CMS management", "SEO plugins", "Large ecosystem"]
-      ),
-
-      createTech(
-        "Tailwind CSS",
-        "tailwind-css",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-        "Utility-first CSS framework.",
-        "Tailwind accelerates UI development with scalable utility classes.",
-        [
-          "Rapid UI development",
-          "Responsive utilities",
-          "Customizable design system",
-        ]
-      ),
-
-      createTech(
-        "Vercel",
-        "vercel",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
-        "Deployment platform for frontend apps.",
-        "Optimized hosting and deployments for Next.js and frontend applications.",
-        ["Instant deployment", "Global CDN", "Serverless support"]
       ),
     ],
 
@@ -163,15 +110,6 @@ export const techGroups = [
       ),
 
       createTech(
-        "Tailwind CSS",
-        "tailwind-css",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-        "Utility-first CSS framework.",
-        "Speeds up frontend development with reusable utilities.",
-        ["Fast styling", "Responsive design", "Scalable UI"]
-      ),
-
-      createTech(
         "Vue.js",
         "vue-js",
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
@@ -187,15 +125,6 @@ export const techGroups = [
         "Enterprise frontend framework.",
         "Complete frontend solution with TypeScript and RxJS.",
         ["Enterprise apps", "TypeScript-first", "Powerful tooling"]
-      ),
-
-      createTech(
-        "Framer Motion",
-        "framer-motion",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-        "Animation library for React.",
-        "Smooth animations and interactive transitions for modern interfaces.",
-        ["Page transitions", "Gesture animations", "Interactive UI"]
       ),
     ],
 
@@ -232,15 +161,6 @@ export const techGroups = [
         "JavaScript runtime for scalable backends.",
         "Efficient event-driven runtime for APIs and realtime systems.",
         ["REST APIs", "Realtime apps", "High concurrency"]
-      ),
-
-      createTech(
-        "Express.js",
-        "express-js",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-        "Minimal Node.js backend framework.",
-        "Simplifies routing, middleware, and API development.",
-        ["REST APIs", "Middleware architecture", "Fast backend setup"]
       ),
 
       createTech(
@@ -286,24 +206,6 @@ export const techGroups = [
         "Flexible API query language.",
         "Optimized API fetching with strongly typed schemas.",
         ["Efficient queries", "Typed schema", "Frontend flexibility"]
-      ),
-
-      createTech(
-        "Python",
-        "python",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        "Backend and automation language.",
-        "Used for APIs, automation, AI integrations, and scripting.",
-        ["Automation", "AI integrations", "Fast development"]
-      ),
-
-      createTech(
-        "Docker",
-        "docker",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-        "Containerization platform.",
-        "Portable and scalable deployment environments.",
-        ["Containerized deployment", "Environment consistency", "Scalability"]
       ),
     ],
 
@@ -567,25 +469,8 @@ export const NAME_TO_SLUG_HINT = {
   angular: "angular",
   angularjs: "angular",
 
-  javascript: "javascript",
-  js: "javascript",
-
   typescript: "typescript",
   ts: "typescript",
-
-  html: "html5",
-  html5: "html5",
-
-  css: "css3",
-  css3: "css3",
-
-  tailwind: "tailwind-css",
-  tailwindcss: "tailwind-css",
-
-  framer: "framer-motion",
-  framermotion: "framer-motion",
-
-  bootstrap: "bootstrap",
 
   redux: "redux-toolkit",
   reduxtoolkit: "redux-toolkit",
@@ -638,11 +523,6 @@ export const NAME_TO_SLUG_HINT = {
   php: "php",
 
   wordpress: "wordpress",
-
-  // Python
-  python: "python",
-
-  django: "django",
 
   flask: "flask",
 
