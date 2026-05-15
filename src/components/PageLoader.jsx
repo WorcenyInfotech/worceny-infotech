@@ -2,14 +2,17 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function PageLoader() {
   const [done, setDone] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const t = setTimeout(() => setDone(true), 2400);
+    setDone(false);
+    const t = setTimeout(() => setDone(true), 1500); // Reduced slightly for smoother page navigation
     return () => clearTimeout(t);
-  }, []);
+  }, [pathname]);
 
   return (
     <AnimatePresence>
