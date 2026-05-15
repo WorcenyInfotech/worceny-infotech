@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 
 export function SectionBadge({ label, color = "var(--accent)" }) {
@@ -21,7 +23,7 @@ export function GradientLine() {
       initial={{ scaleX: 0, transformOrigin: "left center" }}
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 1.1, ease: "power3.out" }}
+      transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
       className="w-24 h-0.5 mx-auto mb-6 rounded-full"
       style={{
         background: "linear-gradient(90deg, var(--accent), var(--accent2))",

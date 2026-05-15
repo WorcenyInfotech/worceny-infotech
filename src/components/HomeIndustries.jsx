@@ -1,9 +1,11 @@
+"use client";
+
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { industries } from "../data/industriesData";
 
 export default function HomeIndustries() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const displayed = industries.slice(0, 6);
 
   return (
@@ -76,7 +78,7 @@ export default function HomeIndustries() {
                 background: "#ffffff",
                 border: `1.5px solid ${industry.accent}30`,
               }}
-              onClick={() => navigate(`/industries/${industry.id}`)}
+              onClick={() => router.push(`/industries/${industry.id}`)}
             >
               {/* Icon */}
               <div
@@ -136,7 +138,7 @@ export default function HomeIndustries() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate(`/industries/${industry.id}`);
+                  router.push(`/industries/${industry.id}`);
                 }}
                 className="text-sm font-semibold flex items-center gap-1 transition-all duration-200 group-hover:gap-2"
                 style={{ color: industry.accent }}
@@ -156,7 +158,7 @@ export default function HomeIndustries() {
             }}
             whileTap={{ scale: 0.97 }}
             onClick={() => {
-              navigate("/industries");
+              router.push("/industries");
               window.scrollTo({ top: 0 });
             }}
             className="px-10 py-4 rounded-full font-bold text-base transition-all duration-300 cursor-pointer"

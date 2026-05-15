@@ -1,24 +1,25 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-
 # Dependencies
-node_modules/
+node_modules
 .pnp
 .pnp.js
-node_modules
-# Build output
-dist
-dist/
-dist-ssr/
 
-# Environment
+# Next.js
+.next/
+out/
+
+# Build / test
+coverage
+
+# Env
 .env
-.env.local
-.env.*.local
+.env*.local
 
-# Editor
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE / OS
 .vscode/
 .idea/
 *.suo
@@ -26,7 +27,5 @@ dist-ssr/
 *.njsproj
 *.sln
 *.sw?
-
-# OS
 .DS_Store
 Thumbs.db

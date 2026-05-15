@@ -1,8 +1,10 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { usePathname, useRouter } from "next/navigation";
 import { services } from "../data/servicesData";
 import { industries } from "../data/industriesData";
 import { techGroups } from "../data/technologiesData";
@@ -19,36 +21,36 @@ export default function Navbar() {
   const [megaOpen, setMegaOpen] = useState(null);
   const [mobileMega, setMobileMega] = useState(null);
   const [activeLink, setActiveLink] = useState("Home");
-  const location = useLocation();
-  const navigate = useNavigate();
+  const pathname = usePathname();
+  const router = useRouter();
   const megaLeaveTimer = useRef(null);
   const navRef = useRef(null);
 
   useEffect(() => {
-    if (location.pathname === "/contact") {
+    if (pathname === "/contact") {
       setActiveLink("Contact");
-    } else if (location.pathname === "/portfolio") {
+    } else if (pathname === "/portfolio") {
       setActiveLink("Portfolio");
-    } else if (location.pathname.startsWith("/services")) {
+    } else if (pathname.startsWith("/services")) {
       setActiveLink("Services");
-    } else if (location.pathname.startsWith("/industries")) {
+    } else if (pathname.startsWith("/industries")) {
       setActiveLink("Industries");
-    } else if (location.pathname.startsWith("/technologies")) {
+    } else if (pathname.startsWith("/technologies")) {
       setActiveLink("Technologies");
     } else {
       setActiveLink("Home");
     }
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     setMegaOpen(null);
     setMobileMega(null);
     setMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => {
-      if (location.pathname !== "/") {
+      if (pathname !== "/") {
         return;
       }
       const pos = window.scrollY + 120;
@@ -61,7 +63,7 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     const onDoc = (e) => {
@@ -89,8 +91,8 @@ export default function Navbar() {
     setMenuOpen(false);
     setMegaOpen(null);
     if (link.section) {
-      if (location.pathname !== "/") {
-        navigate("/");
+      if (pathname !== "/") {
+        router.push("/");
         setTimeout(
           () =>
             document
@@ -104,13 +106,13 @@ export default function Navbar() {
           ?.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      navigate(link.path);
+      router.push(link.path);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const goMega = (path) => {
-    navigate(path);
+    router.push(path);
     window.scrollTo({ top: 0, behavior: "smooth" });
     setMegaOpen(null);
     setMenuOpen(false);
@@ -343,7 +345,7 @@ export default function Navbar() {
                 setMegaOpen(null);
               }}
               onClick={() => {
-                navigate("/contact");
+                router.push("/contact");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className="px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer"
@@ -717,7 +719,7 @@ export default function Navbar() {
               >
                 <button
                   onClick={() => {
-                    navigate("/contact");
+                    router.push("/contact");
                     window.scrollTo({ top: 0 });
                     setMenuOpen(false);
                   }}

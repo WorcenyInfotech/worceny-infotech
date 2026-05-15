@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   FiMail,
   FiMapPin,
@@ -12,6 +14,8 @@ import {
   FiGithub,
 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const contactInfo = [
   {
@@ -59,7 +63,7 @@ const socials = [
   },
 ];
 
-const serviceOptions = [
+const services = [
   "Web Development",
   "Frontend Development",
   "Backend Development",
@@ -67,10 +71,41 @@ const serviceOptions = [
   "UI/UX Design",
   "Other",
 ];
-
 const budgets = ["< ₹50K", "₹50K–1L", "₹1L–3L", "₹3L–5L", "₹5L+", "Discuss"];
 
-export default function HomeContact() {
+const faqs = [
+  {
+    q: "How long does a project take?",
+    a: "Typical projects take 2–8 weeks depending on complexity. We provide a detailed timeline after the initial consultation.",
+  },
+  {
+    q: "What is your pricing model?",
+    a: "We offer fixed-price and hourly models. After understanding your requirements, we provide a transparent quote with no hidden costs.",
+  },
+  {
+    q: "Do you provide post-launch support?",
+    a: "Yes! We offer 3 months of free support after launch, and ongoing maintenance packages are available.",
+  },
+  {
+    q: "Can you work with our existing team?",
+    a: "Absolutely. We integrate seamlessly with in-house teams and adapt to your workflow and tools.",
+  },
+];
+
+function AnimateHeight({ isOpen, children }) {
+  return (
+    <motion.div
+      initial={false}
+      animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      style={{ overflow: "hidden" }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default function ContactPage() {
   const sectionRef = useRef();
   const [form, setForm] = useState({
     name: "",
@@ -84,6 +119,51 @@ export default function HomeContact() {
   const [sent, setSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [focused, setFocused] = useState(null);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".contact-hero-text",
+        { opacity: 0, y: 55 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.12,
+          ease: "power3.out",
+          delay: 0.2,
+        }
+      );
+      gsap.fromTo(
+        ".contact-card",
+        { opacity: 0, y: 45, scale: 0.93 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.65,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ".contact-cards-grid", start: "top 82%" },
+        }
+      );
+      gsap.fromTo(
+        ".faq-item",
+        { opacity: 0, x: -28 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.55,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ".faq-section", start: "top 82%" },
+        }
+      );
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
 
   const validate = () => {
     const e = {};
@@ -154,22 +234,30 @@ export default function HomeContact() {
   });
 
   return (
-    <section
+    <div
       ref={sectionRef}
+      className="min-h-screen pt-16 md:pt-18"
       style={{ background: "var(--bg)" }}
-      className="py-24 px-6"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
+      {/* Hero */}
+      <div className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 grid-overlay pointer-events-none" />
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+          animate={{ scale: [1, 1.2, 1], opacity: [0.07, 0.13, 0.07] }}
+          transition={{ duration: 7, repeat: Infinity }}
+          className="absolute top-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+          style={{ background: "var(--accent)" }}
+        />
+        <motion.div
+          animate={{ scale: [1, 1.3, 1], opacity: [0.04, 0.08, 0.04] }}
+          transition={{ duration: 9, repeat: Infinity, delay: 2 }}
+          className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none"
+          style={{ background: "var(--accent2)" }}
+        />
+
+        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
           <div
-            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-5"
+            className="contact-hero-text inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-6"
             style={{
               background: "rgba(134,90,255,0.1)",
               border: "1px solid rgba(134,90,255,0.28)",
@@ -183,35 +271,36 @@ export default function HomeContact() {
               className="text-sm font-semibold"
               style={{ color: "var(--accent)" }}
             >
-              Get In Touch
+              Available for Projects
             </span>
           </div>
-          <h2
-            className="text-4xl md:text-5xl font-black mb-4"
+          <h1
+            className="contact-hero-text text-5xl md:text-7xl font-black mb-6"
             style={{ color: "var(--text)" }}
           >
-            Let's Build Something <span className="gradient-text">Amazing</span>
-          </h2>
+            Let's <span className="gradient-text">Build</span> Something
+            <br />
+            <span className="gradient-text-rev">Amazing</span> Together
+          </h1>
           <p
-            className="text-base max-w-2xl mx-auto"
+            className="contact-hero-text text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ color: "var(--muted)" }}
           >
             Have a project in mind? Fill out the form below or reach out
             directly — we respond within 2 hours.
           </p>
-        </motion.div>
+        </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-6 pb-16">
         {/* Info Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {contactInfo.map((item, i) => (
+        <div className="contact-cards-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
+          {contactInfo.map((item) => (
             <motion.div
               key={item.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
               whileHover={{ y: -6, boxShadow: `0 0 28px ${item.accent}18` }}
-              className="rounded-2xl p-5 text-center cursor-default"
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="contact-card rounded-2xl p-5 text-center cursor-default"
               style={{
                 background: "var(--card-bg)",
                 border: "1px solid var(--border)",
@@ -232,12 +321,12 @@ export default function HomeContact() {
                 {item.label}
               </div>
               <div
-                className="text-xs font-semibold leading-tight mb-1"
+                className="text-xs font-semibold leading-tight mb-1 wrap-break-words"
                 style={{ color: "var(--text-card)" }}
               >
                 {Array.isArray(item.value) ? (
-                  item.value.map((num, idx) => (
-                    <p key={idx} className="break-all">
+                  item.value.map((num, index) => (
+                    <p key={index} className="break-all">
                       {num}
                     </p>
                   ))
@@ -256,13 +345,13 @@ export default function HomeContact() {
         </div>
 
         {/* Form + Sidebar */}
-        <div className="grid lg:grid-cols-5 gap-10">
+        <div className="grid lg:grid-cols-5 gap-10 mb-20">
           {/* Form */}
           <motion.div
-            initial={{ opacity: 0, rotateY: -8 }}
-            whileInView={{ opacity: 1, rotateY: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8 }}
             className="lg:col-span-3"
           >
             <div
@@ -272,12 +361,12 @@ export default function HomeContact() {
                 border: "1px solid rgba(134,90,255,0.15)",
               }}
             >
-              <h3
+              <h2
                 className="text-2xl font-black mb-1"
                 style={{ color: "var(--text-card)" }}
               >
                 Send Us a Message
-              </h3>
+              </h2>
               <p
                 className="text-sm mb-8"
                 style={{ color: "var(--muted-card)" }}
@@ -424,7 +513,7 @@ export default function HomeContact() {
                         >
                           Select a service
                         </option>
-                        {serviceOptions.map((s) => (
+                        {services.map((s) => (
                           <option
                             key={s}
                             value={s}
@@ -615,7 +704,6 @@ export default function HomeContact() {
                     key={s.label}
                     href={s.href}
                     target="_blank"
-                    rel="noopener noreferrer"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -667,7 +755,71 @@ export default function HomeContact() {
             </motion.div>
           </motion.div>
         </div>
+
+        {/* FAQ */}
+        <div className="faq-section mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 38 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <span
+              className="text-sm font-semibold tracking-widest uppercase"
+              style={{ color: "var(--accent)" }}
+            >
+              FAQ
+            </span>
+            <h2
+              className="text-3xl md:text-4xl font-black mt-3 mb-4"
+              style={{ color: "var(--text)" }}
+            >
+              Frequently Asked <span className="gradient-text">Questions</span>
+            </h2>
+          </motion.div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq, i) => (
+              <motion.div
+                key={i}
+                className="faq-item rounded-2xl overflow-hidden"
+                style={{
+                  background: "var(--card-bg)",
+                  border: "1px solid var(--border)",
+                }}
+              >
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
+                >
+                  <span
+                    className="text-sm font-semibold"
+                    style={{ color: "var(--text-card)" }}
+                  >
+                    {faq.q}
+                  </span>
+                  <motion.span
+                    animate={{ rotate: openFaq === i ? 45 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="text-xl shrink-0 ml-4"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    +
+                  </motion.span>
+                </button>
+                <AnimateHeight isOpen={openFaq === i}>
+                  <p
+                    className="px-6 pb-5 text-sm leading-relaxed"
+                    style={{ color: "var(--muted-card)" }}
+                  >
+                    {faq.a}
+                  </p>
+                </AnimateHeight>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

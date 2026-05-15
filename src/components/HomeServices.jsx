@@ -1,9 +1,11 @@
+"use client";
+
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { services } from "../data/servicesData";
 
 export default function HomeServices() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const displayed = services.slice(0, 6);
 
   return (
@@ -79,7 +81,7 @@ export default function HomeServices() {
                 background: "#ffffff",
                 border: `1.5px solid ${service.accent}30`,
               }}
-              onClick={() => navigate(`/services/${service.id}`)}
+              onClick={() => router.push(`/services/${service.id}`)}
             >
               {/* Icon + Number */}
               <div className="flex items-start justify-between mb-4">
@@ -140,7 +142,7 @@ export default function HomeServices() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate(`/services/${service.id}`);
+                  router.push(`/services/${service.id}`);
                 }}
                 className="text-sm font-semibold flex items-center gap-1 transition-all duration-200 group-hover:gap-2"
                 style={{ color: service.accent }}
@@ -160,7 +162,7 @@ export default function HomeServices() {
             }}
             whileTap={{ scale: 0.97 }}
             onClick={() => {
-              navigate("/services");
+              router.push("/services");
               window.scrollTo({ top: 0 });
             }}
             className="px-10 py-4 rounded-full font-bold text-base transition-all duration-300 cursor-pointer"

@@ -1,6 +1,8 @@
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import {
   FiArrowRight,
   FiGlobe,
@@ -189,7 +191,7 @@ const services = [
 
 export default function Technologies() {
   const [active, setActive] = useState("website-development");
-  const navigate = useNavigate();
+  const router = useRouter();
   const current = services.find((s) => s.id === active);
 
   return (
@@ -370,7 +372,7 @@ export default function Technologies() {
                     }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => {
-                      navigate(`/technologies/${active}/${tech.slug}`);
+                      router.push(`/technologies/${active}/${tech.slug}`);
                       window.scrollTo({ top: 0 });
                     }}
                     className="flex flex-col items-center gap-2 p-3 rounded-xl cursor-pointer transition-all duration-200 border border-solid appearance-none bg-transparent font-[inherit]"
@@ -400,7 +402,7 @@ export default function Technologies() {
                   }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => {
-                    navigate(`/technologies`);
+                    router.push(`/technologies`);
                     window.scrollTo({ top: 0 });
                   }}
                   className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold cursor-pointer transition-all duration-300"
@@ -473,7 +475,7 @@ export default function Technologies() {
               }}
               whileTap={{ scale: 0.97 }}
               onClick={() => {
-                navigate("/contact");
+                router.push("/contact");
                 window.scrollTo({ top: 0 });
               }}
               className="w-full py-4 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer"
