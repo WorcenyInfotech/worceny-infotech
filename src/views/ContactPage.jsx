@@ -21,7 +21,7 @@ const contactInfo = [
   {
     icon: <FiMail size={20} />,
     label: "Email Us",
-    value: "worcenyinfotech@gmail.com",
+    value: "info@worceny.com",
     sub: "Reply within 2 hours",
     accent: "#865aff",
   },
