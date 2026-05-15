@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import CursorGlow from "@/components/CursorGlow";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-// import PageLoader from "@/components/PageLoader";
+import PageLoader from "@/components/PageLoader";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -24,7 +24,7 @@ export default function SiteShell({ children }) {
 
   return (
     <>
-      {/* <PageLoader /> */}
+      <PageLoader />
       <CursorGlow />
       <Navbar />
       <main className="min-h-screen min-w-0 overflow-x-clip">
