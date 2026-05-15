@@ -106,7 +106,7 @@ export default function Footer() {
                   className="inline mr-2"
                   style={{ color: "var(--accent2)" }}
                 />
-                worcenyinfotech@gmail.com
+                info@worceny.com
               </div>
               <div>
                 <FaPhone
