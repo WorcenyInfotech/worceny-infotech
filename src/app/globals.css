@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface2: #f3f4f6;
+    --surface3: #e5e7eb;
+    --border: #4f46e5;
+    --accent: #4f46e5;
+    --accent2: #8b5cf6;
+    --accent3: #f3f3f3;
+    --accent4: #8b5cf6;
+    --text: #111827;
+    --text-card: #1f2937;
+    --muted: #6b7280;
+    --muted-card: #9ca3af;
+    --card-bg: #ffffff;
+    --card-bg2: #4f46e5;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    height: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: rgba(134, 90, 255, 0.3);
+    color: var(--text);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+  }
+
+  .glass-dark {
+    background: rgba(17, 17, 20, 0.7);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(134, 90, 255, 0.12);
+  }
+
+  .accent-text {
+    color: var(--accent);
+    text-shadow:
+      0 0 12px rgba(134, 90, 255, 0.5),
+      0 0 32px rgba(134, 90, 255, 0.2);
+  }
+
+  .accent2-text {
+    color: var(--accent2);
+    text-shadow:
+      0 0 12px rgba(90, 255, 115, 0.5),
+      0 0 32px rgba(90, 255, 115, 0.2);
+  }
+
+  .accent-border {
+    border: 1px solid var(--accent);
+    box-shadow:
+      0 0 12px rgba(134, 90, 255, 0.25),
+      inset 0 0 12px rgba(134, 90, 255, 0.04);
+  }
+
+  .accent2-border {
+    border: 1px solid var(--accent2);
+    box-shadow:
+      0 0 12px rgba(90, 255, 115, 0.25),
+      inset 0 0 12px rgba(90, 255, 115, 0.04);
+  }
+
+  .accent-glow {
+    box-shadow:
+      0 0 16px rgba(79, 70, 229, 0.35),
+      0 0 48px rgba(79, 70, 229, 0.1);
+  }
+
+  .accent2-glow {
+    box-shadow:
+      0 0 16px rgba(139, 92, 246, 0.35),
+      0 0 48px rgba(139, 92, 246, 0.08);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-rev {
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-gradient {
+    background:
+      radial-gradient(
+        ellipse at 60% 40%,
+        rgba(79, 70, 229, 0.08) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 20% 70%,
+        rgba(139, 92, 246, 0.05) 0%,
+        transparent 50%
+      ),
+      var(--bg);
+  }
+
+  .section-gradient {
+    background: linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      var(--surface) 50%,
+      var(--bg) 100%
+    );
+  }
+
+  .surface-bg {
+    background-color: var(--surface);
+  }
+
+  .surface2-bg {
+    background-color: var(--surface2);
+  }
+
+  .card-bg {
+    background-color: var(--card-bg);
+  }
+
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(134, 90, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(134, 90, 255, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .chip-accent {
+    background: rgba(134, 90, 255, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(134, 90, 255, 0.25);
+  }
+
+  .chip-accent2 {
+    background: rgba(90, 255, 115, 0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(90, 255, 115, 0.22);
+  }
+
+  .calendly-overlay {
+    overflow-y: auto !important;
+  }
+}

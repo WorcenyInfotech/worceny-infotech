@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
@@ -126,7 +128,7 @@ export default function WorkProcess() {
         }}
         transition={{
           type: "tween",       // smoother than spring
-          ease: "power2.out",  // gentle easing
+          ease: [0.33, 1, 0.68, 1],  // gentle easing (power2.out equivalent)
           duration: 0.3,       // quick, smooth response
         }}
         className="

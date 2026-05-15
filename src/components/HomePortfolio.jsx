@@ -1,6 +1,8 @@
+"use client";
+
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import {
   FiArrowRight,
   FiX,
@@ -609,7 +611,7 @@ function SplitCard({ project, index, onSelect }) {
 
 // ─── Section ──────────────────────────────────────────────────────────────────
 export default function HomePortfolio() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [selected, setSelected] = useState(null);
   const homeProjects = projects.slice(0, 3);
 
@@ -678,7 +680,7 @@ export default function HomePortfolio() {
             }}
             whileTap={{ scale: 0.97 }}
             onClick={() => {
-              navigate("/portfolio");
+              router.push("/portfolio");
               window.scrollTo({ top: 0 });
             }}
             className="px-10 py-4 rounded-full font-bold text-base cursor-pointer"

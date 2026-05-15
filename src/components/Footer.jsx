@@ -1,6 +1,8 @@
+"use client";
+
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import {
   FaLinkedin,
   FaGithub,
@@ -12,10 +14,10 @@ import {
 export default function Footer() {
   const ref = useRef();
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const scrollTo = (section) => {
-    navigate("/");
+    router.push("/");
     setTimeout(
       () =>
         document
@@ -26,7 +28,7 @@ export default function Footer() {
   };
 
   const goTo = (path) => {
-    navigate(path);
+    router.push(path);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -83,10 +85,10 @@ export default function Footer() {
             className="md:col-span-1"
           >
             <img
-              src="./logo.png"
+              src="/logo.png"
               alt="WorcenyInfotech"
               className="h-10 object-contain mb-4 cursor-pointer"
-              onClick={() => navigate("/")}
+              onClick={() => router.push("/")}
             />
             <p
               className="text-sm leading-relaxed mb-5"
