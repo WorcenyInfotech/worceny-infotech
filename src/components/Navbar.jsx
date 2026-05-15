@@ -87,37 +87,30 @@ export default function Navbar() {
     megaLeaveTimer.current = setTimeout(() => setMegaOpen(null), 160);
   };
 
-  const handleNav = (link) => {
-    setMenuOpen(false);
-    setMegaOpen(null);
-    if (link.section) {
-      if (pathname !== "/") {
-        router.push("/");
-        setTimeout(
-          () =>
-            document
-              .getElementById(link.section)
-              ?.scrollIntoView({ behavior: "smooth" }),
-          320
-        );
-      } else {
-        document
-          .getElementById(link.section)
-          ?.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      router.push(link.path);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+ const handleNav = (link) => {
+  setMenuOpen(false);
+  setMegaOpen(null);
 
-  const goMega = (path) => {
-    router.push(path);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setMegaOpen(null);
-    setMenuOpen(false);
-    setMobileMega(null);
-  };
+  if (link.section) {
+    if (pathname !== "/") {
+      router.push(`/#${link.section}`);
+    } else {
+      document
+        .getElementById(link.section)
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  } else {
+    router.push(link.path);
+  }
+ };
+
+ const goMega = (path) => {
+  setMegaOpen(null);
+  setMenuOpen(false);
+  setMobileMega(null);
+
+  router.push(path);
+};
 
   const megaLabel = (key) =>
     key === "services"
