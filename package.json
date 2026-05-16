@@ -1,33 +1,27 @@
 {
-  "name": "next-worceny",
+  "name": "worceny-infotech-nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
-    "cloudinary": "^2.10.0",
+    "@emailjs/browser": "^4.4.1",
     "framer-motion": "^12.38.0",
     "gsap": "^3.15.0",
-    "lucide-react": "^0.400.0",
-    "mongoose": "^9.6.2",
-    "next": "^15.3.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-icons": "^5.6.0",
-    "resend": "^6.12.3",
-    "three": "^0.184.0"
+    "resend": "^6.12.3"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "@tailwindcss/postcss": "^4.1.7",
-    "eslint": "^9.25.1",
-    "eslint-config-next": "^15.3.2",
-    "tailwindcss": "^4.1.7"
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4"
   }
 }
