@@ -1,30 +1,50 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-import { usePathname, useRouter } from "next/navigation";
+import { Menu, X, ChevronDown, ChevronRight, Sparkles } from "lucide-react";
 import { services } from "../data/servicesData";
 import { industries } from "../data/industriesData";
 import { techGroups } from "../data/technologiesData";
 
 const simpleLinks = [
-  { label: "Home", path: "/", section: "home" },
-  { label: "About", path: "/", section: "about" },
+  { label: "Home", href: "/", section: "home" },
+  { label: "About", href: "/", section: "about" },
 ];
 
 const megaKeys = ["services", "industries", "technologies"];
 
+const portfolioContactLinks = [
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Contact", href: "/contact" },
+];
+
 export default function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(null);
   const [mobileMega, setMobileMega] = useState(null);
   const [activeLink, setActiveLink] = useState("Home");
-  const pathname = usePathname();
-  const router = useRouter();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const megaLeaveTimer = useRef(null);
   const navRef = useRef(null);
+
+  const isHome = pathname === "/";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
+      setIsVisible(currentScrollY < lastScrollY || currentScrollY < 50);
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   useEffect(() => {
     if (pathname === "/contact") {
@@ -40,29 +60,9 @@ export default function Navbar() {
     } else {
       setActiveLink("Home");
     }
-  }, [pathname]);
-
-  useEffect(() => {
     setMegaOpen(null);
     setMobileMega(null);
     setMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (pathname !== "/") {
-        return;
-      }
-      const pos = window.scrollY + 120;
-      ["home", "about"].forEach((id) => {
-        const el = document.getElementById(id);
-        if (el && pos >= el.offsetTop) {
-          setActiveLink(id.charAt(0).toUpperCase() + id.slice(1));
-        }
-      });
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
   useEffect(() => {
@@ -87,30 +87,34 @@ export default function Navbar() {
     megaLeaveTimer.current = setTimeout(() => setMegaOpen(null), 160);
   };
 
- const handleNav = (link) => {
-  setMenuOpen(false);
-  setMegaOpen(null);
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  if (link.section) {
-    if (pathname !== "/") {
-      router.push(`/#${link.section}`);
-    } else {
-      document
-        .getElementById(link.section)
-        ?.scrollIntoView({ behavior: "smooth" });
+  const handleNav = (link) => {
+    setMenuOpen(false);
+    setMegaOpen(null);
+    if (link.section) {
+      if (pathname !== "/") {
+        setTimeout(
+          () =>
+            document
+              .getElementById(link.section)
+              ?.scrollIntoView({ behavior: "smooth" }),
+          320
+        );
+      } else {
+        document
+          .getElementById(link.section)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  } else {
-    router.push(link.path);
-  }
- };
+  };
 
- const goMega = (path) => {
-  setMegaOpen(null);
-  setMenuOpen(false);
-  setMobileMega(null);
-
-  router.push(path);
-};
+  const goMega = (path) => {
+    setMegaOpen(null);
+    setMenuOpen(false);
+    setMobileMega(null);
+  };
 
   const megaLabel = (key) =>
     key === "services"
@@ -126,609 +130,533 @@ export default function Navbar() {
         ? "/industries"
         : "/technologies";
 
+  const topBarSolid = !isHome || isScrolled;
+
   return (
-    <motion.nav
-      ref={navRef}
-      initial={{ y: -90, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white`}
-    >
-      <div className="relative" onMouseLeave={scheduleMegaClose}>
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between gap-6">
-          <motion.div
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="cursor-pointer flex items-center shrink-0"
-            onMouseEnter={() => {
-              clearMegaLeave();
-              setMegaOpen(null);
-            }}
-            onClick={() => handleNav({ path: "/", section: "home" })}
+    <>
+      <motion.header
+        ref={navRef}
+        className="fixed top-0 right-0 left-0 z-50"
+        initial={{ y: 0 }}
+        animate={{ y: isVisible ? 0 : -120 }}
+        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      >
+        {/* Top promo bar */}
+        <div
+          className={`hidden border-b transition-colors md:block ${
+            topBarSolid
+              ? "border-rose-gold/15 bg-rose-gold text-white"
+              : "border-white/10 bg-rose-gold/85 text-white backdrop-blur-md"
+          }`}
+        >
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 text-xs sm:px-6 lg:px-8">
+            <div className="flex items-center gap-2 font-medium tracking-wide">
+              <Sparkles size={12} className="text-blush" />
+              <span>{"Worceny Infotech — IT & Web Services in Surat"}</span>
+            </div>
+            <div className="flex items-center gap-3 text-white/95">
+              <a href="tel:+919876543210" className="flex items-center gap-1.5 transition hover:text-blush">
+                <span className="font-semibold">+91 98765 43210</span>
+              </a>
+              <span className="text-white/40">|</span>
+              <span className="text-white/85">Mon–Sat 9AM–6PM</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Main navbar */}
+        <div className="border-b border-rose-gold/10 bg-white shadow-sm backdrop-blur-xl transition-all duration-300">
+          <div
+            className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 sm:px-8"
+            onMouseLeave={scheduleMegaClose}
           >
-            <picture>
-              <source media="(max-width: 767px)" srcSet="/logo-mobile.png" />
-              <img
-                src="/logo.png"
-                alt="Worceny Infotech — IT & web services in Surat"
-                className="h-8 object-contain"
-              />
-            </picture>
-          </motion.div>
-
-          <ul className="hidden md:flex items-center gap-6 lg:gap-8">
-            {simpleLinks.map((link) => {
-              const isActive = activeLink === link.label;
-              return (
-                <li key={link.label}>
-                  <button
-                    onClick={() => handleNav(link)}
-                    onMouseEnter={() => {
-                      clearMegaLeave();
-                      setMegaOpen(null);
-                    }}
-                    className="relative py-1 text-sm font-medium group cursor-pointer"
-                  >
-                    <span
-                      className="transition-colors duration-300"
-                      style={{
-                        color: isActive ? "var(--accent)" : "var(--muted)",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.target.style.color = "var(--text)";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.target.style.color = "var(--muted)";
-                        }
-                      }}
-                    >
-                      {link.label}
-                    </span>
-                    <motion.span
-                      className="absolute -bottom-1 left-0 right-0 h-px rounded-full"
-                      style={{ background: "var(--accent)" }}
-                      animate={{
-                        opacity: isActive ? 1 : 0,
-                        scaleX: isActive ? 1 : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <span
-                      className="absolute -bottom-1 left-0 w-0 h-px rounded-full group-hover:w-full transition-all duration-300"
-                      style={{ background: "rgba(134,90,255,0.4)" }}
-                    />
-                  </button>
-                </li>
-              );
-            })}
-
-            {megaKeys.map((key) => {
-              const label = megaLabel(key);
-              const isActive = activeLink === label;
-              const open = megaOpen === key;
-              return (
-                <li
-                  key={key}
-                  className="relative"
-                  onMouseEnter={() => {
-                    clearMegaLeave();
-                    setMegaOpen(key);
-                  }}
-                >
-                  <button
-                    type="button"
-                    className="relative py-1 text-sm font-medium group cursor-pointer flex items-center gap-1"
-                    onClick={() =>
-                      goMega(
-                        key === "services"
-                          ? "/services"
-                          : key === "industries"
-                            ? "/industries"
-                            : "/technologies"
-                      )
-                    }
-                    aria-expanded={open}
-                    aria-haspopup="true"
-                  >
-                    <span
-                      className="transition-colors duration-300"
-                      style={{
-                        color:
-                          isActive || open ? "var(--accent)" : "var(--muted)",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive && !open) {
-                          e.target.style.color = "var(--text)";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive && !open) {
-                          e.target.style.color = "var(--muted)";
-                        }
-                      }}
-                    >
-                      {label}
-                    </span>
-                    <FiChevronDown
-                      size={14}
-                      className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-                      style={{
-                        color:
-                          isActive || open ? "var(--accent)" : "var(--muted)",
-                      }}
-                    />
-                    <motion.span
-                      className="absolute -bottom-1 left-0 right-0 h-px rounded-full"
-                      style={{ background: "var(--accent)" }}
-                      animate={{
-                        opacity: isActive || open ? 1 : 0,
-                        scaleX: isActive || open ? 1 : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </button>
-                </li>
-              );
-            })}
-
-            {[
-              { label: "Portfolio", path: "/portfolio", section: null },
-              { label: "Contact", path: "/contact", section: null },
-            ].map((link) => {
-              const isActive = activeLink === link.label;
-              return (
-                <li key={link.label}>
-                  <button
-                    onClick={() => handleNav(link)}
-                    onMouseEnter={() => {
-                      clearMegaLeave();
-                      setMegaOpen(null);
-                    }}
-                    className="relative py-1 text-sm font-medium group cursor-pointer"
-                  >
-                    <span
-                      className="transition-colors duration-300"
-                      style={{
-                        color: isActive ? "var(--accent)" : "var(--muted)",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.target.style.color = "var(--text)";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.target.style.color = "var(--muted)";
-                        }
-                      }}
-                    >
-                      {link.label}
-                    </span>
-                    <motion.span
-                      className="absolute -bottom-1 left-0 right-0 h-px rounded-full"
-                      style={{ background: "var(--accent)" }}
-                      animate={{
-                        opacity: isActive ? 1 : 0,
-                        scaleX: isActive ? 1 : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <span
-                      className="absolute -bottom-1 left-0 w-0 h-px rounded-full group-hover:w-full transition-all duration-300"
-                      style={{ background: "rgba(134,90,255,0.4)" }}
-                    />
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-
-          <div className="hidden md:flex items-center shrink-0">
-            <motion.button
-              whileHover={{
-                scale: 1.06,
-                boxShadow: "0 0 28px rgba(134,90,255,0.55)",
-              }}
-              whileTap={{ scale: 0.94 }}
+            <Link
+              href="/"
+              className="group cursor-pointer flex items-center shrink-0"
               onMouseEnter={() => {
                 clearMegaLeave();
                 setMegaOpen(null);
               }}
-              onClick={() => {
-                router.push("/contact");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer"
-              style={{ background: "var(--accent)", color: "#fff" }}
+              onClick={() => handleNav({ href: "/", section: "home" })}
             >
-              Get Started →
-            </motion.button>
-          </div>
+              <picture>
+                <source media="(max-width: 767px)" srcSet="/logo-mobile.png" />
+                <img
+                  src="/logo.png"
+                  alt="Worceny Infotech — IT & web services in Surat"
+                  className="h-8 object-contain"
+                />
+              </picture>
+            </Link>
 
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            className="md:hidden text-2xl"
-            style={{ color: "var(--accent)" }}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-          >
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={menuOpen ? "close" : "open"}
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="block"
-              >
-                {menuOpen ? <HiX /> : <HiMenuAlt3 />}
-              </motion.span>
-            </AnimatePresence>
-          </motion.button>
-        </div>
-
-        <AnimatePresence>
-          {megaOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-              className="hidden md:block absolute left-0 right-0 top-full z-40 px-6 sm:px-8 pt-2 pb-5"
-              onMouseEnter={clearMegaLeave}
-            >
-              <div className="mx-auto max-w-7xl">
-                <div
-                  className="rounded-2xl border shadow-xl overflow-hidden"
-                  style={{
-                    background: "#ffffff",
-                    borderColor: "rgba(45,77,202,0.12)",
-                    boxShadow: "0 24px 60px rgba(15,23,42,0.12)",
-                  }}
-                >
-                  <div className="p-6 lg:p-8">
-                    {megaOpen === "services" && (
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                        {services.map((s) => (
-                          <button
-                            key={s.id}
-                            type="button"
-                            onClick={() => goMega(`/services/${s.id}`)}
-                            className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)] cursor-pointer"
-                          >
-                            <div
-                              className="text-sm font-semibold"
-                              style={{ color: "var(--text)" }}
-                            >
-                              {s.title}
-                            </div>
-                            <div
-                              className="text-xs mt-0.5 line-clamp-2"
-                              style={{ color: "var(--muted-card)" }}
-                            >
-                              {s.subtitle}
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                    {megaOpen === "industries" && (
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[min(70vh,420px)] overflow-y-auto pr-1">
-                        {industries.map((ind) => (
-                          <button
-                            key={ind.id}
-                            type="button"
-                            onClick={() => goMega(`/industries/${ind.id}`)}
-                            className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)] cursor-pointer"
-                          >
-                            <div
-                              className="text-sm font-semibold"
-                              style={{ color: "var(--text)" }}
-                            >
-                              {ind.title}
-                            </div>
-                            <div
-                              className="text-xs mt-0.5 line-clamp-2"
-                              style={{ color: "var(--muted-card)" }}
-                            >
-                              {ind.subtitle}
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                    {megaOpen === "technologies" && (
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 max-h-[min(72vh,520px)] overflow-y-auto pr-1">
-                        {techGroups.map((g) => (
-                          <div key={g.id} className="min-w-0">
-                            <button
-                              type="button"
-                              onClick={() => goMega(`/technologies/${g.id}`)}
-                              className="text-left w-full rounded-lg px-1 py-1 mb-2 transition-colors hover:bg-[rgba(40,77,202,0.08)] cursor-pointer"
-                            >
-                              <div
-                                className="text-sm font-black leading-tight"
-                                style={{ color: "var(--text)" }}
-                              >
-                                {g.label}
-                              </div>
-                              <div
-                                className="text-[11px] mt-0.5 line-clamp-2"
-                                style={{ color: "var(--muted-card)" }}
-                              >
-                                {g.subtitle}
-                              </div>
-                            </button>
-                            <ul
-                              className="space-y-0.5 border-t pt-2"
-                              style={{ borderColor: "rgba(45,77,202,0.1)" }}
-                            >
-                              {g.techs.map((t) => (
-                                <li key={`${g.id}-${t.slug}`}>
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      goMega(`/technologies/${g.id}/${t.slug}`)
-                                    }
-                                    className="w-full text-left text-xs py-1.5 px-2 rounded-md transition-colors hover:bg-[rgba(45,77,202,0.08)] cursor-pointer"
-                                    style={{ color: "var(--text)" }}
-                                  >
-                                    {t.name}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <div
-                      className="mt-5 pt-4 flex justify-end border-t"
-                      style={{ borderColor: "rgba(45,77,202,0.1)" }}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => goMega(megaPath)}
-                        className="text-sm font-bold cursor-pointer"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        View all {megaLabel(megaOpen).toLowerCase()} →
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden max-h-[85vh] overflow-y-auto"
-            style={{
-              background: "rgba(17,17,20,0.95)",
-              borderTop: "1px solid rgba(134,90,255,0.12)",
-            }}
-          >
-            <ul className="flex flex-col px-6 py-5 gap-1">
-              {simpleLinks.map((link, i) => (
-                <motion.li
-                  key={link.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
-                >
-                  <button
-                    onClick={() => handleNav(link)}
-                    className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
-                    style={{
-                      color:
-                        activeLink === link.label
-                          ? "var(--accent)"
-                          : "rgba(255,255,255,0.72)",
-                      background:
-                        activeLink === link.label
-                          ? "var(--surface)"
-                          : "transparent",
+            {/* Desktop nav */}
+            <nav className="hidden items-center gap-1 lg:flex">
+              {simpleLinks.map((link) => {
+                const isActiveLink = activeLink === link.label;
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="relative rounded-full px-4 py-2 text-sm font-medium text-ink/80 transition hover:bg-blush/60 hover:text-rose-gold"
+                    onMouseEnter={() => {
+                      clearMegaLeave();
+                      setMegaOpen(null);
                     }}
+                    onClick={() => handleNav(link)}
                   >
                     {link.label}
-                  </button>
-                </motion.li>
-              ))}
-
-              {megaKeys.map((key, mi) => {
-                const label = megaLabel(key);
-                const expanded = mobileMega === key;
-                const basePath =
-                  key === "services"
-                    ? "/services"
-                    : key === "industries"
-                      ? "/industries"
-                      : "/technologies";
-                const items =
-                  key === "services"
-                    ? services
-                    : key === "industries"
-                      ? industries
-                      : techGroups;
-                return (
-                  <motion.li
-                    key={key}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: (simpleLinks.length + mi) * 0.06 }}
-                    className="rounded-lg overflow-hidden"
-                    style={{
-                      background: expanded
-                        ? "rgba(255,255,255,0.06)"
-                        : "transparent",
-                    }}
-                  >
-                    <div className="flex items-center">
-                      <button
-                        onClick={() => goMega(basePath)}
-                        className="flex-1 text-left py-2.5 px-3 text-sm font-medium cursor-pointer"
-                        style={{
-                          color:
-                            activeLink === label && !expanded
-                              ? "var(--accent)"
-                              : "rgba(255,255,255,0.9)",
-                        }}
-                      >
-                        {label}
-                      </button>
-                      <button
-                        type="button"
-                        aria-expanded={expanded}
-                        className="p-2.5 pr-3 cursor-pointer"
-                        onClick={() => setMobileMega(expanded ? null : key)}
-                        style={{ color: "rgba(255,255,255,0.7)" }}
-                      >
-                        <FiChevronRight
-                          size={18}
-                          className={`transition-transform ${expanded ? "rotate-90" : ""}`}
-                        />
-                      </button>
-                    </div>
-                    <AnimatePresence>
-                      {expanded && (
-                        <motion.ul
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="pl-3 pb-2 space-y-1 overflow-hidden"
-                        >
-                          {key === "technologies"
-                            ? techGroups.flatMap((g) => [
-                                <li key={`h-${g.id}`} className="pt-1 pb-0.5">
-                                  <span
-                                    className="px-3 text-[10px] font-bold uppercase tracking-wider"
-                                    style={{ color: "rgba(255,255,255,0.45)" }}
-                                  >
-                                    {g.label}
-                                  </span>
-                                </li>,
-                                ...g.techs.map((t) => (
-                                  <li key={`${g.id}-${t.slug}`}>
-                                    <button
-                                      type="button"
-                                      onClick={() =>
-                                        goMega(`${basePath}/${g.id}/${t.slug}`)
-                                      }
-                                      className="w-full text-left py-1.5 px-3 rounded-md text-xs cursor-pointer"
-                                      style={{ color: "rgba(255,255,255,0.8)" }}
-                                    >
-                                      {t.name}
-                                    </button>
-                                  </li>
-                                )),
-                                <li key={`a-${g.id}`} className="pb-1">
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      goMega(`${basePath}/${g.id}`)
-                                    }
-                                    className="w-full text-left py-1.5 px-3 rounded-md text-[11px] font-semibold cursor-pointer"
-                                    style={{ color: "var(--accent)" }}
-                                  >
-                                    {g.label} — overview →
-                                  </button>
-                                </li>,
-                              ])
-                            : items.map((item) => {
-                                const id = item.id;
-                                const title =
-                                  "title" in item ? item.title : item.label;
-                                return (
-                                  <li key={id}>
-                                    <button
-                                      type="button"
-                                      onClick={() =>
-                                        goMega(`${basePath}/${id}`)
-                                      }
-                                      className="w-full text-left py-2 px-3 rounded-md text-xs cursor-pointer"
-                                      style={{
-                                        color: "rgba(255,255,255,0.75)",
-                                      }}
-                                    >
-                                      {title}
-                                    </button>
-                                  </li>
-                                );
-                              })}
-                        </motion.ul>
-                      )}
-                    </AnimatePresence>
-                  </motion.li>
+                    {(isActiveLink || pathname === link.href) && (
+                      <motion.span
+                        layoutId="navbar-indicator"
+                        className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-rose-gold"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
                 );
               })}
 
-              {[
-                { label: "Portfolio", path: "/portfolio", section: null },
-                { label: "Contact", path: "/contact", section: null },
-              ].map((link, i) => (
-                <motion.li
-                  key={link.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: (simpleLinks.length + megaKeys.length + i) * 0.06,
-                  }}
-                >
-                  <button
-                    onClick={() => handleNav(link)}
-                    className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
-                    style={{
-                      color:
-                        activeLink === link.label
-                          ? "var(--accent)"
-                          : "rgba(255,255,255,0.72)",
-                      background:
-                        activeLink === link.label
-                          ? "var(--surface)"
-                          : "transparent",
+              {megaKeys.map((key) => {
+                const label = megaLabel(key);
+                const isActiveMega = activeLink === label;
+                const open = megaOpen === key;
+                return (
+                  <div
+                    key={key}
+                    className="relative"
+                    onMouseEnter={() => {
+                      clearMegaLeave();
+                      setMegaOpen(key);
+                    }}
+                  >
+                    <Link
+                      href={megaPath}
+                      className="relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition hover:bg-blush/60"
+                      style={{
+                        color: isActiveMega || open ? "var(--rose-gold)" : "var(--ink)/80",
+                      }}
+                      aria-expanded={open}
+                      aria-haspopup="true"
+                    >
+                      {label}
+                      <ChevronDown
+                        size={14}
+                        className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+                      />
+                      {(isActiveMega || open) && (
+                        <motion.span
+                          layoutId="navbar-indicator"
+                          className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-rose-gold"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </Link>
+                  </div>
+                );
+              })}
+
+              {portfolioContactLinks.map((link) => {
+                const isActiveLink = activeLink === link.label;
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="relative rounded-full px-4 py-2 text-sm font-medium text-ink/80 transition hover:bg-blush/60 hover:text-rose-gold"
+                    onMouseEnter={() => {
+                      clearMegaLeave();
+                      setMegaOpen(null);
                     }}
                   >
                     {link.label}
-                  </button>
-                </motion.li>
-              ))}
-              <motion.li
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  delay: (simpleLinks.length + megaKeys.length + 2) * 0.06,
+                    {isActiveLink && (
+                      <motion.span
+                        layoutId="navbar-indicator"
+                        className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-rose-gold"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Desktop CTA + mobile toggle */}
+            <div className="flex items-center gap-3">
+              <Link
+                href="/contact"
+                className="hidden items-center gap-2 rounded-full bg-rose-gold px-5 py-2.5 text-sm font-semibold text-white shadow-glow-rose transition hover:bg-rose-gold-deep hover:shadow-luxury-hover sm:inline-flex"
+                onMouseEnter={() => {
+                  clearMegaLeave();
+                  setMegaOpen(null);
                 }}
               >
+                <span>Get Started</span>
+                <Sparkles size={14} className="opacity-90" />
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="rounded-2xl border border-rose-gold/15 bg-blush/50 p-2.5 text-ink transition hover:bg-blush lg:hidden"
+                aria-label="Toggle menu"
+              >
+                <motion.div
+                  animate={{ rotate: menuOpen ? 90 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {menuOpen ? <X size={24} /> : <Menu size={24} />}
+                </motion.div>
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop megamenu */}
+          <AnimatePresence>
+            {megaOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="hidden md:block absolute left-0 right-0 top-full z-40 px-6 sm:px-8 pt-2 pb-5"
+                onMouseEnter={clearMegaLeave}
+              >
+                <div className="mx-auto max-w-7xl">
+                  <div
+                    className="rounded-2xl border shadow-xl overflow-hidden"
+                    style={{
+                      background: "#ffffff",
+                      borderColor: "rgba(45,77,202,0.12)",
+                      boxShadow: "0 24px 60px rgba(15,23,42,0.12)",
+                    }}
+                  >
+                    <div className="p-6 lg:p-8">
+                      {megaOpen === "services" && (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                          {services.map((s) => (
+                            <Link
+                              key={s.id}
+                              href={`/services/${s.id}`}
+                              className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)]"
+                              onClick={() => goMega(`/services/${s.id}`)}
+                            >
+                              <div className="text-sm font-semibold" style={{ color: "var(--text)" }}>
+                                {s.title}
+                              </div>
+                              <div className="text-xs mt-0.5 line-clamp-2" style={{ color: "var(--muted-card)" }}>
+                                {s.subtitle}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                      {megaOpen === "industries" && (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[min(70vh,420px)] overflow-y-auto pr-1">
+                          {industries.map((ind) => (
+                            <Link
+                              key={ind.id}
+                              href={`/industries/${ind.id}`}
+                              className="text-left rounded-xl px-3 py-2.5 transition-colors hover:bg-[rgba(45,77,202,0.06)]"
+                              onClick={() => goMega(`/industries/${ind.id}`)}
+                            >
+                              <div className="text-sm font-semibold" style={{ color: "var(--text)" }}>
+                                {ind.title}
+                              </div>
+                              <div className="text-xs mt-0.5 line-clamp-2" style={{ color: "var(--muted-card)" }}>
+                                {ind.subtitle}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                      {megaOpen === "technologies" && (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 max-h-[min(72vh,520px)] overflow-y-auto pr-1">
+                          {techGroups.map((g) => (
+                            <div key={g.id} className="min-w-0">
+                              <Link
+                                href={`/technologies/${g.id}`}
+                                className="text-left w-full rounded-lg px-1 py-1 mb-2 transition-colors hover:bg-[rgba(40,77,202,0.08)]"
+                                onClick={() => goMega(`/technologies/${g.id}`)}
+                              >
+                                <div className="text-sm font-black leading-tight" style={{ color: "var(--text)" }}>
+                                  {g.label}
+                                </div>
+                                <div className="text-[11px] mt-0.5 line-clamp-2" style={{ color: "var(--muted-card)" }}>
+                                  {g.subtitle}
+                                </div>
+                              </Link>
+                              <ul
+                                className="space-y-0.5 border-t pt-2"
+                                style={{ borderColor: "rgba(45,77,202,0.1)" }}
+                              >
+                                {g.techs.map((t) => (
+                                  <li key={`${g.id}-${t.slug}`}>
+                                    <Link
+                                      href={`/technologies/${g.id}/${t.slug}`}
+                                      className="w-full text-left text-xs py-1.5 px-2 rounded-md transition-colors hover:bg-[rgba(45,77,202,0.08)]"
+                                      onClick={() => goMega(`/technologies/${g.id}/${t.slug}`)}
+                                      style={{ color: "var(--text)" }}
+                                    >
+                                      {t.name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      <div
+                        className="mt-5 pt-4 flex justify-end border-t"
+                        style={{ borderColor: "rgba(45,77,202,0.1)" }}
+                      >
+                        <Link
+                          href={megaPath}
+                          className="text-sm font-bold"
+                          style={{ color: "var(--accent)" }}
+                          onClick={() => goMega(megaPath)}
+                        >
+                          View all {megaLabel(megaOpen).toLowerCase()} →
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-rose-gold/35 to-transparent opacity-100" />
+      </motion.header>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            <motion.div
+              className="fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm lg:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setMenuOpen(false)}
+            />
+
+            <motion.div
+              className="fixed top-0 right-0 z-50 flex h-full w-[min(100%,380px)] flex-col border-l border-rose-gold/15 bg-cream shadow-luxury lg:hidden"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+            >
+              <div className="h-1.5 bg-gradient-to-r from-blush via-rose-gold to-blush" />
+
+              <div className="flex items-center justify-between border-b border-rose-gold/10 px-5 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-rose-gold to-rose-gold-deep font-display text-lg font-bold text-white shadow-md">
+                    <span>W</span>
+                  </div>
+                  <div>
+                    <div className="font-display text-lg font-semibold text-ink">Worceny Infotech</div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-rose-gold">
+                      IT & Web Services
+                    </div>
+                  </div>
+                </div>
                 <button
-                  onClick={() => {
-                    router.push("/contact");
-                    window.scrollTo({ top: 0 });
-                    setMenuOpen(false);
-                  }}
-                  className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-bold mt-2 cursor-pointer"
-                  style={{
-                    color: "var(--surface)",
-                    background: "var(--accent)",
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-xl border border-rose-gold/20 p-2 text-ink transition hover:bg-blush"
+                >
+                  <X size={22} />
+                </button>
+              </div>
+
+              <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-6">
+                {simpleLinks.map((link, i) => (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.06 + 0.12 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3.5 text-[15px] font-medium transition ${
+                        activeLink === link.label
+                          ? "bg-blush text-rose-gold-deep shadow-sm"
+                          : "text-ink/85 hover:bg-blush/50 hover:text-rose-gold"
+                      }`}
+                      onClick={() => handleNav(link)}
+                    >
+                      <span>{link.label}</span>
+                      {activeLink === link.label && (
+                        <span className="h-2 w-2 rounded-full bg-rose-gold shadow-glow-rose" />
+                      )}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                {megaKeys.map((key, mi) => {
+                  const label = megaLabel(key);
+                  const expanded = mobileMega === key;
+                  const basePath =
+                    key === "services"
+                      ? "/services"
+                      : key === "industries"
+                        ? "/industries"
+                        : "/technologies";
+                  const items =
+                    key === "services"
+                      ? services
+                      : key === "industries"
+                        ? industries
+                        : techGroups;
+
+                  return (
+                    <motion.div
+                      key={key}
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: (simpleLinks.length + mi) * 0.06 + 0.12 }}
+                      className="rounded-lg overflow-hidden"
+                      style={{
+                        background: expanded ? "rgba(255,255,255,0.06)" : "transparent",
+                      }}
+                    >
+                      <div className="flex items-center">
+                        <Link
+                          href={basePath}
+                          className={`flex-1 text-left py-3.5 px-4 text-[15px] font-medium transition ${
+                            activeLink === label && !expanded
+                              ? "bg-blush text-rose-gold-deep"
+                              : "text-ink/85 hover:bg-blush/50 hover:text-rose-gold"
+                          }`}
+                        >
+                          {label}
+                        </Link>
+                        <button
+                          type="button"
+                          aria-expanded={expanded}
+                          className="p-2.5 pr-3"
+                          onClick={() => setMobileMega(expanded ? null : key)}
+                          style={{ color: "rgba(255,255,255,0.7)" }}
+                        >
+                          <ChevronRight
+                            size={18}
+                            className={`transition-transform ${expanded ? "rotate-90" : ""}`}
+                          />
+                        </button>
+                      </div>
+                      <AnimatePresence>
+                        {expanded && (
+                          <motion.ul
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="pl-3 pb-2 space-y-1 overflow-hidden"
+                          >
+                            {key === "technologies"
+                              ? techGroups.flatMap((g) => [
+                                  <li key={`h-${g.id}`} className="pt-1 pb-0.5">
+                                    <span
+                                      className="px-4 text-[10px] font-bold uppercase tracking-wider"
+                                      style={{ color: "rgba(255,255,255,0.45)" }}
+                                    >
+                                      {g.label}
+                                    </span>
+                                  </li>,
+                                  ...g.techs.map((t) => (
+                                    <li key={`${g.id}-${t.slug}`}>
+                                      <Link
+                                        href={`/technologies/${g.id}/${t.slug}`}
+                                        className="block w-full text-left py-1.5 px-4 rounded-md text-xs text-ink/80 hover:bg-blush/50 hover:text-rose-gold"
+                                        onClick={() => setMenuOpen(false)}
+                                      >
+                                        {t.name}
+                                      </Link>
+                                    </li>
+                                  )),
+                                  <li key={`a-${g.id}`} className="pb-1">
+                                    <Link
+                                      href={`/technologies/${g.id}`}
+                                      className="block w-full text-left py-1.5 px-4 rounded-md text-[11px] font-semibold text-rose-gold"
+                                      onClick={() => setMenuOpen(false)}
+                                    >
+                                      {g.label} — overview →
+                                    </Link>
+                                  </li>,
+                                ])
+                              : items.map((item) => {
+                                  const id = item.id;
+                                  const title = "title" in item ? item.title : item.label;
+                                  return (
+                                    <li key={id}>
+                                      <Link
+                                        href={`${basePath}/${id}`}
+                                        className="block w-full text-left py-2 px-4 rounded-md text-xs text-ink/75 hover:bg-blush/50 hover:text-rose-gold"
+                                        onClick={() => setMenuOpen(false)}
+                                      >
+                                        {title}
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  );
+                })}
+
+                {portfolioContactLinks.map((link, i) => (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      delay: (simpleLinks.length + megaKeys.length + i) * 0.06 + 0.12,
+                    }}
+                  >
+                    <Link
+                      href={link.href}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3.5 text-[15px] font-medium transition ${
+                        activeLink === link.label
+                          ? "bg-blush text-rose-gold-deep shadow-sm"
+                          : "text-ink/85 hover:bg-blush/50 hover:text-rose-gold"
+                      }`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      <span>{link.label}</span>
+                      {activeLink === link.label && (
+                        <span className="h-2 w-2 rounded-full bg-rose-gold shadow-glow-rose" />
+                      )}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    delay: (simpleLinks.length + megaKeys.length + 2) * 0.06 + 0.12,
                   }}
                 >
-                  Get Started →
-                </button>
-              </motion.li>
-            </ul>
-          </motion.div>
+                  <Link
+                    href="/contact"
+                    className="flex items-center justify-center gap-2 rounded-2xl bg-rose-gold py-3.5 text-sm font-semibold text-white shadow-glow-rose transition hover:bg-rose-gold-deep"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <Sparkles size={16} />
+                    Get Started
+                  </Link>
+                </motion.div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }
