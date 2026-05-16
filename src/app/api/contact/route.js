@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import dbConnect from '@/lib/mongodb';
+import ContactSubmission from '@/models/ContactSubmission';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -13,6 +15,24 @@ export async function POST(request) {
         { success: false, message: 'Name, email, and message are required' },
         { status: 400 }
       );
+    }
+
+    let submission = null;
+    if (process.env.MONGODB_URI) {
+      try {
+        await dbConnect();
+        submission = await ContactSubmission.create({
+          name: name.trim(),
+          email: email.trim(),
+          phone: (phone || '').trim(),
+          service: (service || '').trim(),
+          budget: (budget || '').trim(),
+          message: message.trim(),
+          emailSent: false,
+        });
+      } catch (dbErr) {
+        console.error('Contact submission DB error:', dbErr);
+      }
     }
 
     const htmlContent = `
@@ -80,10 +100,30 @@ export async function POST(request) {
     });
 
     if (data.error) {
+      if (submission?._id) {
+        try {
+          await ContactSubmission.findByIdAndUpdate(submission._id, {
+            resendError: data.error.message || 'Resend error',
+          });
+        } catch (e) {
+          console.error('Contact submission update error:', e);
+        }
+      }
       return NextResponse.json(
         { success: false, message: data.error.message },
         { status: 400 }
       );
+    }
+
+    if (submission?._id) {
+      try {
+        await ContactSubmission.findByIdAndUpdate(submission._id, {
+          emailSent: true,
+          resendError: null,
+        });
+      } catch (e) {
+        console.error('Contact submission update error:', e);
+      }
     }
 
     return NextResponse.json(

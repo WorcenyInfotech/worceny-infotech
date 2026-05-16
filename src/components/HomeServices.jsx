@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { services } from "../data/servicesData";
+import { services } from "@/data/servicesData";
 
 export default function HomeServices() {
   const router = useRouter();

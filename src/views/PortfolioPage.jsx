@@ -12,175 +12,14 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import {
+  portfolioCategories as categories,
+  portfolioProjects as projects,
+  portfolioPageStats as stats,
+} from "@/data/portfolioData";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const categories = ["All", "Full Stack", "Frontend", "Backend"];
-
-const projects = [
-  {
-    id: 1,
-    title: "Employee Management Services Website | Business Website",
-    category: "Full Stack",
-    year: "2025",
-    desc: "Full-stack Employee Management Services Website designed for companies to manage employees, attendance, leave requests, payroll, and internal operations with a secure multi-role system and admin control panel.",
-    tech: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript", "AJAX"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    liveDemo: "https://emsraj.vercel.app/", // TODO: replace with real URL
-    images: ["/images/1.1.png", "/images/1.2.png", "/images/1.3.png"],
-    features: [
-      "Multi-role system (Admin, Employee, Super Admin)",
-      "Attendance & leave management",
-      "Payroll & salary processing",
-      "Admin dashboard analytics",
-      "Secure authentication system",
-    ],
-  },
-  {
-    id: 2,
-    title: "Ecommerce Watch Website with AI Customer Support",
-    category: "Full Stack",
-    year: "2025",
-    desc: "Modern ecommerce watch store with AI-powered customer support, product catalog, cart system, secure checkout, and intelligent chatbot for instant customer assistance and product recommendations.",
-    tech: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Tailwind CSS",
-      "AI Chatbot API",
-    ],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    liveDemo: "#", // TODO: replace with real URL
-    images: ["/images/2.1.png", "/images/2.2.png", "/images/2.3.png"],
-    features: [
-      "AI chatbot customer support",
-      "Product catalog & filters",
-      "Shopping cart system",
-      "Secure checkout flow",
-      "Order tracking system",
-    ],
-  },
-  {
-    id: 3,
-    title: "QuickChat - Real-Time Chat Application",
-    category: "Full Stack",
-    year: "2025",
-    desc: "QuickChat is a full-stack real-time chat application built with the MERN stack. It features JWT authentication, Socket.IO powered real-time messaging, online/offline user status, responsive UI, and 32 modern theme variations using Zustand and Tailwind CSS.",
-    tech: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Socket.IO",
-      "Tailwind CSS",
-      "Zustand",
-    ],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    liveDemo: "https://quickchat-y6jq.onrender.com/",
-    images: ["/images/3.1.png", "/images/3.2.png", "/images/3.3.png"],
-    features: [
-      "JWT authentication",
-      "Real-time messaging",
-      "Online/offline status",
-      "32 custom themes",
-      "Responsive chat interface",
-    ],
-  },
-  {
-    id: 4,
-    title: "GreatKart - Ecommerce Platform",
-    category: "Frontend",
-    year: "2026",
-    desc: "GreatKart is a powerful ecommerce web application built with Python and Django. It includes shopping cart functionality, secure checkout system, order management, PayPal Sandbox payment integration, user dashboard, and token-based email authentication.",
-    tech: ["Python", "Django", "SQLite", "Bootstrap", "PayPal API"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    liveDemo: "#",
-    images: ["/images/6.1.png"],
-    features: [
-      "Cart & checkout system",
-      "Payment integration",
-      "Order management",
-      "Email authentication",
-      "User dashboard",
-    ],
-  },
-  {
-    id: 5,
-    title: "ArtX - AI Image Generator",
-    category: "Full Stack",
-    year: "2026",
-    desc: "ArtX is a modern AI-powered image generation platform where users can create stunning images from text prompts. Built using the MERN stack with advanced AI APIs, it delivers high-quality AI art generation with a sleek and responsive user experience.",
-    tech: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Tailwind CSS",
-      "OpenAI API",
-    ],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    liveDemo: "https://artx-ai.vercel.app/",
-    images: ["/images/4.1.png", "/images/4.2.png", "/images/4.3.png"],
-    features: [
-      "AI image generation",
-      "Text-to-image prompts",
-      "Modern responsive UI",
-      "High-quality image output",
-      "Full-stack MERN architecture",
-    ],
-  },
-  {
-    id: 6,
-    title: "WavyMusic - Music Streaming Platform",
-    category: "Frontend",
-    year: "2025",
-    desc: "WavyMusic is a modern full-stack music streaming web application built using the MERN stack. Users can explore albums, stream tracks, and enjoy a dynamic audio player with a responsive and visually engaging interface.",
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    liveDemo: "https://wavymusic.vercel.app",
-    images: ["/images/5.1.png"],
-    features: [
-      "Music streaming",
-      "Dynamic audio player",
-      "Album & track browsing",
-      "Responsive UI",
-      "Modern MERN architecture",
-    ],
-  },
-  {
-    id: 7,
-    title: "Online Chess Game - TimewithChess website",
-    category: "Backend",
-    year: "2025",
-    desc: "A real-time multiplayer chess application inspired by Time with Chess, built using Node.js and Socket.IO. Players can compete online with live game synchronization, responsive gameplay, and seamless real-time interactions.",
-    tech: ["Node.js", "Express.js", "Socket.IO", "JavaScript", "HTML", "CSS"],
-    accent: "#5aff73",
-    gradient: "rgba(90,255,115,0.15), rgba(134,90,255,0.08)",
-    liveDemo: "#",
-    images: ["/images/7.1.png", "/images/7.2.png"],
-    features: [
-      "Real-time multiplayer chess",
-      "Live game synchronization",
-      "Socket.IO integration",
-      "Responsive gameplay UI",
-      "Online player matchmaking",
-    ],
-  },
-];
-
-const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "50+", label: "Happy Clients" },
-  { value: "2+", label: "Years Experience" },
-  { value: "99%", label: "Client Satisfaction" },
-];
 
 function ProjectModal({ project, onClose }) {
   const [imgIndex, setImgIndex] = useState(0);
@@ -232,10 +71,13 @@ function ProjectModal({ project, onClose }) {
           >
             {hasImages ? (
               <>
-                <img
+                <Image
+                  key={project.images[imgIndex]}
                   src={project.images[imgIndex]}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 36rem"
                 />
                 {project.images.length > 1 && (
                   <>
@@ -302,10 +144,12 @@ function ProjectModal({ project, onClose }) {
           {hasImages && project.images.length > 1 && (
             <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
               {project.images.map((img, i) => (
-                <img
+                <Image
                   key={i}
                   src={img}
                   alt=""
+                  width={56}
+                  height={40}
                   onClick={() => setImgIndex(i)}
                   className="w-14 h-10 object-cover rounded-lg cursor-pointer shrink-0 transition-all"
                   style={{

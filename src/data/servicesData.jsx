@@ -78,7 +78,7 @@ export const services = [
     faqs: [
       {
         q: "Website build duration?",
-        a: "Standard: 2–4 weeks. Complex: 6–10 weeks.",
+        a: "Standard: 2-4 weeks. Complex: 6-10 weeks.",
       },
       {
         q: "Maintenance offered?",
@@ -145,7 +145,7 @@ export const services = [
       { step: "04", title: "Monitor", desc: "Rank tracking and reporting." },
     ],
     faqs: [
-      { q: "Results timeline?", a: "3–6 months for measurable results." },
+      { q: "Results timeline?", a: "3-6 months for measurable results." },
       {
         q: "Guarantee first-page?",
         a: "No guarantees; focus on sustainable growth.",

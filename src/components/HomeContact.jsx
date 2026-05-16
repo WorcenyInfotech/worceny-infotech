@@ -2,73 +2,14 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { FiSend, FiCheckCircle } from "react-icons/fi";
 import {
-  FiMail,
-  FiMapPin,
-  FiSend,
-  FiCheckCircle,
-  FiClock,
-  FiLinkedin,
-  FiGithub,
-} from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
-
-const contactInfo = [
-  {
-    icon: <FiMail size={20} />,
-    label: "Email Us",
-    value: "info@worceny.com",
-    sub: "Reply within 2 hours",
-    accent: "#865aff",
-  },
-  {
-    icon: <FaWhatsapp size={20} />,
-    label: "Call & WhatsApp",
-    value: ["+91 81403 98723", "+91 91069 30388"],
-    sub: "Mon-Sat, 9am-7pm IST",
-    accent: "#25D366",
-  },
-  {
-    icon: <FiMapPin size={20} />,
-    label: "Office",
-    value: "Surat, Gujarat, India",
-    sub: "India — 395004",
-    accent: "#865aff",
-  },
-  {
-    icon: <FiClock size={20} />,
-    label: "Working Hours",
-    value: "Mon - Sat",
-    sub: "9:00 AM - 7:00 PM IST",
-    accent: "#5aff73",
-  },
-];
-
-const socials = [
-  {
-    icon: <FiLinkedin size={17} />,
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/worceny-infotech",
-    accent: "#0077b5",
-  },
-  {
-    icon: <FiGithub size={17} />,
-    label: "GitHub",
-    href: "https://github.com/WorcenyInfotech",
-    accent: "#0e0e0e",
-  },
-];
-
-const serviceOptions = [
-  "Web Development",
-  "Frontend Development",
-  "Backend Development",
-  "Full Stack Development",
-  "UI/UX Design",
-  "Other",
-];
-
-const budgets = ["< ₹50K", "₹50K–1L", "₹1L–3L", "₹3L–5L", "₹5L+", "Discuss"];
+  contactInfo,
+  contactSocials as socials,
+  contactFormServices as serviceOptions,
+  contactFormBudgets as budgets,
+  contactFormWhyBullets,
+} from "@/data/contactData";
 
 export default function HomeContact() {
   const sectionRef = useRef();
@@ -546,19 +487,7 @@ export default function HomeContact() {
                 Why Choose Us?
               </h3>
               <div className="space-y-4">
-                {[
-                  { title: "Fast Delivery", desc: "On time, every time." },
-                  { title: "Clean Code", desc: "Scalable & well-documented." },
-                  {
-                    title: "Transparent Pricing",
-                    desc: "No hidden costs. Fixed quotes.",
-                  },
-                  { title: "24/7 Support", desc: "We're always here for you." },
-                  {
-                    title: "Modern Tech Stack",
-                    desc: "React, Node.js, Next.js & more.",
-                  },
-                ].map((item, i) => (
+                {contactFormWhyBullets.map((item, i) => (
                   <motion.div
                     key={item.title}
                     initial={{ opacity: 0, x: 18 }}

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { industries } from "../data/industriesData";
+import { industries } from "@/data/industriesData";
 
 export default function HomeIndustries() {
   const router = useRouter();

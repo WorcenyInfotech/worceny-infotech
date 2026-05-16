@@ -676,3 +676,8 @@ export function getTechSiblings(groupId, techSlug) {
     next: idx < group.techs.length - 1 ? group.techs[idx + 1] : null,
   };
 }
+
+/** Unique technology names across all groups (hero metrics, etc.). */
+export const totalDistinctTechnologiesCount = new Set(
+  techGroups.flatMap((g) => g.techs.map((t) => t.name))
+).size;

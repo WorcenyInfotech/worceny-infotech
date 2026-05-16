@@ -9,7 +9,6 @@ import {
   FiCpu,
   FiUsers,
   FiGlobe,
-  FiCheck,
 } from "react-icons/fi";
 import { FaHotel, FaIndustry } from "react-icons/fa";
 

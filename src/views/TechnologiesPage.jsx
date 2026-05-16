@@ -6,13 +6,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRouter } from "next/navigation";
 import { FiArrowRight } from "react-icons/fi";
-import { techGroups } from "@/data/technologiesData";
+import { techGroups, totalDistinctTechnologiesCount } from "@/data/technologiesData";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const totalTechs = [
-  ...new Set(techGroups.flatMap((g) => g.techs.map((t) => t.name))),
-].length;
 
 function TechCard({ tech, accent, index, groupId }) {
   const router = useRouter();
@@ -282,7 +278,7 @@ export default function TechnologiesPage() {
           <div className="tech-hero-el flex flex-wrap justify-center gap-4">
             {[
               {
-                v: `${totalTechs}+`,
+                v: `${totalDistinctTechnologiesCount}+`,
                 l: "Technologies",
                 accent: "var(--accent)",
               },

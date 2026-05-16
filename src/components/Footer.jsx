@@ -10,6 +10,17 @@ import {
   FaPhone,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import {
+  footerBrand,
+  footerNavColumns,
+  footerCta,
+  footerLegal,
+} from "@/data/footerData";
+
+const connectIcons = {
+  linkedin: <FaLinkedin className="inline mr-2" />,
+  github: <FaGithub className="inline mr-2" />,
+};
 
 export default function Footer() {
   const ref = useRef();
@@ -32,42 +43,17 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const footerLinks = {
-    Company: [
-      { label: "About", action: () => scrollTo("about") },
-      { label: "Services", action: () => goTo("/services") },
-      { label: "Industries", action: () => goTo("/industries") },
-      { label: "Technologies", action: () => goTo("/technologies") },
-      { label: "Portfolio", action: () => goTo("/portfolio") },
-      { label: "Contact", action: () => goTo("/contact") },
-    ],
-    Services: [
-      { label: "Web Development", action: () => goTo("/services/website") },
-      {
-        label: "Frontend Development",
-        action: () => goTo("/services/frontend"),
-      },
-      { label: "Backend Development", action: () => goTo("/services/backend") },
-      { label: "Web Hosting", action: () => goTo("/services/hosting") },
-      { label: "SEO Optimization", action: () => goTo("/services/seo") },
-    ],
-    Connect: [
-      {
-        label: "LinkedIn",
-        icon: <FaLinkedin className="inline mr-2" />,
-        action: () =>
-          window.open(
-            "https://www.linkedin.com/company/worceny-infotech",
-            "_blank"
-          ),
-      },
-      {
-        label: "GitHub",
-        icon: <FaGithub className="inline mr-2" />,
-        action: () =>
-          window.open("https://github.com/WorcenyInfotech", "_blank"),
-      },
-    ],
+  const resolveClick = (title, item) => {
+    if (title === "Connect") {
+      return () => window.open(item.href, "_blank");
+    }
+    if (item.kind === "homeSection") {
+      return () => scrollTo(item.sectionId);
+    }
+    if (item.path) {
+      return () => goTo(item.path);
+    }
+    return () => {};
   };
 
   return (
@@ -94,8 +80,7 @@ export default function Footer() {
               className="text-sm leading-relaxed mb-5"
               style={{ color: "var(--muted)" }}
             >
-              Surat-based IT & web company — modern websites, apps, and software
-              for businesses in Gujarat and worldwide.
+              {footerBrand.tagline}
             </p>
             <div
               className="space-y-2 text-sm mb-4"
@@ -106,34 +91,29 @@ export default function Footer() {
                   className="inline mr-2"
                   style={{ color: "var(--accent2)" }}
                 />
-                info@worceny.com
+                {footerBrand.email}
               </div>
-              <div>
-                <FaPhone
-                  className="inline mr-2"
-                  style={{ color: "var(--accent2)" }}
-                />
-                +91 91069 30388
-              </div>
-              <div>
-                <FaPhone
-                  className="inline mr-2"
-                  style={{ color: "var(--accent2)" }}
-                />
-                +91 81403 98723
-              </div>
+              {footerBrand.phones.map((phone) => (
+                <div key={phone}>
+                  <FaPhone
+                    className="inline mr-2"
+                    style={{ color: "var(--accent2)" }}
+                  />
+                  {phone}
+                </div>
+              ))}
               <div>
                 <FaMapMarkerAlt
                   className="inline mr-2"
                   style={{ color: "var(--accent2)" }}
                 />
-                Surat, Gujarat, India
+                {footerBrand.address}
               </div>
             </div>
           </motion.div>
 
           {/* Footer links */}
-          {Object.entries(footerLinks).map(([title, items], gi) => (
+          {Object.entries(footerNavColumns).map(([title, items], gi) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 28 }}
@@ -157,11 +137,14 @@ export default function Footer() {
                     <motion.button
                       whileHover={{ x: 5, color: "var(--accent2)" }}
                       transition={{ duration: 0.2 }}
-                      onClick={item.action}
+                      onClick={resolveClick(title, item)}
                       className="text-sm transition-colors duration-300 cursor-pointer flex items-center"
                       style={{ color: "var(--muted)" }}
                     >
-                      {item.icon && <span>{item.icon}</span>}
+                      {title === "Connect" &&
+                        connectIcons[item.connectIcon] && (
+                          <span>{connectIcons[item.connectIcon]}</span>
+                        )}
                       {item.label}
                     </motion.button>
                   </motion.li>
@@ -185,10 +168,9 @@ export default function Footer() {
             className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold p-2 text-center md:text-left"
             style={{
               color: "var(--text)",
-              // background: "rgba(134, 90, 255, 0.4)",
             }}
           >
-            Have a project in mind?
+            {footerCta.headline}
           </h3>
           <motion.button
             whileHover={{
@@ -209,9 +191,9 @@ export default function Footer() {
                 "linear-gradient(to right, var(--accent), var(--accent2))",
               color: "white",
             }}
-            onClick={() => goTo("/contact")}
+            onClick={() => goTo(footerCta.path)}
           >
-            Let's Talk
+            {footerCta.buttonLabel}
           </motion.button>
         </motion.div>
 
@@ -227,9 +209,10 @@ export default function Footer() {
           }}
         >
           <p>
-            © {new Date().getFullYear()} Worceny Infotech. All rights reserved.
+            © {new Date().getFullYear()} {footerLegal.companyName}. All rights
+            reserved.
           </p>
-          <p>Designed with ❤️ by Worceny Infotech</p>
+          <p>{footerLegal.creditLine}</p>
         </motion.div>
       </div>
     </footer>
