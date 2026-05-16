@@ -87,7 +87,8 @@ export default function Navbar() {
     megaLeaveTimer.current = setTimeout(() => setMegaOpen(null), 160);
   };
 
-  const isActive = (href: string) =>
+  // Fixed: Removed TypeScript type annotation
+  const isActive = (href) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const handleNav = (link) => {
